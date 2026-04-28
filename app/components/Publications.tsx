@@ -5,7 +5,7 @@ import { BookOpen, ExternalLink, GraduationCap, Library, Network } from "lucide-
 
 export default function Publications() {
   return (
-    <section id="publications" className="py-24 relative overflow-hidden bg-black/80">
+    <section id="publications" className="py-24 relative overflow-hidden bg-transparent">
       {/* Decorative ambient background */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
       <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-indigo-900/10 rounded-full blur-[100px] pointer-events-none" />

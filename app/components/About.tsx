@@ -5,7 +5,7 @@ import { GraduationCap, MapPin, Briefcase, Mail } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-black/50">
+    <section id="about" className="py-24 relative overflow-hidden bg-transparent">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

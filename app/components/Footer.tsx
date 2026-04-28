@@ -21,7 +21,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-black border-t border-white/5 py-12 md:py-24 overflow-hidden">
+    <footer className="relative bg-transparent border-t border-white/5 py-12 md:py-24 overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute inset-x-0 bottom-0 h-40 bg-purple-900/10 blur-[100px] pointer-events-none" />
 

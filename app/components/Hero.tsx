@@ -83,10 +83,10 @@ export default function Hero() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute top-1/4 right-[10%] w-24 h-24 rounded-2xl glass border border-white/10 flex items-center justify-center -z-10 hidden lg:flex transform rotate-12"
+        className="absolute top-1/4 right-[10%] w-32 h-32 rounded-full glass border border-white/10 flex items-center justify-center z-[0] hidden lg:flex transform rotate-12"
       >
-        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full opacity-50 blur-md absolute" />
-        <span className="text-4xl font-black text-white/20 select-none">UI</span>
+        <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full opacity-50 blur-lg absolute" />
+        <span className="text-4xl font-black text-white/30 select-none">UI</span>
       </motion.div>
 
       <motion.div
@@ -99,10 +99,10 @@ export default function Hero() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute bottom-1/3 left-[10%] w-32 h-32 rounded-full glass border border-white/10 flex items-center justify-center -z-10 hidden lg:flex transform -rotate-12"
+        className="absolute bottom-1/3 left-[10%] w-32 h-32 rounded-full glass border border-white/10 flex items-center justify-center z-[0] hidden lg:flex transform -rotate-12"
       >
-        <div className="w-16 h-16 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full opacity-40 blur-lg absolute" />
-        <span className="text-4xl font-black text-white/20 select-none">&lt;/&gt;</span>
+        <div className="w-16 h-16 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full opacity-50 blur-lg absolute" />
+        <span className="text-4xl font-black text-white/30 select-none">&lt;/&gt;</span>
       </motion.div>
     </section>
   );

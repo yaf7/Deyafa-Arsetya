@@ -24,7 +24,7 @@ const DEVICON_BASE = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/
 
 export default function TechStack() {
   return (
-    <section id="tech" className="py-24 relative bg-[#0a0a0a]">
+    <section id="tech" className="py-24 relative bg-transparent">
       {/* Background accents */}
       <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-purple-900/10 rounded-full blur-[100px] pointer-events-none" />

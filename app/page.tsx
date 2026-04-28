@@ -5,6 +5,7 @@ import TechStack from "./components/TechStack";
 import Publications from "./components/Publications";
 import Projects from "./components/Projects";
 import Footer from "./components/Footer";
+import FloatingDecorations from "./components/FloatingDecorations";
 
 export default function Home() {
   return (
@@ -15,23 +16,24 @@ export default function Home() {
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
       />
 
-      {/* Decorative Scrolling Orbs (Bulatan Cahaya Berbeda Warna) */}
+      {/* Decorative Scrolling Orbs (Bulatan Gradasi Cahaya) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[-1]">
-        {/* Orb 1: Hero Section (Cyan/Blue) */}
-        <div className="absolute top-[5%] -left-[10%] w-[500px] h-[500px] rounded-full bg-cyan-700/20 blur-[120px]" />
+        {/* Top: Hero Section (Indigo to Purple) - The one the user missed! */}
+        <div className="absolute top-0 -left-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-600/20 to-purple-600/20 blur-[130px]" />
+        <div className="absolute top-[5%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-fuchsia-600/20 to-pink-600/20 blur-[120px]" />
         
-        {/* Orb 2: About Section (Fuchsia/Pink) */}
-        <div className="absolute top-[25%] -right-[15%] w-[600px] h-[600px] rounded-full bg-fuchsia-700/10 blur-[130px]" />
+        {/* Middle Top: About & Tech Stack (Blue to Cyan) */}
+        <div className="absolute top-[25%] left-[5%] w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-blue-600/20 to-cyan-600/20 blur-[150px]" />
         
-        {/* Orb 3: Tech Stack Section (Violet/Indigo) */}
-        <div className="absolute top-[45%] -left-[20%] w-[700px] h-[700px] rounded-full bg-indigo-700/20 blur-[150px]" />
+        {/* Middle: Publications & Projects (Violet to Purple) */}
+        <div className="absolute top-[50%] -right-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-r from-violet-600/15 to-purple-600/15 blur-[140px]" />
         
-        {/* Orb 4: Projects Section (Amber/Orange) */}
-        <div className="absolute top-[70%] -right-[10%] w-[500px] h-[500px] rounded-full bg-amber-600/10 blur-[120px]" />
-        
-        {/* Orb 5: Footer Section (Emerald/Teal) */}
-        <div className="absolute bottom-[-2%] left-[10%] w-[600px] h-[600px] rounded-full bg-emerald-700/10 blur-[140px]" />
+        {/* Bottom: Footer (Emerald to Teal & Amber) */}
+        <div className="absolute top-[75%] -left-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-emerald-600/15 to-teal-600/15 blur-[130px]" />
+        <div className="absolute bottom-[2%] right-[5%] w-[600px] h-[600px] rounded-full bg-gradient-to-tl from-amber-600/15 to-orange-600/15 blur-[140px]" />
       </div>
+
+      <FloatingDecorations />
       
       <Navbar />
       <Hero />

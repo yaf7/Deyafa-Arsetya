@@ -27,8 +27,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-[#0B1120] text-white selection:bg-blue-900 selection:text-white`}
       >
-        {/* Elegant Deep Slate Blue Background (Matched to reference image) */}
-        <div className="fixed inset-0 z-[-1] pointer-events-none bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-[#1e293b] via-[#0f172a] to-[#020617]" />
+        {/* Elegant Deep Slate Blue Background - Continuous, no black spots */}
+        <div className="fixed inset-0 z-[-1] pointer-events-none bg-gradient-to-br from-[#1e293b] via-[#0f172a] to-[#0B1120]" />
         
         {children}
       </body>
