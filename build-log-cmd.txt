@@ -1,0 +1,220 @@
+
+> deyafa-arsetya-portfolio@0.1.0 build
+> next build
+
+▲ Next.js 16.2.1 (Turbopack)
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 10 errors:
+./app/components/Footer.tsx:4:1
+Export Github doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mGithub[0m, [33mLinkedin[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+  [90m7 |[0m   [36mconst[0m currentYear = [36mnew[0m [33mDate[0m().getFullYear();
+
+The export Github was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Footer.tsx
+    ./app/page.tsx
+
+
+./app/components/Footer.tsx:4:1
+Export Github doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mGithub[0m, [33mLinkedin[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+  [90m7 |[0m   [36mconst[0m currentYear = [36mnew[0m [33mDate[0m().getFullYear();
+
+The export Github was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Footer.tsx
+    ./app/page.tsx
+
+
+./app/components/Projects.tsx:4:1
+Export Github doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion, useMotionValue, useSpring, useTransform } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mExternalLink[0m, [33mGithub[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mReact[0m [36mfrom[0m [32m"react"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m [33mPROJECTS[0m = [
+
+The export Github was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Projects.tsx
+    ./app/page.tsx
+
+
+./app/components/Projects.tsx:4:1
+Export Github doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion, useMotionValue, useSpring, useTransform } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mExternalLink[0m, [33mGithub[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mReact[0m [36mfrom[0m [32m"react"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m [33mPROJECTS[0m = [
+
+The export Github was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Projects.tsx
+    ./app/page.tsx
+
+
+./app/components/Footer.tsx:4:1
+Export Instagram doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mGithub[0m, [33mLinkedin[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+  [90m7 |[0m   [36mconst[0m currentYear = [36mnew[0m [33mDate[0m().getFullYear();
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Footer.tsx
+    ./app/page.tsx
+
+
+./app/components/Footer.tsx:4:1
+Export Instagram doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mGithub[0m, [33mLinkedin[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+  [90m7 |[0m   [36mconst[0m currentYear = [36mnew[0m [33mDate[0m().getFullYear();
+
+The export Instagram was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Star?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Footer.tsx
+    ./app/page.tsx
+
+
+./app/components/Footer.tsx:4:1
+Export Linkedin doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mGithub[0m, [33mLinkedin[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+  [90m7 |[0m   [36mconst[0m currentYear = [36mnew[0m [33mDate[0m().getFullYear();
+
+The export Linkedin was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Link?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Footer.tsx
+    ./app/page.tsx
+
+
+./app/components/Footer.tsx:4:1
+Export Linkedin doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mGithub[0m, [33mLinkedin[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+  [90m7 |[0m   [36mconst[0m currentYear = [36mnew[0m [33mDate[0m().getFullYear();
+
+The export Linkedin was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Link?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Footer.tsx
+    ./app/page.tsx
+
+
+./app/components/Footer.tsx:4:1
+Export Twitter doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mGithub[0m, [33mLinkedin[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+  [90m7 |[0m   [36mconst[0m currentYear = [36mnew[0m [33mDate[0m().getFullYear();
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Footer.tsx
+    ./app/page.tsx
+
+
+./app/components/Footer.tsx:4:1
+Export Twitter doesn't exist in target module
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { motion } [36mfrom[0m [32m"framer-motion"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mGithub[0m, [33mLinkedin[0m, [33mInstagram[0m, [33mTwitter[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+  [90m7 |[0m   [36mconst[0m currentYear = [36mnew[0m [33mDate[0m().getFullYear();
+
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./app/components/Footer.tsx
+    ./app/page.tsx
+
+
+    at <unknown> (./app/components/Footer.tsx:4:1)
+    at <unknown> (./app/components/Footer.tsx:4:1)
+    at <unknown> (./app/components/Projects.tsx:4:1)
+    at <unknown> (./app/components/Projects.tsx:4:1)
+    at <unknown> (./app/components/Footer.tsx:4:1)
+    at <unknown> (./app/components/Footer.tsx:4:1)
+    at <unknown> (./app/components/Footer.tsx:4:1)
+    at <unknown> (./app/components/Footer.tsx:4:1)
+    at <unknown> (./app/components/Footer.tsx:4:1)
+    at <unknown> (./app/components/Footer.tsx:4:1)
