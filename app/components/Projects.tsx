@@ -382,14 +382,28 @@ export default function Projects() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[999] bg-black/95 backdrop-blur-md flex justify-center items-center p-4 sm:p-8"
+          className="fixed inset-0 z-[999] bg-[#050505]/80 backdrop-blur-xl flex justify-center items-center p-4 sm:p-8"
           onClick={() => setSelectedCertificate(null)}
         >
+          {/* Animated Glowing Background Orbs */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" 
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, delay: 0.2 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" 
+          />
+
           <motion.div
             initial={{ scale: 0.9, y: 30, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
             transition={{ type: "spring", damping: 25, stiffness: 400 }}
-            className="w-full max-w-4xl relative rounded-xl overflow-hidden shadow-[0_0_100px_rgba(245,158,11,0.15)] border border-white/10 p-2 bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a]"
+            className="w-full max-w-4xl relative rounded-xl overflow-hidden shadow-[0_0_150px_rgba(245,158,11,0.2)] border border-amber-500/20 p-2 bg-gradient-to-br from-[#1a1a1a]/90 via-[#0a0a0a]/90 to-amber-900/10 backdrop-blur-md"
             onClick={(e) => e.stopPropagation()}
           >
             <button
