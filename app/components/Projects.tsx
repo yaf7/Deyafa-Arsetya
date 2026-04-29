@@ -67,13 +67,13 @@ const PROJECTS = [
     ]
   },
   {
-    title: "AI Chat Interface",
-    description: "Conversational UI powered by advanced language models, featuring glassmorphic design and dark mode.",
-    tags: ["Kotlin", "Android", "API"],
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop",
-    github: "#",
+    title: "Sistem Informasi Reservasi Meeting Room – Amaze Hotel",
+    description: "Sistem manajemen reservasi ruang pertemuan berbasis Laravel untuk Amaze Hotel Kediri. Terintegrasi dengan Midtrans Payment Gateway (Sandbox) untuk otomatisasi transaksi dan dilengkapi fitur kustomisasi paket meeting serta menu buffet secara real-time.",
+    tags: ["Laravel", "PHP", "MySQL", "Midtrans"],
+    image: "/Reservasi-Meeting-Room-Amaze-Hotel/tampilan-luar-project-meeting-room.png",
+    comingSoon: true,
     device: "desktop",
-    presentation: "stitched"
+    presentation: "separated"
   }
 ];
 
@@ -135,6 +135,16 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
 
         {/* Content Floating Above */}
         <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end" style={{ transform: "translateZ(80px)" }}>
+          {project.comingSoon && (
+            <div className="absolute top-6 right-6">
+              <div className="relative group/badge">
+                <div className="absolute inset-0 bg-amber-500/20 blur-xl rounded-full group-hover/badge:bg-amber-500/30 transition-colors" />
+                <span className="relative flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-300 bg-black/50 border border-amber-500/30 px-4 py-2 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+                  <Lock size={14} className="text-amber-400" /> Coming Soon
+                </span>
+              </div>
+            </div>
+          )}
           <h3 className="text-3xl font-black text-white mb-3 tracking-wide drop-shadow-lg">{project.title}</h3>
           <p className="text-gray-300 mb-6 drop-shadow-md text-sm leading-relaxed line-clamp-3">{project.description}</p>
 
@@ -146,44 +156,46 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
             ))}
           </div>
 
-          <div className="flex gap-4 items-center flex-wrap">
-            {project.viewDesign && (
-              <button
-                onClick={() => {
-                  if (Array.isArray(project.viewDesign)) {
-                    onOpenGallery(project.viewDesign);
-                  } else {
-                    window.open(project.viewDesign as string, "_blank");
-                  }
-                }}
-                className="flex items-center gap-2 text-sm font-bold bg-white text-black px-4 py-2 rounded-full hover:bg-purple-100 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.2)]"
-              >
-                <Eye size={16} /> View Design
-              </button>
-            )}
-            {project.certificate && (
-              <button
-                onClick={() => onOpenCertificate?.(project.certificate as string)}
-                className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-yellow-400 to-amber-600 text-black px-4 py-2 rounded-full hover:from-yellow-300 hover:to-amber-500 transition-colors shadow-[0_0_20px_rgba(245,158,11,0.3)]"
-              >
-                <Award size={16} /> Certificate
-              </button>
-            )}
-            {project.github ? (
-              <a href={project.github} className="flex items-center gap-2 text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full transition-colors backdrop-blur-sm">
-                <GithubIcon /> Code
-              </a>
-            ) : (
-              <span className="flex items-center gap-2 text-sm font-bold text-gray-400 bg-white/5 border border-white/5 px-4 py-2 rounded-full backdrop-blur-sm cursor-not-allowed">
-                <Lock size={16} /> Private Source
-              </span>
-            )}
-            {project.download && (
-              <a href={project.download} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full hover:from-blue-400 hover:to-indigo-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                <Download size={16} /> Download App
-              </a>
-            )}
-          </div>
+          {!project.comingSoon && (
+            <div className="flex gap-4 items-center flex-wrap">
+              {project.viewDesign && (
+                <button
+                  onClick={() => {
+                    if (Array.isArray(project.viewDesign)) {
+                      onOpenGallery(project.viewDesign);
+                    } else {
+                      window.open(project.viewDesign as string, "_blank");
+                    }
+                  }}
+                  className="flex items-center gap-2 text-sm font-bold bg-white text-black px-4 py-2 rounded-full hover:bg-purple-100 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+                >
+                  <Eye size={16} /> View Design
+                </button>
+              )}
+              {project.certificate && (
+                <button
+                  onClick={() => onOpenCertificate?.(project.certificate as string)}
+                  className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-yellow-400 to-amber-600 text-black px-4 py-2 rounded-full hover:from-yellow-300 hover:to-amber-500 transition-colors shadow-[0_0_20px_rgba(245,158,11,0.3)]"
+                >
+                  <Award size={16} /> Certificate
+                </button>
+              )}
+              {project.github ? (
+                <a href={project.github} className="flex items-center gap-2 text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full transition-colors backdrop-blur-sm">
+                  <GithubIcon /> Code
+                </a>
+              ) : (
+                <span className="flex items-center gap-2 text-sm font-bold text-gray-400 bg-white/5 border border-white/5 px-4 py-2 rounded-full backdrop-blur-sm cursor-not-allowed">
+                  <Lock size={16} /> Private Source
+                </span>
+              )}
+              {project.download && (
+                <a href={project.download} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full hover:from-blue-400 hover:to-indigo-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                  <Download size={16} /> Download App
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
