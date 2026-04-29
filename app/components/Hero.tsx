@@ -57,7 +57,7 @@ export default function Hero() {
           >
             <span className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent transition-all group-hover:h-full group-hover:opacity-10 opacity-0" />
             <span className="relative flex items-center gap-2">
-              View Work <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </span>
           </a>
         </motion.div>
