@@ -123,7 +123,7 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
       className="relative w-full rounded-2xl h-[450px] group cursor-pointer"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 1.2, ease: "easeOut" }}
       viewport={{ once: true, margin: "-100px" }}
     >
       <div
@@ -138,7 +138,7 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
           {project.comingSoon && (
             <div className="absolute top-6 right-6">
               <div className="relative group/badge">
-                <div className="absolute inset-0 bg-amber-500/20 blur-xl rounded-full group-hover/badge:bg-amber-500/30 transition-colors" />
+                <div className="absolute inset-0 bg-amber-500/20 blur-xl rounded-full group-hover/badge:bg-amber-500/30 transition-colors duration-500 ease-out" />
                 <span className="relative flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-300 bg-black/50 border border-amber-500/30 px-4 py-2 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(245,158,11,0.2)]">
                   <Lock size={14} className="text-amber-400" /> Coming Soon
                 </span>
@@ -167,7 +167,7 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
                       window.open(project.viewDesign as string, "_blank");
                     }
                   }}
-                  className="flex items-center gap-2 text-sm font-bold bg-white text-black px-4 py-2 rounded-full hover:bg-purple-100 transition-colors shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+                  className="flex items-center gap-2 text-sm font-bold bg-white text-black px-4 py-2 rounded-full hover:bg-purple-100 transition-colors duration-500 ease-out shadow-[0_0_15px_rgba(255,255,255,0.2)]"
                 >
                   <Eye size={16} /> View Design
                 </button>
@@ -175,13 +175,13 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
               {project.certificate && (
                 <button
                   onClick={() => onOpenCertificate?.(project.certificate as string)}
-                  className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-yellow-400 to-amber-600 text-black px-4 py-2 rounded-full hover:from-yellow-300 hover:to-amber-500 transition-colors shadow-[0_0_20px_rgba(245,158,11,0.3)]"
+                  className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-yellow-400 to-amber-600 text-black px-4 py-2 rounded-full hover:from-yellow-300 hover:to-amber-500 transition-colors duration-500 ease-out shadow-[0_0_20px_rgba(245,158,11,0.3)]"
                 >
                   <Award size={16} /> Certificate
                 </button>
               )}
               {project.github ? (
-                <a href={project.github} className="flex items-center gap-2 text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full transition-colors backdrop-blur-sm">
+                <a href={project.github} className="flex items-center gap-2 text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full transition-colors duration-500 ease-out backdrop-blur-sm">
                   <GithubIcon /> Code
                 </a>
               ) : (
@@ -190,7 +190,7 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
                 </span>
               )}
               {project.download && (
-                <a href={project.download} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full hover:from-blue-400 hover:to-indigo-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                <a href={project.download} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full hover:from-blue-400 hover:to-indigo-500 transition-colors duration-500 ease-out shadow-[0_0_20px_rgba(59,130,246,0.3)]">
                   <Download size={16} /> Download App
                 </a>
               )}
@@ -225,7 +225,7 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
@@ -284,7 +284,7 @@ export default function Projects() {
                 <div className="w-1/4 flex justify-end">
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 p-2 rounded-full transition-all"
+                    className="text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 p-2 rounded-full transition-all duration-500 ease-out"
                     title="Close Gallery"
                   >
                     <X size={18} />
@@ -323,7 +323,7 @@ export default function Projects() {
                         <motion.div
                           initial={{ y: 50, opacity: 0 }}
                           animate={{ y: 0, opacity: 1 }}
-                          transition={{ duration: 0.8 }}
+                          transition={{ duration: 1.2, ease: "easeOut" }}
                           className={`w-full ${contentWidth} flex flex-col rounded-xl md:rounded-[20px] overflow-hidden shadow-[0_0_80px_rgba(168,85,247,0.15)] bg-black ring-1 ring-white/10 relative z-10`}
                         >
                           {/* Aesthetic Header */}
@@ -367,7 +367,7 @@ export default function Projects() {
                               initial={{ opacity: 0, y: 30 }}
                               whileInView={{ opacity: 1, y: 0 }}
                               viewport={{ once: true, margin: "-100px" }}
-                              transition={{ duration: 0.8 }}
+                              transition={{ duration: 1.2, ease: "easeOut" }}
                               key={idx}
                               className="w-full rounded-[24px] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/5 group relative bg-black ring-1 ring-white/10"
                             >
@@ -426,7 +426,7 @@ export default function Projects() {
           >
             <button
               onClick={() => setSelectedCertificate(null)}
-              className="absolute top-4 right-4 z-[1001] w-10 h-10 bg-black/50 hover:bg-red-500 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all shadow-lg"
+              className="absolute top-4 right-4 z-[1001] w-10 h-10 bg-black/50 hover:bg-red-500 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-500 ease-out shadow-lg"
             >
               <X size={20} />
             </button>

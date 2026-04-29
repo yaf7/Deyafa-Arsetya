@@ -13,7 +13,7 @@ export default function FloatingDecorations() {
   ];
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-[0] hidden lg:block">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-[0] block">
       {elements.map((el, i) => (
         <motion.div
           key={i}
@@ -22,16 +22,16 @@ export default function FloatingDecorations() {
             rotate: [el.rotate, el.rotate + 10, el.rotate],
           }}
           transition={{
-            duration: 8 + (i % 3),
+            duration: 15 + (i * 2), // Smooth, very slow floating
             repeat: Infinity,
             ease: "easeInOut",
             delay: el.delay,
           }}
-          className="absolute flex items-center justify-center glass border border-white/10 w-32 h-32 rounded-full"
+          className="absolute flex items-center justify-center glass border border-white/10 w-16 h-16 md:w-32 md:h-32 rounded-full opacity-60 md:opacity-100"
           style={{ top: el.top, left: el.left }}
         >
-          <div className={`w-16 h-16 bg-gradient-to-tr ${el.color} rounded-full opacity-50 blur-lg absolute`} />
-          <span className="text-4xl font-black text-white/30 select-none drop-shadow-md">{el.text}</span>
+          <div className={`w-8 h-8 md:w-16 md:h-16 bg-gradient-to-tr ${el.color} rounded-full opacity-50 blur-lg absolute`} />
+          <span className="text-xl md:text-4xl font-black text-white/30 select-none drop-shadow-md">{el.text}</span>
         </motion.div>
       ))}
     </div>

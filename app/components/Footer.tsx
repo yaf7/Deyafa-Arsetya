@@ -27,7 +27,7 @@ export default function Footer() {
         <motion.h2
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
           viewport={{ once: true }}
           className="text-3xl md:text-5xl font-black mb-8 text-white tracking-widest text-center"
         >
@@ -37,7 +37,7 @@ export default function Footer() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
           viewport={{ once: true }}
           className="flex gap-6 mb-12"
         >
@@ -54,7 +54,7 @@ export default function Footer() {
                 href={links[type]}
                 target={type !== "email" ? "_blank" : undefined}
                 rel={type !== "email" ? "noopener noreferrer" : undefined}
-                className="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-purple-600 border border-white/5 hover:border-purple-500 transition-all duration-300 hover:scale-110"
+                className="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-purple-600 border border-white/5 hover:border-purple-500 transition-all duration-500 hover:scale-110"
               >
                 <SocialIcon type={type} />
               </a>
@@ -65,7 +65,7 @@ export default function Footer() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
           viewport={{ once: true }}
           className="text-center text-sm text-gray-600 font-medium tracking-wide uppercase"
         >

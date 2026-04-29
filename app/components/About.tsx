@@ -10,7 +10,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-20"
         >
@@ -28,7 +28,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             viewport={{ once: true }}
             className="md:col-span-5 relative group"
           >
@@ -60,7 +60,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
             viewport={{ once: true }}
             className="md:col-span-7 flex flex-col justify-center"
           >
@@ -78,8 +78,8 @@ export default function About() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
 
               {/* Education Card */}
-              <div className="glass-card p-6 rounded-2xl group border border-white/5 hover:border-purple-500/30 transition-all duration-300">
-                <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 transition-transform">
+              <div className="glass-card p-6 rounded-2xl group border border-white/5 hover:border-purple-500/30 transition-all duration-500">
+                <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 transition-transform duration-500 ease-out">
                   <GraduationCap size={20} />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">Education</h4>
@@ -89,8 +89,8 @@ export default function About() {
               </div>
 
               {/* Location Card */}
-              <div className="glass-card p-6 rounded-2xl group border border-white/5 hover:border-purple-500/30 transition-all duration-300">
-                <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 mb-4 group-hover:scale-110 transition-transform">
+              <div className="glass-card p-6 rounded-2xl group border border-white/5 hover:border-purple-500/30 transition-all duration-500">
+                <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 mb-4 group-hover:scale-110 transition-transform duration-500 ease-out">
                   <MapPin size={20} />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">Location</h4>
@@ -98,13 +98,13 @@ export default function About() {
               </div>
 
               {/* Contact Email in Card Format */}
-              <div className="glass-card p-6 rounded-2xl group border border-white/5 sm:col-span-2 hover:border-purple-500/30 transition-all duration-300 flex items-center gap-5 cursor-pointer">
-                <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform">
+              <div className="glass-card p-6 rounded-2xl group border border-white/5 sm:col-span-2 hover:border-purple-500/30 transition-all duration-500 flex items-center gap-5 cursor-pointer">
+                <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform duration-500 ease-out">
                   <Mail size={22} />
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase font-bold tracking-widest mb-1">Let's Connect</p>
-                  <p className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors">yafaarsetya@gmail.com</p>
+                  <p className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors duration-500 ease-out">yafaarsetya@gmail.com</p>
                 </div>
               </div>
             </div>

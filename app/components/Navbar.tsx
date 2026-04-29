@@ -28,9 +28,9 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "glass py-4 shadow-lg shadow-purple-900/10" : "bg-transparent py-6"
+      transition={{ duration: 1.2, ease: "easeOut" }}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        scrolled ? "glass py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b border-white/5" : "bg-transparent py-6"
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
@@ -65,10 +65,10 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-gray-300 hover:text-white transition-colors uppercase tracking-widest relative group"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-500 ease-out uppercase tracking-widest relative group"
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-purple-500 transition-all duration-500 group-hover:w-full"></span>
             </a>
           ))}
         </div>
@@ -104,7 +104,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-sm font-medium text-gray-300 hover:text-purple-400 transition-colors uppercase tracking-widest py-2 border-b border-white/5"
+                className="text-sm font-medium text-gray-300 hover:text-purple-400 transition-colors duration-500 ease-out uppercase tracking-widest py-2 border-b border-white/5"
               >
                 {link.name}
               </a>

@@ -14,7 +14,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
@@ -25,7 +25,7 @@ export default function Hero() {
           className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 relative"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
         >
           <span className="block text-white">DEYAFA</span>
           <span className="block gradient-accent bg-clip-text text-transparent transform md:translate-x-12">ARSETYA</span>
@@ -40,7 +40,7 @@ export default function Hero() {
           className="text-xl md:text-2xl text-gray-400 font-light mb-10 max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.6 }}
         >
           Web & Mobile Developer
         </motion.h2>
@@ -49,15 +49,15 @@ export default function Hero() {
           className="flex justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.8 }}
         >
           <a
             href="#projects"
-            className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:border-purple-500/50 overflow-hidden"
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-500 ease-out bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] overflow-hidden"
           >
-            <span className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent transition-all group-hover:h-full group-hover:opacity-10 opacity-0" />
+            <span className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent transition-all duration-700 ease-out group-hover:h-full group-hover:opacity-10 opacity-0" />
             <span className="relative flex items-center gap-2">
-              View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-500 ease-out" />
             </span>
           </a>
         </motion.div>
@@ -70,14 +70,14 @@ export default function Hero() {
           rotate: [0, 5, 0],
         }}
         transition={{
-          duration: 6,
+          duration: 12,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute top-1/4 right-[10%] w-32 h-32 rounded-full glass border border-white/10 flex items-center justify-center z-[0] hidden lg:flex transform rotate-12"
+        className="absolute top-[15%] md:top-1/4 right-[5%] md:right-[10%] w-20 h-20 md:w-32 md:h-32 rounded-full glass border border-white/10 flex items-center justify-center z-[0] transform rotate-12 opacity-60 md:opacity-100"
       >
-        <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full opacity-50 blur-lg absolute" />
-        <span className="text-4xl font-black text-white/30 select-none">UI</span>
+        <div className="w-10 h-10 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full opacity-50 blur-lg absolute" />
+        <span className="text-2xl md:text-4xl font-black text-white/30 select-none">UI</span>
       </motion.div>
 
       <motion.div
@@ -86,14 +86,14 @@ export default function Hero() {
           rotate: [0, -10, 0],
         }}
         transition={{
-          duration: 8,
+          duration: 14,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute bottom-1/3 left-[10%] w-32 h-32 rounded-full glass border border-white/10 flex items-center justify-center z-[0] hidden lg:flex transform -rotate-12"
+        className="absolute bottom-1/4 md:bottom-1/3 left-[5%] md:left-[10%] w-20 h-20 md:w-32 md:h-32 rounded-full glass border border-white/10 flex items-center justify-center z-[0] transform -rotate-12 opacity-60 md:opacity-100"
       >
-        <div className="w-16 h-16 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full opacity-50 blur-lg absolute" />
-        <span className="text-4xl font-black text-white/30 select-none">&lt;/&gt;</span>
+        <div className="w-10 h-10 md:w-16 md:h-16 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full opacity-50 blur-lg absolute" />
+        <span className="text-2xl md:text-4xl font-black text-white/30 select-none">&lt;/&gt;</span>
       </motion.div>
     </section>
   );

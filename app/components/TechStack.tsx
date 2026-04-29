@@ -33,7 +33,7 @@ export default function TechStack() {
         <motion.div
            initial={{ opacity: 0, y: 30 }}
            whileInView={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8 }}
+           transition={{ duration: 1.2, ease: "easeOut" }}
            viewport={{ once: true }}
            className="text-center mb-16"
         >
@@ -59,9 +59,9 @@ export default function TechStack() {
                <img 
                   src={`${DEVICON_BASE}${tech.icon}`} 
                   alt={tech.name} 
-                  className={`w-10 h-10 md:w-14 md:h-14 transition-all duration-300 ${tech.name === "Next.js" ? "filter invert" : ""}`} 
+                  className={`w-10 h-10 md:w-14 md:h-14 transition-all duration-500 ${tech.name === "Next.js" ? "filter invert" : ""}`} 
                />
-               <span className="text-xs md:text-sm font-bold text-gray-400 group-hover:text-purple-400 group-hover:glow-text transition-colors">
+               <span className="text-xs md:text-sm font-bold text-gray-400 group-hover:text-purple-400 group-hover:glow-text transition-colors duration-500 ease-out">
                   {tech.name}
                </span>
             </motion.div>
