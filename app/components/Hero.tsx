@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -46,7 +46,7 @@ export default function Hero() {
         </motion.h2>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-5"
+          className="flex justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -58,15 +58,6 @@ export default function Hero() {
             <span className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent transition-all group-hover:h-full group-hover:opacity-10 opacity-0" />
             <span className="relative flex items-center gap-2">
               View Work <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </span>
-          </a>
-
-          <a
-            href="#"
-            className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-black transition-all bg-white rounded-full hover:bg-gray-200"
-          >
-            <span className="flex items-center gap-2">
-              Download CV <Download size={18} />
             </span>
           </a>
         </motion.div>
