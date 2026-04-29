@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Lock, Eye, X, Award } from "lucide-react";
+import { Lock, Eye, X, Award, Download } from "lucide-react";
 import React, { useState } from "react";
 
 const PROJECTS = [
@@ -31,6 +31,7 @@ const PROJECTS = [
     tags: ["Kotlin", "Android", "CameraX", "Mobile"],
     image: "/yfscanner/yfscanner1.jpeg",
     github: "https://github.com/yaf7/YFScanner",
+    download: "https://github.com/yaf7/YFScanner/releases/tag/v1.0.0",
     device: "mobile",
     presentation: "separated",
     viewDesign: [
@@ -176,6 +177,11 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
               <span className="flex items-center gap-2 text-sm font-bold text-gray-400 bg-white/5 border border-white/5 px-4 py-2 rounded-full backdrop-blur-sm cursor-not-allowed">
                 <Lock size={16} /> Private Source
               </span>
+            )}
+            {project.download && (
+              <a href={project.download} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full hover:from-blue-400 hover:to-indigo-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                <Download size={16} /> Download App
+              </a>
             )}
           </div>
         </div>
