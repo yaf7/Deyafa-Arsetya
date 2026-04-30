@@ -1,9 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { GraduationCap, MapPin, Briefcase, Mail } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { GraduationCap, MapPin, Briefcase, Mail, Code2, FolderGit2 } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+
+// Animated counter hook
+function useCounter(target: number, duration = 2000) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const increment = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, target, duration]);
+
+  return { count, ref };
+}
 
 export default function About() {
+  const stat1 = useCounter(4, 1500);
+  const stat2 = useCounter(2, 1500);
+  const stat3 = useCounter(1, 1500);
+
   return (
     <section id="about" className="py-24 relative overflow-hidden bg-transparent">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -44,14 +74,14 @@ export default function About() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-6 -right-6 glass border border-white/20 p-4 rounded-2xl shadow-2xl bg-black/80 flex items-center gap-4"
+              className="absolute -bottom-6 right-2 md:-right-6 glass border border-white/20 p-3 md:p-4 rounded-2xl shadow-2xl bg-black/80 flex items-center gap-3 md:gap-4 max-w-[280px] md:max-w-none"
             >
-              <div className="w-12 h-12 rounded-full bg-purple-600/20 flex items-center justify-center text-purple-400">
-                <Briefcase size={24} />
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-purple-600/20 flex items-center justify-center text-purple-400 flex-shrink-0">
+                <Briefcase size={20} className="md:w-6 md:h-6" />
               </div>
-              <div>
-                <p className="text-xs text-gray-400 uppercase font-bold tracking-wider">Experience</p>
-                <p className="font-bold text-white text-lg">Web & Mobile Developer</p>
+              <div className="min-w-0">
+                <p className="text-[10px] md:text-xs text-gray-400 uppercase font-bold tracking-wider">Experience</p>
+                <p className="font-bold text-white text-sm md:text-lg truncate">Web & Mobile Developer</p>
               </div>
             </motion.div>
           </motion.div>
@@ -65,7 +95,7 @@ export default function About() {
             className="md:col-span-7 flex flex-col justify-center"
           >
             <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white leading-tight">
-              "Membangun Kapabilitas dari Titik Nol."
+              &quot;Membangun Kapabilitas dari Titik Nol.&quot;
             </h3>
             <p className="text-gray-400 text-lg leading-relaxed mb-4">
               Perjalanan saya di dunia teknologi tidak dimulai dengan bakat instan, melainkan dari selembar kertas kosong. Mengawali langkah di Manajemen Informatika POLINEMA tanpa latar belakang pemrograman adalah tantangan sekaligus pembuktian dedikasi saya.
@@ -74,12 +104,13 @@ export default function About() {
               Bagi saya, keterbatasan adalah ruang untuk bertumbuh. Melalui disiplin dan ribuan jam eksperimen, saya mentransformasi rasa ingin tahu menjadi kompetensi nyata. Kini, sebagai Web & Mobile Developer berbasis di Kediri, saya berdedikasi menciptakan solusi digital yang presisi dan berdampak. Saya tidak hanya menulis kode; saya merancang solusi digital yang lebih cerdas.
             </p>
 
-            {/* Information Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
+
+            {/* Bento Information Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
 
               {/* Education Card */}
-              <div className="glass-card p-6 rounded-2xl group border border-white/5 hover:border-purple-500/30 transition-all duration-500">
-                <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 transition-transform duration-500 ease-out">
+              <div className="bento-card p-6 group">
+                <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all duration-500 ease-out">
                   <GraduationCap size={20} />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">Education</h4>
@@ -89,22 +120,27 @@ export default function About() {
               </div>
 
               {/* Location Card */}
-              <div className="glass-card p-6 rounded-2xl group border border-white/5 hover:border-purple-500/30 transition-all duration-500">
-                <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 mb-4 group-hover:scale-110 transition-transform duration-500 ease-out">
+              <div className="bento-card p-6 group">
+                <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 mb-4 group-hover:scale-110 group-hover:bg-pink-500/20 transition-all duration-500 ease-out">
                   <MapPin size={20} />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">Location</h4>
                 <p className="text-sm text-gray-400 mb-1">Kediri, Indonesia</p>
+                <p className="text-xs text-gray-500">Available remotely</p>
               </div>
 
               {/* Contact Email in Card Format */}
-              <div className="glass-card p-6 rounded-2xl group border border-white/5 sm:col-span-2 hover:border-purple-500/30 transition-all duration-500 flex items-center gap-5 cursor-pointer">
-                <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform duration-500 ease-out">
+              <div className="bento-card p-6 group sm:col-span-2 flex items-center gap-5 cursor-pointer">
+                <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/30 group-hover:scale-110 group-hover:shadow-purple-500/50 transition-all duration-500 ease-out">
                   <Mail size={22} />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 uppercase font-bold tracking-widest mb-1">Let's Connect</p>
+                  <p className="text-xs text-gray-500 uppercase font-bold tracking-widest mb-1">Let&apos;s Connect</p>
                   <p className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors duration-500 ease-out">yafaarsetya@gmail.com</p>
+                </div>
+                {/* Arrow indicator */}
+                <div className="ml-auto text-gray-600 group-hover:text-purple-400 group-hover:translate-x-1 transition-all duration-500">
+                  →
                 </div>
               </div>
             </div>

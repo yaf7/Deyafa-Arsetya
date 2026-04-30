@@ -84,7 +84,7 @@ const GithubIcon = () => (
 );
 
 // 3D Tilt Card Component Using Framer Motion
-const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: typeof PROJECTS[0] | any, onOpenGallery: (images: string[]) => void, onOpenCertificate?: (url: string) => void }) => {
+const TiltCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: { project: typeof PROJECTS[0] | any, onOpenGallery: (images: string[]) => void, onOpenCertificate?: (url: string) => void, index?: number }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -121,9 +121,9 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className="relative w-full rounded-2xl h-[450px] group cursor-pointer"
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.2, ease: "easeOut" }}
+      transition={{ duration: 1.2, ease: "easeOut", delay: index * 0.15 }}
       viewport={{ once: true, margin: "-100px" }}
     >
       <div
@@ -135,6 +135,9 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate }: { project: type
 
         {/* Content Floating Above */}
         <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end" style={{ transform: "translateZ(80px)" }}>
+          {/* Project number index */}
+          <span className="absolute top-6 left-8 text-7xl font-black text-white/[0.04] select-none leading-none">{String(index + 1).padStart(2, '0')}</span>
+          
           {project.comingSoon && (
             <div className="absolute top-6 right-6">
               <div className="relative group/badge">
@@ -242,6 +245,7 @@ export default function Projects() {
             <TiltCard
               key={project.title}
               project={project}
+              index={i}
               onOpenGallery={() => setSelectedProject(project as any)}
               onOpenCertificate={project.certificate ? () => setSelectedCertificate(project.certificate as string) : undefined}
             />

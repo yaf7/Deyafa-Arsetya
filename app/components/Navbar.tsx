@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,12 +17,30 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Active section detection via IntersectionObserver
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Tech Stack", href: "#tech" },
-    { name: "Research", href: "#publications" },
-    { name: "Projects", href: "#projects" },
+    { name: "Home", href: "#home", id: "home" },
+    { name: "About", href: "#about", id: "about" },
+    { name: "Tech Stack", href: "#tech", id: "tech" },
+    { name: "Research", href: "#publications", id: "publications" },
+    { name: "Projects", href: "#projects", id: "projects" },
   ];
 
   return (
@@ -29,7 +48,7 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1.2, ease: "easeOut" }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`fixed top-0 left-0 w-full z-[999] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         scrolled ? "glass py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-b border-white/5" : "bg-transparent py-6"
       }`}
     >
@@ -59,59 +78,101 @@ export default function Navbar() {
            </motion.div>
         </motion.a>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-500 ease-out uppercase tracking-widest relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-purple-500 transition-all duration-500 group-hover:w-full"></span>
-            </a>
-          ))}
+        {/* Desktop Nav with Active Indicator */}
+        <div className="hidden md:flex gap-8 items-center relative">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className={`text-sm font-medium transition-all duration-500 ease-out uppercase tracking-widest relative group py-1 ${
+                  isActive ? "text-white" : "text-gray-400 hover:text-white"
+                }`}
+              >
+                {link.name}
+                
+                {/* Active indicator dot */}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavDot"
+                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.8)]"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
+
+                {/* Hover underline (only when not active) */}
+                {!isActive && (
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-purple-500/50 transition-all duration-500 group-hover:w-full" />
+                )}
+              </a>
+            );
+          })}
         </div>
 
         {/* Mobile Nav Button */}
         <div className="md:hidden flex items-center">
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-gray-300 hover:text-white focus:outline-none"
+            className="text-gray-300 hover:text-white focus:outline-none relative w-8 h-8 flex items-center justify-center"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-              )}
-            </svg>
+            <motion.span
+              animate={{ rotate: isMobileMenuOpen ? 45 : 0, y: isMobileMenuOpen ? 0 : -6 }}
+              className="absolute w-5 h-[1.5px] bg-current rounded-full"
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span
+              animate={{ opacity: isMobileMenuOpen ? 0 : 1, scaleX: isMobileMenuOpen ? 0 : 1 }}
+              className="absolute w-5 h-[1.5px] bg-current rounded-full"
+              transition={{ duration: 0.2 }}
+            />
+            <motion.span
+              animate={{ rotate: isMobileMenuOpen ? -45 : 0, y: isMobileMenuOpen ? 0 : 6 }}
+              className="absolute w-5 h-[1.5px] bg-current rounded-full"
+              transition={{ duration: 0.3 }}
+            />
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {isMobileMenuOpen && (
-        <motion.div 
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-black/95 backdrop-blur-md border-b border-white/10"
-        >
-          <div className="flex flex-col px-6 py-4 gap-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-sm font-medium text-gray-300 hover:text-purple-400 transition-colors duration-500 ease-out uppercase tracking-widest py-2 border-b border-white/5"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden bg-black/95 backdrop-blur-md border-b border-white/10 overflow-hidden relative z-[60]"
+          >
+            <div className="flex flex-col px-6 py-4 gap-1">
+              {navLinks.map((link, i) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => {
+                    // Let the browser handle the hash scroll natively, but close menu after a tiny delay
+                    setTimeout(() => setIsMobileMenuOpen(false), 150);
+                  }}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: i * 0.05, duration: 0.3 }}
+                  className={`text-sm font-medium transition-colors duration-500 ease-out uppercase tracking-widest py-3 border-b border-white/5 flex items-center gap-3 ${
+                    activeSection === link.id 
+                      ? "text-purple-400" 
+                      : "text-gray-300 hover:text-purple-400"
+                  }`}
+                >
+                  {activeSection === link.id && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_6px_rgba(168,85,247,0.8)]" />
+                  )}
+                  {link.name}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

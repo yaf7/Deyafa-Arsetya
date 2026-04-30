@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const SocialIcon = ({ type }: { type: string }) => {
   switch (type) {
@@ -15,61 +16,120 @@ const SocialIcon = ({ type }: { type: string }) => {
   }
 };
 
-export default function Footer() {
-  const currentYear = new Date().getFullYear();
+// Magnetic button component
+function MagneticButton({ children, href, className, target, rel }: { children: React.ReactNode; href: string; className?: string; target?: string; rel?: string }) {
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+  };
+
+  const handleMouseLeave = () => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.transform = "translate(0, 0)";
+  };
 
   return (
-    <footer className="relative bg-transparent border-t border-white/5 py-12 md:py-24 overflow-hidden">
+    <a
+      ref={ref}
+      href={href}
+      target={target}
+      rel={rel}
+      className={className}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transition: "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)" }}
+    >
+      {children}
+    </a>
+  );
+}
+
+export default function Footer() {
+  return (
+    <footer className="relative bg-transparent border-t border-white/5 py-16 md:py-28 overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute inset-x-0 bottom-0 h-40 bg-purple-900/10 blur-[100px] pointer-events-none" />
+      
+      {/* Animated gradient line at top */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
+        className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 to-transparent origin-left"
+      />
 
       <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center">
+        {/* Animated Gradient CTA Text */}
         <motion.h2
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-3xl md:text-5xl font-black mb-8 text-white tracking-widest text-center"
+          className="text-2xl md:text-5xl lg:text-6xl font-black mb-4 tracking-wider md:tracking-widest text-center leading-tight"
         >
-          LET'S BUILD SOMETHING <span className="text-purple-500">GREAT</span>
+          <span className="text-white">LET&apos;S BUILD</span>
+          <br />
+          <span className="text-white">SOMETHING </span>
+          <span className="gradient-text-animated">GREAT</span>
         </motion.h2>
 
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-gray-500 text-sm md:text-base mb-12 tracking-wider"
+        >
+          Got a project? Let&apos;s talk.
+        </motion.p>
+
+        {/* Magnetic Social Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
           viewport={{ once: true }}
-          className="flex gap-6 mb-12"
+          className="flex gap-5 mb-16"
         >
-          {["github", "instagram", "email"].map((type) => {
-            const links: Record<string, string> = {
-              github: "https://github.com/yaf7",
-              instagram: "https://www.instagram.com/yffaarz?igsh=bWM0NHFta3BsNnJ3",
-              email: "mailto:yafaarsetya@gmail.com"
-            };
-            
-            return (
-              <a
-                key={type}
-                href={links[type]}
-                target={type !== "email" ? "_blank" : undefined}
-                rel={type !== "email" ? "noopener noreferrer" : undefined}
-                className="w-12 h-12 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-purple-600 border border-white/5 hover:border-purple-500 transition-all duration-500 hover:scale-110"
-              >
-                <SocialIcon type={type} />
-              </a>
-            );
-          })}
+          {[
+            { type: "github", href: "https://github.com/yaf7", label: "GitHub" },
+            { type: "instagram", href: "https://www.instagram.com/yffaarz?igsh=bWM0NHFta3BsNnJ3", label: "Instagram" },
+            { type: "email", href: "mailto:yafaarsetya@gmail.com", label: "Email" },
+          ].map(({ type, href, label }) => (
+            <MagneticButton
+              key={type}
+              href={href}
+              target={type !== "email" ? "_blank" : undefined}
+              rel={type !== "email" ? "noopener noreferrer" : undefined}
+              className="w-14 h-14 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-purple-600/80 border border-white/5 hover:border-purple-500 transition-colors duration-500 hover:shadow-[0_0_25px_rgba(168,85,247,0.3)]"
+            >
+              <SocialIcon type={type} />
+            </MagneticButton>
+          ))}
         </motion.div>
 
+        {/* Divider */}
+        <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8" />
+
+        {/* Footer bottom */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center text-sm text-gray-600 font-medium tracking-wide uppercase"
+          className="text-center text-sm text-gray-600 font-medium tracking-wide uppercase flex flex-col items-center gap-1"
         >
           <p>Deyafa Arsetya</p>
+          <p className="text-xs text-gray-700">© {new Date().getFullYear()}</p>
         </motion.div>
       </div>
     </footer>
