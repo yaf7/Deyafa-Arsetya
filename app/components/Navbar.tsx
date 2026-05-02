@@ -151,9 +151,26 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => {
-                    // Let the browser handle the hash scroll natively, but close menu after a tiny delay
-                    setTimeout(() => setIsMobileMenuOpen(false), 150);
+                    e.preventDefault();
+                    const targetId = link.href.replace("#", "");
+                    setIsMobileMenuOpen(false);
+                    
+                    // Explicitly scroll to the target after the menu closing starts
+                    setTimeout(() => {
+                      const element = document.getElementById(targetId);
+                      if (element) {
+                        const offset = 80; // Offset for fixed navbar
+                        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - offset;
+
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: "smooth",
+                        });
+                      }
+                    }, 300); // Wait for menu unmount animation to avoid layout shift conflicts
                   }}
+                  whileTap={{ scale: 0.98 }}
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: i * 0.05, duration: 0.3 }}
