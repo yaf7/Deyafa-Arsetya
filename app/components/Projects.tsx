@@ -26,7 +26,7 @@ const PROJECTS = [
     ]
   },
   {
-    title: "YFScanner – Android Document Mobile Scanner",
+    title: "YFScanner – Pemindai Dokumen Mobile Android",
     description: "Aplikasi pemindai dokumen berbasis Android yang dikembangkan dengan Kotlin. Dirancang untuk memudahkan digitalisasi dokumen fisik ke dalam format digital secara cepat, ringan, dan efisien langsung dari perangkat mobile.",
     tags: ["Kotlin", "Android", "CameraX", "Mobile"],
     image: "/yfscanner/yfscanner1.jpeg",
@@ -80,6 +80,15 @@ const PROJECTS = [
     description: "Sistem Informasi Geografis (GIS) berbasis Web untuk pemetaan infrastruktur FTTH, manajemen titik ODP/ODC, dan monitoring layanan internet pada proyek Griya Karsa.",
     tags: ["Laravel", "PHP", "GIS", "FTTH", "Mapping", "LeafletJS", "MySQL"],
     image: "/Griya-Karsa-FTTH-Mapping/tampilan-luar-project-griyakarsa.png",
+    comingSoon: true,
+    device: "desktop",
+    presentation: "separated"
+  },
+  {
+    title: "NextGen Photobooth: Kreator Kolase & Strip Foto Instan",
+    description: "Platform photobooth digital yang menghadirkan pengalaman studio foto. Buat strip foto estetik dengan filter real-time dan ekspor kualitas tinggi dalam hitungan detik.",
+    tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Canvas API"],
+    image: "/NexGen-Photobooth/tampilan-luar-project-nexgen-photobooth.png",
     comingSoon: true,
     device: "desktop",
     presentation: "separated"
@@ -146,7 +155,7 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: { pr
         <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end" style={{ transform: "translateZ(80px)" }}>
           {/* Project number index */}
           <span className="absolute top-6 left-8 text-7xl font-black text-white/[0.04] select-none leading-none">{String(index + 1).padStart(2, '0')}</span>
-          
+
           {project.comingSoon && (
             <div className="absolute top-6 right-6">
               <div className="relative group/badge">
@@ -373,7 +382,7 @@ export default function Projects() {
                       {/* Display Canvas Frames (All if separated, or Remaining if stitched) */}
                       {((selectedProject.viewDesign as string[]).length > 3 || !showStitched) && (
                         <div className={`flex flex-col items-center gap-16 w-full ${contentWidth} ${!showStitched ? 'mt-0' : 'mt-16'} relative z-10`}>
-                          
+
                           {/* Gapped Image Display Inside Canvas Frames */}
                           {(selectedProject.viewDesign as string[]).slice(showStitched ? 3 : 0).map((img, idx) => (
                             <motion.div
@@ -417,17 +426,17 @@ export default function Projects() {
           onClick={() => setSelectedCertificate(null)}
         >
           {/* Animated Glowing Background Orbs */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none"
           />
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, delay: 0.2 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen"
           />
 
           <motion.div
