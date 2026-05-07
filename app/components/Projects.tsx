@@ -74,6 +74,15 @@ const PROJECTS = [
     comingSoon: true,
     device: "desktop",
     presentation: "separated"
+  },
+  {
+    title: "Griya Karsa: Sistem Pemetaan Infrastruktur FTTH Berbasis GIS",
+    description: "Sistem Informasi Geografis (GIS) berbasis Web untuk pemetaan infrastruktur FTTH, manajemen titik ODP/ODC, dan monitoring layanan internet pada proyek Griya Karsa.",
+    tags: ["Laravel", "PHP", "GIS", "FTTH", "Mapping", "LeafletJS", "MySQL"],
+    image: "/Griya-Karsa-FTTH-Mapping/tampilan-luar-project-griyakarsa.png",
+    comingSoon: true,
+    device: "desktop",
+    presentation: "separated"
   }
 ];
 
