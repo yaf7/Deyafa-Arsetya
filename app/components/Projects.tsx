@@ -138,7 +138,7 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: { pr
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full rounded-2xl h-[450px] group cursor-pointer"
+      className="relative w-full rounded-2xl min-h-[480px] h-auto md:h-[450px] group cursor-pointer"
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2, ease: "easeOut", delay: index * 0.15 }}
@@ -152,7 +152,7 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: { pr
         <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700 blur-[2px] group-hover:blur-0" />
 
         {/* Content Floating Above */}
-        <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end" style={{ transform: "translateZ(80px)" }}>
+        <div className="absolute inset-0 z-20 p-6 md:p-8 flex flex-col justify-end" style={{ transform: "translateZ(80px)" }}>
           {/* Project number index */}
           <span className="absolute top-6 left-8 text-7xl font-black text-white/[0.04] select-none leading-none">{String(index + 1).padStart(2, '0')}</span>
 
@@ -166,8 +166,8 @@ const TiltCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: { pr
               </div>
             </div>
           )}
-          <h3 className="text-3xl font-black text-white mb-3 tracking-wide drop-shadow-lg">{project.title}</h3>
-          <p className="text-gray-300 mb-6 drop-shadow-md text-sm leading-relaxed line-clamp-3">{project.description}</p>
+          <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-wide drop-shadow-lg">{project.title}</h3>
+          <p className="text-gray-300 mb-6 drop-shadow-md text-sm leading-relaxed">{project.description}</p>
 
           <div className="flex flex-wrap gap-3 mb-6">
             {project.tags.map((tag: string) => (
@@ -248,7 +248,7 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20 md:mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-black mb-4 uppercase tracking-widest text-white">
             Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">Projects</span>
