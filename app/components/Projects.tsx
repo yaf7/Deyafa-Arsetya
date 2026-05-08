@@ -250,7 +250,7 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mb-20 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-black mb-4 uppercase tracking-widest text-white">
+          <h2 className="font-display text-4xl md:text-5xl font-black mb-4 uppercase tracking-widest text-white">
             Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">Projects</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">

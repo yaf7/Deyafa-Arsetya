@@ -4,9 +4,11 @@ import { useEffect, useRef } from "react";
 
 export default function CursorGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const glow = glowRef.current;
+    const inner = innerRef.current;
     if (!glow) return;
 
     let animFrame: number;
@@ -14,6 +16,8 @@ export default function CursorGlow() {
     let targetY = 0;
     let currentX = 0;
     let currentY = 0;
+    let innerX = 0;
+    let innerY = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
       targetX = e.clientX;
@@ -21,10 +25,20 @@ export default function CursorGlow() {
     };
 
     const animate = () => {
+      // Outer glow — slow, lazy follow
       currentX += (targetX - currentX) * 0.08;
       currentY += (targetY - currentY) * 0.08;
       glow.style.left = `${currentX}px`;
       glow.style.top = `${currentY}px`;
+
+      // Inner glow — faster, snappier follow
+      if (inner) {
+        innerX += (targetX - innerX) * 0.18;
+        innerY += (targetY - innerY) * 0.18;
+        inner.style.left = `${innerX}px`;
+        inner.style.top = `${innerY}px`;
+      }
+
       animFrame = requestAnimationFrame(animate);
     };
 
@@ -41,5 +55,10 @@ export default function CursorGlow() {
     };
   }, []);
 
-  return <div ref={glowRef} className="cursor-glow hidden md:block" />;
+  return (
+    <>
+      <div ref={glowRef} className="cursor-glow hidden md:block" />
+      <div ref={innerRef} className="cursor-glow-inner hidden md:block" />
+    </>
+  );
 }
