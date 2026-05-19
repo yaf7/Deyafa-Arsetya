@@ -18,13 +18,13 @@ export default function Publications() {
           className="text-center mb-16"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-widest mb-6">
-            <BookOpen size={12} /> Research & Publications
+            <BookOpen size={12} /> Riset & Publikasi
           </span>
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest text-white">
-            Academic <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">Research</span>
+            Riset <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">Akademik</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg mt-4">
-            Documenting technical implementations and system architectures through academic research and scientific publications.
+            Mendokumentasikan implementasi teknis dan arsitektur sistem melalui riset akademik serta publikasi ilmiah.
           </p>
         </motion.div>
 
@@ -49,7 +49,7 @@ export default function Publications() {
                   Sistem Informasi Modul Registrasi NPWPD Berbasis Laravel pada BPPKAD Kota Kediri
                 </h3>
                 <p className="text-gray-400 mb-8 leading-relaxed">
-                  The NPWPD registration module was developed using the Laravel framework for BPPKAD Kediri City, specifically engineered to streamline administrative workflows and enhance the quality of local public services.
+                  Modul registrasi NPWPD ini dikembangkan dengan framework Laravel untuk BPPKAD Kota Kediri, dirancang secara khusus untuk menyederhanakan alur administrasi dan meningkatkan efisiensi layanan publik daerah.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
                   {["Framework Laravel", "NPWPD", "Public Service", "System Architecture", "Transparency"].map(keyword => (
@@ -62,7 +62,7 @@ export default function Publications() {
               <div className="mt-auto">
                 <a href="https://doi.org/10.62951/router.v3i4.821" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-bold bg-white text-black px-6 py-3 rounded-full hover:bg-blue-50 transition-colors duration-500 ease-out shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] group/btn">
-                  View DOI Publication <ExternalLink size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
+                  Lihat Publikasi DOI <ExternalLink size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
                 </a>
               </div>
             </div>
@@ -75,14 +75,14 @@ export default function Publications() {
             viewport={{ once: true }}
             className="lg:col-span-4 flex flex-col gap-4"
           >
-            <h4 className="text-sm font-black text-gray-500 uppercase tracking-widest mb-2 pl-2">Academic Footprint</h4>
+            <h4 className="text-sm font-black text-gray-500 uppercase tracking-widest mb-2 pl-2">Jejak Akademik</h4>
             <a href="https://scholar.google.co.id/scholar?hl=id&as_sdt=0%2C5&q=deyafa+arsetya&btnG=" target="_blank" rel="noopener noreferrer"
               className="bento-card p-6 flex items-center justify-between group">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform duration-500 ease-out">
                   <GraduationCap size={22} />
                 </div>
-                <div><h5 className="font-bold text-white text-lg">Google Scholar</h5><p className="text-xs text-gray-400">Citations & Papers</p></div>
+                <div><h5 className="font-bold text-white text-lg">Google Scholar</h5><p className="text-xs text-gray-400">Sitasi & Karya Ilmiah</p></div>
               </div>
               <ExternalLink size={16} className="text-gray-600 group-hover:text-blue-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
             </a>
@@ -92,7 +92,7 @@ export default function Publications() {
                 <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform duration-500 ease-out">
                   <Library size={22} />
                 </div>
-                <div><h5 className="font-bold text-white text-lg">Semantic Scholar</h5><p className="text-xs text-gray-400">Research Graph</p></div>
+                <div><h5 className="font-bold text-white text-lg">Semantic Scholar</h5><p className="text-xs text-gray-400">Grafik Riset</p></div>
               </div>
               <ExternalLink size={16} className="text-gray-600 group-hover:text-purple-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
             </a>
@@ -102,7 +102,7 @@ export default function Publications() {
                 <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 transition-transform duration-500 ease-out">
                   <Network size={22} />
                 </div>
-                <div><h5 className="font-bold text-white text-lg">ResearchGate</h5><p className="text-xs text-gray-400">Scientific Network</p></div>
+                <div><h5 className="font-bold text-white text-lg">ResearchGate</h5><p className="text-xs text-gray-400">Jaringan Ilmiah</p></div>
               </div>
               <ExternalLink size={16} className="text-gray-600 group-hover:text-green-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
             </a>

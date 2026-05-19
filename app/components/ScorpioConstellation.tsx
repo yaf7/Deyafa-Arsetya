@@ -23,6 +23,18 @@ interface ScorpioStar {
   info?: string;
 }
 
+interface ScorpioParticle {
+  nodeA: number;
+  nodeB: number;
+  t: number;      // interpolation along the line (0 to 1)
+  offsetX: number; // perpendicular offset
+  offsetY: number; // parallel offset
+  size: number;
+  alpha: number;
+  twinkleSpeed: number;
+  color: string;
+}
+
 export default function ScorpioConstellation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -35,72 +47,93 @@ export default function ScorpioConstellation() {
 
     let animationFrameId: number;
     let stars: Star[] = [];
+    let scorpioParticles: ScorpioParticle[] = [];
     let isVisible = true;
     const mouse = { x: null as number | null, y: null as number | null, active: false };
     const targetMouseOffset = { x: 0, y: 0 };
     const currentMouseOffset = { x: 0, y: 0 };
 
-    // ===== REALISTIC SCORPION ANIMAL SHAPE (top-down view) =====
-    // ===== SCORPION DEVELOPER CHARACTER SHAPE (top-down view) =====
+    // ===== REALISTIC SCORPION ANIMAL SHAPE SKELETON =====
     const scorpioStars: ScorpioStar[] = [
-      // ── LEFT CLAW: MOBILE DEVELOPMENT (Senjata Mobile) ──
-      { name: "Mobile Weapon (Outer)", scientificName: "Kotlin Native Drive", rx: -195, ry: -265, size: 3.8, color: "#bae6fd", glowColor: "rgba(56, 189, 248, 0.4)", info: "Membangun aplikasi Android native yang responsif, modern, dan berkinerja tinggi." },
-      { name: "Mobile Weapon (Inner)", scientificName: "Android SDK & Jetpack", rx: -140, ry: -255, size: 3.8, color: "#bae6fd", glowColor: "rgba(56, 189, 248, 0.4)", info: "Implementasi komponen UI modern, manajemen memori, dan arsitektur aplikasi mobile yang clean." },
-      { name: "Mobile Hinge", scientificName: "API Integration Module", rx: -160, ry: -215, size: 4.2, color: "#7dd3fc", glowColor: "rgba(56, 189, 248, 0.35)", info: "Menghubungkan aplikasi mobile dengan endpoint RESTful API dan sinkronisasi data secara real-time." },
-      { name: "L-Arm Connector", scientificName: "Mobile State Management", rx: -125, ry: -170, size: 3.5, color: "#7dd3fc", glowColor: "rgba(56, 189, 248, 0.3)", info: "Mengelola aliran data (data flow) yang asinkronus dan efisien di sisi client mobile." },
-      { name: "L-Arm Base", scientificName: "App Release Pipeline", rx: -85, ry: -125, size: 4.0, color: "#f0f9ff", glowColor: "rgba(14, 165, 233, 0.45)", info: "Manajemen rilis aplikasi, pembuatan build APK/Bundle, dan distribusi source code." },
+      // ── LEFT CLAW (Indices 0 - 5) ──
+      { name: "Mobile Weapon (Outer)", scientificName: "Kotlin Native Drive", rx: -195, ry: -275, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Membangun aplikasi Android native yang responsif, modern, dan berkinerja tinggi." },
+      { name: "Mobile Weapon (Inner)", scientificName: "Android SDK & Jetpack", rx: -140, ry: -270, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Implementasi komponen UI modern, manajemen memori, dan arsitektur aplikasi mobile yang clean." },
+      { name: "Mobile Palm", scientificName: "API Integration Module", rx: -160, ry: -240, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Menghubungkan aplikasi mobile dengan endpoint RESTful API dan sinkronisasi data secara real-time." },
+      { name: "L-Arm Elbow", scientificName: "Mobile State Management", rx: -140, ry: -180, size: 3.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.3)", info: "Mengelola aliran data (data flow) yang asinkronus dan efisien di sisi client mobile." },
+      { name: "L-Arm Femur", scientificName: "App Release Pipeline", rx: -75, ry: -150, size: 4.0, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.3)", info: "Manajemen rilis aplikasi, pembuatan build APK/Bundle, dan distribusi source code." },
+      { name: "L-Arm Base", scientificName: "Mobile Base Connection", rx: -25, ry: -100, size: 3.0, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.2)" },
 
-      // ── RIGHT CLAW: WEB DEVELOPMENT (Senjata Web Full-Stack) ──
-      { name: "Web Weapon (Outer)", scientificName: "PHP & Laravel Framework", rx: 195, ry: -265, size: 3.8, color: "#bae6fd", glowColor: "rgba(56, 189, 248, 0.4)", info: "Arsitektur backend yang kokoh, pembuatan RESTful API, dan sistem autentikasi yang aman." },
-      { name: "Web Weapon (Inner)", scientificName: "React & Next.js Engine", rx: 140, ry: -255, size: 3.8, color: "#bae6fd", glowColor: "rgba(56, 189, 248, 0.4)", info: "Pembuatan antarmuka web interaktif, berkinerja tinggi, dan ramah terhadap optimasi SEO." },
-      { name: "Web Hinge", scientificName: "Database Layer (MySQL)", rx: 160, ry: -215, size: 4.2, color: "#7dd3fc", glowColor: "rgba(56, 189, 248, 0.35)", info: "Perancangan skema database relasional, optimasi query, dan manajemen integritas data." },
-      { name: "R-Arm Connector", scientificName: "Full-Stack Integration", rx: 125, ry: -170, size: 3.5, color: "#7dd3fc", glowColor: "rgba(56, 189, 248, 0.3)", info: "Menjembatani logika database backend dengan tampilan frontend secara dinamis dan seamless." },
-      { name: "R-Arm Base", scientificName: "Web Deployment Module", rx: 85, ry: -125, size: 4.0, color: "#f0f9ff", glowColor: "rgba(14, 165, 233, 0.45)", info: "Proses deployment aplikasi web ke server produksi, manajemen hosting, dan konfigurasi domain." },
+      // ── RIGHT CLAW (Indices 6 - 11) ──
+      { name: "Web Weapon (Outer)", scientificName: "PHP & Laravel Framework", rx: 195, ry: -275, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Arsitektur backend yang kokoh, pembuatan RESTful API, dan sistem autentikasi yang aman." },
+      { name: "Web Weapon (Inner)", scientificName: "React & Next.js Engine", rx: 140, ry: -270, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Pembuatan antarmuka web interaktif, berkinerja tinggi, dan ramah terhadap optimasi SEO." },
+      { name: "Web Palm", scientificName: "Database Layer (MySQL)", rx: 160, ry: -240, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Perancangan skema database relasional, optimasi query, dan manajemen integritas data." },
+      { name: "R-Arm Elbow", scientificName: "Full-Stack Integration", rx: 140, ry: -180, size: 3.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.3)", info: "Menjembatani logika database backend dengan tampilan frontend secara dinamis dan seamless." },
+      { name: "R-Arm Femur", scientificName: "Web Deployment Module", rx: 75, ry: -150, size: 4.0, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.3)", info: "Proses deployment aplikasi web ke server produksi, manajemen hosting, dan konfigurasi domain." },
+      { name: "R-Arm Base", scientificName: "Web Base Connection", rx: 25, ry: -100, size: 3.0, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.2)" },
 
-      // ── BODY: THE CORE RUNTIME (Pusat Kendali Sistem) ──
-      { name: "Main Sensor", scientificName: "Management Informatics", rx: 0, ry: -95, size: 5.2, color: "#f0f9ff", glowColor: "rgba(14, 165, 233, 0.5)", info: "Menghubungkan kebutuhan manajemen bisnis atau instansi dengan solusi teknis pemrograman." },
-      { name: "Core Processor", scientificName: "Systems Architect", rx: 0, ry: -35, size: 4.8, color: "#e0f2fe", glowColor: "rgba(99, 102, 241, 0.4)", info: "Merancang alur logika program yang bersih (clean code), efisien, dan terstruktur." },
-      { name: "Deyafa Arsetya", scientificName: "Alpha Core (Full-Stack Developer)", rx: 0, ry: 30, size: 7.5, color: "#f59e0b", glowColor: "rgba(239, 68, 68, 0.65)", isHeart: true, info: "Pusat pengendali seluruh sistem portofolio. Fokus pada pengembangan Web & Mobile." },
-      { name: "Analytics Module", scientificName: "Python 3 & Data Processing", rx: 0, ry: 95, size: 4.5, color: "#e0f2fe", glowColor: "rgba(99, 102, 241, 0.4)", info: "Sub-prosesor untuk mengolah data, analisis logika matematika, dan visualisasi informasi terstruktur." },
+      // ── BODY SPINE (Indices 12 - 16) ──
+      { name: "Main Sensor", scientificName: "Management Informatics", rx: 0, ry: -110, size: 5.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.55)", info: "Menghubungkan kebutuhan manajemen bisnis atau instansi dengan solusi teknis pemrograman." },
+      { name: "Carapace Center", scientificName: "Systems Architect", rx: 0, ry: -65, size: 5.0, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Merancang alur logika program yang bersih (clean code), efisien, dan terstruktur." },
+      { name: "Deyafa Arsetya", scientificName: "Alpha Core (Full-Stack Developer)", rx: 0, ry: -15, size: 8.5, color: "#f97316", glowColor: "rgba(249, 115, 22, 0.8)", isHeart: true, info: "Pusat pengendali seluruh sistem portofolio. Fokus pada pengembangan Web & Mobile." },
+      { name: "Analytics Module", scientificName: "Python 3 & Data Processing", rx: 0, ry: 45, size: 5.0, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Sub-prosesor untuk mengolah data, analisis logika matematika, dan visualisasi informasi terstruktur." },
+      { name: "Tail Connection", scientificName: "Core Base", rx: 0, ry: 110, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.4)", info: "Pangkal penghubung antara tubuh utama dengan sistem ekor kalajengking." },
 
-      // ── LEFT LEGS: STABILIZERS (Fondasi Pemrograman Dasar) ──
-      { name: "Stabilizer L1", scientificName: "JavaScript / TypeScript", rx: -115, ry: -75, size: 2.5, color: "#93c5fd", glowColor: "rgba(56, 189, 248, 0.22)", info: "Logika dasar penggerak interaktivitas web modern dan validasi data di sisi klien." },
-      { name: "Stabilizer L2", scientificName: "HTML5 & CSS3 Structure", rx: -130, ry: -20, size: 2.5, color: "#93c5fd", glowColor: "rgba(56, 189, 248, 0.22)", info: "Fondasi struktural halaman web dan implementasi desain visual yang responsif." },
-      { name: "Stabilizer L3", scientificName: "Version Control (Git)", rx: -130, ry: 50, size: 2.5, color: "#93c5fd", glowColor: "rgba(56, 189, 248, 0.22)", info: "Pelacakan perubahan kode, manajemen branch, dan kolaborasi tim via GitHub." },
-      { name: "Stabilizer L4", scientificName: "UI/UX Frameworks", rx: -115, ry: 105, size: 2.5, color: "#93c5fd", glowColor: "rgba(56, 189, 248, 0.22)", info: "Pemanfaatan framework CSS seperti Tailwind untuk mempercepat pembangunan antarmuka." },
+      // ── LEFT LEGS (Indices 17 - 24, Faint/Invisible Skeleton) ──
+      { name: "Knee L1", scientificName: "JS/TS Knee Joint", rx: -75, ry: -95, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Stabilizer L1", scientificName: "JavaScript / TypeScript", rx: -130, ry: -80, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Knee L2", scientificName: "HTML/CSS Knee Joint", rx: -85, ry: -50, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Stabilizer L2", scientificName: "HTML5 & CSS3 Structure", rx: -145, ry: -35, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Knee L3", scientificName: "Git Knee Joint", rx: -85, ry: 0, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Stabilizer L3", scientificName: "Version Control (Git)", rx: -145, ry: 20, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Knee L4", scientificName: "UI/UX Knee Joint", rx: -75, ry: 45, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Stabilizer L4", scientificName: "UI/UX Frameworks", rx: -130, ry: 75, size: 0, color: "transparent", glowColor: "transparent" },
 
-      // ── RIGHT LEGS: SUPPORTING ENGINES (Sistem Pendukung) ──
-      { name: "Engine R1", scientificName: "SEO Optimization Node", rx: 115, ry: -75, size: 2.5, color: "#93c5fd", glowColor: "rgba(56, 189, 248, 0.22)", info: "Optimasi performa dan metadata agar aplikasi web mudah ditemukan di mesin pencari Google." },
-      { name: "Engine R2", scientificName: "Algorithmic Logic", rx: 130, ry: -20, size: 2.5, color: "#93c5fd", glowColor: "rgba(56, 189, 248, 0.22)", info: "Penerapan algoritma yang efisien untuk menyelesaikan masalah komputasi dan struktur data." },
-      { name: "Engine R3", scientificName: "Cross-Device Compatibility", rx: 130, ry: 50, size: 2.5, color: "#93c5fd", glowColor: "rgba(56, 189, 248, 0.22)", info: "Memastikan aplikasi web dan mobile berjalan stabil di berbagai ukuran layar dan perangkat." },
-      { name: "Engine R4", scientificName: "Package Management", rx: 115, ry: 105, size: 2.5, color: "#93c5fd", glowColor: "rgba(56, 189, 248, 0.22)", info: "Pengelolaan dependensi, pustaka (library), dan modul proyek menggunakan Composer serta NPM." },
+      // ── RIGHT LEGS (Indices 25 - 32, Faint/Invisible Skeleton) ──
+      { name: "Knee R1", scientificName: "SEO Knee Joint", rx: 75, ry: -95, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Engine R1", scientificName: "SEO Optimization Node", rx: 130, ry: -80, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Knee R2", scientificName: "Algo Knee Joint", rx: 85, ry: -50, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Engine R2", scientificName: "Algorithmic Logic", rx: 145, ry: -35, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Knee R3", scientificName: "Compat Knee Joint", rx: 85, ry: 0, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Engine R3", scientificName: "Cross-Device Compatibility", rx: 145, ry: 20, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Knee R4", scientificName: "PM Knee Joint", rx: 75, ry: 45, size: 0, color: "transparent", glowColor: "transparent" },
+      { name: "Engine R4", scientificName: "Package Management", rx: 130, ry: 75, size: 0, color: "transparent", glowColor: "transparent" },
 
-      // ── TAIL & STINGER: DEVELOPMENT LIFE CYCLE (Alur Kerja Developer) ──
-      { name: "Workflow Node 1", scientificName: "Problem Analysis", rx: 15, ry: 155, size: 4.0, color: "#f0f9ff", glowColor: "rgba(14, 165, 233, 0.4)", info: "Tahap awal menganalisis kebutuhan sistem dan menerjemahkannya ke dalam rencana arsitektur kode." },
-      { name: "Workflow Node 2", scientificName: "UI/UX Translation", rx: 50, ry: 205, size: 3.8, color: "#e0f2fe", glowColor: "rgba(56, 189, 248, 0.35)", info: "Mengubah konsep desain visual menjadi komponen kode frontend web atau mobile yang interaktif." },
-      { name: "Workflow Node 3", scientificName: "Backend Integration", rx: 100, ry: 245, size: 3.8, color: "#e0f2fe", glowColor: "rgba(56, 189, 248, 0.35)", info: "Membangun API, mengelola database, dan memastikan keamanan data di sisi server." },
-      { name: "Workflow Node 4", scientificName: "Testing & QA", rx: 160, ry: 260, size: 4.5, color: "#fef08a", glowColor: "rgba(234, 179, 8, 0.45)", info: "Melakukan pengujian fitur (debugging) untuk memastikan aplikasi bebas dari error sebelum dirilis." },
-      { name: "Workflow Node 5", scientificName: "Deployment Ready", rx: 210, ry: 240, size: 4.0, color: "#e0f2fe", glowColor: "rgba(56, 189, 248, 0.4)", info: "Menyiapkan build final aplikasi web maupun mobile untuk diunggah ke server produksi atau platform distribusi." },
-      { name: "Workflow Node 6", scientificName: "Scalability Planning", rx: 240, ry: 195, size: 4.0, color: "#e0f2fe", glowColor: "rgba(14, 165, 233, 0.4)", info: "Memastikan kode program ditulis dengan standar yang rapi agar mudah dirawat dan dikembangkan ke depan." },
-      { name: "Pre-Sting Valve", scientificName: "Performance Optimization", rx: 248, ry: 140, size: 4.2, color: "#e0f2fe", glowColor: "rgba(14, 165, 233, 0.45)", info: "Optimasi kecepatan load halaman web dan efisiensi penggunaan memori pada aplikasi mobile." },
-
-      // ── THE STINGER: ULTIMATE IMPACT (Dampak Akhir) ──
-      { name: "Shaula (THE STINGER)", scientificName: "Production-Ready Standard", rx: 235, ry: 85, size: 6.5, color: "#22d3ee", glowColor: "rgba(6, 182, 212, 0.65)", info: "Sengatan Utama: Menghasilkan produk digital berupa aplikasi Web & Mobile yang siap pakai, stabil, dan solutif!" },
+      // ── TAIL & STINGER (Indices 33 - 40) ──
+      { name: "Workflow Node 1", scientificName: "Problem Analysis", rx: 15, ry: 155, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Tahap awal menganalisis kebutuhan sistem dan menerjemahkannya ke dalam rencana arsitektur kode." },
+      { name: "Workflow Node 2", scientificName: "UI/UX Translation", rx: 50, ry: 205, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Mengubah konsep desain visual menjadi komponen kode frontend web atau mobile yang interaktif." },
+      { name: "Workflow Node 3", scientificName: "Backend Integration", rx: 100, ry: 245, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Membangun API, mengelola database, dan memastikan keamanan data di sisi server." },
+      { name: "Workflow Node 4", scientificName: "Testing & QA", rx: 160, ry: 260, size: 5.0, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.5)", info: "Melakukan pengujian fitur (debugging) untuk memastikan aplikasi bebas dari error sebelum dirilis." },
+      { name: "Workflow Node 5", scientificName: "Deployment Ready", rx: 215, ry: 235, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Menyiapkan build final aplikasi web maupun mobile untuk diunggah ke server produksi atau platform distribusi." },
+      { name: "Workflow Node 6", scientificName: "Scalability Planning", rx: 240, ry: 180, size: 4.5, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.45)", info: "Memastikan kode program ditulis dengan standar yang rapi agar mudah dirawat dan dikembangkan ke depan." },
+      { name: "Pre-Sting Valve", scientificName: "Performance Optimization", rx: 230, ry: 125, size: 4.8, color: "#fbbf24", glowColor: "rgba(245, 158, 11, 0.5)", info: "Optimasi kecepatan load halaman web dan efisiensi penggunaan memori pada aplikasi mobile." },
+      { name: "Shaula (THE STINGER)", scientificName: "Production-Ready Standard", rx: 195, ry: 95, size: 6.5, color: "#f97316", glowColor: "rgba(249, 115, 22, 0.75)", info: "Sengatan Utama: Menghasilkan produk digital berupa aplikasi Web & Mobile yang siap pakai, stabil, dan solutif!" },
     ];
 
     const scorpioLines = [
-      [0, 2], [1, 2], [2, 3], [3, 4], [4, 10],
-      [5, 7], [6, 7], [7, 8], [8, 9], [9, 10],
-      [10, 11], [11, 12], [12, 13],
-      [10, 14], [11, 15], [12, 16], [13, 17],
-      [10, 18], [11, 19], [12, 20], [13, 21],
-      [13, 22], [22, 23], [23, 24], [24, 25], [25, 26], [26, 27], [27, 28], [28, 29],
+      // Left Pedipalp
+      [12, 5], [5, 4], [4, 3], [3, 2], [2, 0], [2, 1],
+      // Right Pedipalp
+      [12, 11], [11, 10], [10, 9], [9, 8], [8, 6], [8, 7],
+      // Body
+      [12, 13], [13, 14], [14, 15], [15, 16],
+      // Left Legs
+      [13, 17], [17, 18],
+      [13, 19], [19, 20],
+      [15, 21], [21, 22],
+      [16, 23], [23, 24],
+      // Right Legs
+      [13, 25], [25, 26],
+      [13, 27], [27, 28],
+      [15, 29], [29, 30],
+      [16, 31], [31, 32],
+      // Tail
+      [16, 33], [33, 34], [34, 35], [35, 36], [36, 37], [37, 38], [38, 39], [39, 40]
     ];
 
     const initBackgroundStars = (width: number, height: number) => {
       stars = [];
       const isMobile = width < 768;
-      const starCount = isMobile ? 40 : 100; // Reduced from 60/150
+      const starCount = isMobile ? 40 : 100;
 
       for (let i = 0; i < starCount; i++) {
         stars.push({
@@ -114,8 +147,102 @@ export default function ScorpioConstellation() {
       }
     };
 
+    const initScorpioParticles = () => {
+      scorpioParticles = [];
+      
+      const generateParticlesForSegment = (
+        nodeA: number,
+        nodeB: number,
+        count: number,
+        maxOffset: number,
+        colorType: 'gold' | 'blue' = 'gold'
+      ) => {
+        for (let i = 0; i < count; i++) {
+          const t = Math.random();
+          const angle = Math.random() * Math.PI * 2;
+          const dist = Math.random() * maxOffset;
+          // Perpendicular offset in rotated space
+          const offsetX = Math.cos(angle) * dist;
+          // Parallel offset along the segment
+          const offsetY = Math.sin(angle) * dist * 0.5;
+
+          const size = Math.random() * 0.8 + 0.3; // Tiny star dust particles
+          const baseAlpha = Math.random() * 0.6 + 0.3;
+          const twinkleSpeed = (Math.random() * 0.008 + 0.004) * (Math.random() < 0.5 ? 1 : -1);
+
+          const color = colorType === 'gold' 
+            ? `rgba(253, 224, 71, ` // Yellow gold dust
+            : `rgba(186, 230, 253, `; // Cyan/blue dust
+
+          scorpioParticles.push({
+            nodeA,
+            nodeB,
+            t,
+            offsetX,
+            offsetY,
+            size,
+            alpha: baseAlpha,
+            twinkleSpeed,
+            color
+          });
+        }
+      };
+
+      // Left Claw (Fingers, Palm, Arms)
+      generateParticlesForSegment(12, 5, 15, 7, 'gold');
+      generateParticlesForSegment(5, 4, 18, 9, 'gold');
+      generateParticlesForSegment(4, 3, 20, 11, 'gold');
+      generateParticlesForSegment(3, 2, 28, 13, 'gold');
+      generateParticlesForSegment(2, 0, 22, 9, 'blue');
+      generateParticlesForSegment(2, 1, 22, 9, 'blue');
+
+      // Right Claw (Fingers, Palm, Arms)
+      generateParticlesForSegment(12, 11, 15, 7, 'gold');
+      generateParticlesForSegment(11, 10, 18, 9, 'gold');
+      generateParticlesForSegment(10, 9, 20, 11, 'gold');
+      generateParticlesForSegment(9, 8, 28, 13, 'gold');
+      generateParticlesForSegment(8, 6, 22, 9, 'blue');
+      generateParticlesForSegment(8, 7, 22, 9, 'blue');
+
+      // Body (Thick oval, dense star cluster)
+      generateParticlesForSegment(12, 13, 60, 20, 'gold');
+      generateParticlesForSegment(13, 14, 80, 25, 'gold');
+      generateParticlesForSegment(14, 15, 80, 23, 'gold');
+      generateParticlesForSegment(15, 16, 60, 18, 'gold');
+
+      // Left Legs (Jointed, thin distinct outlines)
+      generateParticlesForSegment(13, 17, 12, 5, 'blue');
+      generateParticlesForSegment(17, 18, 16, 4, 'gold');
+      generateParticlesForSegment(13, 19, 12, 5, 'blue');
+      generateParticlesForSegment(19, 20, 16, 4, 'gold');
+      generateParticlesForSegment(15, 21, 12, 5, 'blue');
+      generateParticlesForSegment(21, 22, 16, 4, 'gold');
+      generateParticlesForSegment(16, 23, 12, 5, 'blue');
+      generateParticlesForSegment(23, 24, 16, 4, 'gold');
+
+      // Right Legs (Jointed, thin distinct outlines)
+      generateParticlesForSegment(13, 25, 12, 5, 'blue');
+      generateParticlesForSegment(25, 26, 16, 4, 'gold');
+      generateParticlesForSegment(13, 27, 12, 5, 'blue');
+      generateParticlesForSegment(27, 28, 16, 4, 'gold');
+      generateParticlesForSegment(15, 29, 12, 5, 'blue');
+      generateParticlesForSegment(29, 30, 16, 4, 'gold');
+      generateParticlesForSegment(16, 31, 12, 5, 'blue');
+      generateParticlesForSegment(31, 32, 16, 4, 'gold');
+
+      // Tail (Segmented tube wrapping the J-Spine)
+      generateParticlesForSegment(16, 33, 25, 14, 'gold');
+      generateParticlesForSegment(33, 34, 25, 13, 'gold');
+      generateParticlesForSegment(34, 35, 25, 12, 'gold');
+      generateParticlesForSegment(35, 36, 25, 11, 'gold');
+      generateParticlesForSegment(36, 37, 30, 9, 'gold');
+      generateParticlesForSegment(37, 38, 30, 8, 'gold');
+      generateParticlesForSegment(38, 39, 30, 7, 'gold');
+      generateParticlesForSegment(39, 40, 35, 6, 'gold');
+    };
+
     const handleResize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap DPR
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const width = window.innerWidth;
       const height = window.innerHeight;
 
@@ -129,6 +256,7 @@ export default function ScorpioConstellation() {
     };
 
     handleResize();
+    initScorpioParticles();
     window.addEventListener("resize", handleResize);
 
     // Throttled mouse handler
@@ -175,7 +303,7 @@ export default function ScorpioConstellation() {
       currentMouseOffset.x += (targetMouseOffset.x - currentMouseOffset.x) * 0.04;
       currentMouseOffset.y += (targetMouseOffset.y - currentMouseOffset.y) * 0.04;
 
-      // 1. Background Stars — draw as simple rects (faster)
+      // 1. Background Stars
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
         s.alpha += s.twinkleSpeed;
@@ -190,7 +318,7 @@ export default function ScorpioConstellation() {
         ctx.fillRect(sx - s.radius, sy - s.radius, s.radius * 2, s.radius * 2);
       }
 
-      // 2. Scorpio Constellation — WALKING ANIMATION
+      // 2. Scorpio Constellation Layout
       const isMobile = w < 768;
       const baseX = isMobile ? w * 0.5 : w * 0.68;
       const baseY = isMobile ? h * 0.5 : h * 0.48;
@@ -198,118 +326,248 @@ export default function ScorpioConstellation() {
       const constellationOffsetX = currentMouseOffset.x * 0.4;
       const constellationOffsetY = currentMouseOffset.y * 0.4;
 
-      // ── Walking Path (Lissajous wandering) ──
-      // Compound sine waves create organic, non-repeating wandering
-      const walkSpeed = 0.00015;
-      const walkX = Math.sin(time * walkSpeed) * 50
-        + Math.sin(time * walkSpeed * 1.7 + 1.2) * 25
-        + Math.sin(time * walkSpeed * 0.3) * 15;
-      const walkY = Math.cos(time * walkSpeed * 0.8) * 35
-        + Math.cos(time * walkSpeed * 1.3 + 0.7) * 18;
+      // Walking Wandering
+      const walkSpeed = 0.00018;
+      const wanderRangeX = isMobile ? 60 : 180;
+      const wanderRangeY = isMobile ? 40 : 120;
 
-      // ── Walking Gait Cycle ──
-      const gaitSpeed = 0.0025; // Controls how fast the legs move
+      const getWanderPos = (t: number) => {
+        const x = Math.sin(t * walkSpeed) * (wanderRangeX * 0.6)
+          + Math.sin(t * walkSpeed * 1.7 + 1.2) * (wanderRangeX * 0.3)
+          + Math.sin(t * walkSpeed * 0.3) * (wanderRangeX * 0.1);
+        const y = Math.cos(t * walkSpeed * 0.8) * (wanderRangeY * 0.6)
+          + Math.cos(t * walkSpeed * 1.3 + 0.7) * (wanderRangeY * 0.3)
+          + Math.sin(t * walkSpeed * 0.4) * (wanderRangeY * 0.1);
+        return { x, y };
+      };
+
+      const posCurrent = getWanderPos(time);
+      const posNext = getWanderPos(time + 100);
+      const dx = posNext.x - posCurrent.x;
+      const dy = posNext.y - posCurrent.y;
+      const heading = Math.atan2(dy, dx);
+      // Face the direction of travel
+      const rotationAngle = heading + Math.PI / 2;
+
+      const walkX = posCurrent.x;
+      const walkY = posCurrent.y;
+
+      // Walking Gait Cycle
+      const gaitSpeed = 0.0025;
       const gaitPhase = time * gaitSpeed;
-      const bodyBob = Math.sin(gaitPhase * 2) * 2; // Body bounces at 2x leg frequency
+      const bodyBob = Math.sin(gaitPhase * 2) * 2;
+
+      // Helper for realistic gait offsets (stance vs swing phases)
+      const getWalkOffsets = (p: number, side: number) => {
+        const stride = 14; // Y-axis stride (walking direction)
+        const lift = 8;    // X-axis joint lift
+        const normP = ((p % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+
+        let footX = 0;
+        let footY = 0;
+        let kneeX = 0;
+        let kneeY = 0;
+
+        if (normP < Math.PI) {
+          // Stance phase (foot pushes backward on the ground)
+          const t = normP / Math.PI;
+          footY = -stride + 2 * stride * t;
+          footX = 0;
+
+          kneeY = footY * 0.5;
+          kneeX = 0;
+        } else {
+          // Swing phase (foot lifts and steps forward)
+          const t = (normP - Math.PI) / Math.PI;
+          footY = stride - 2 * stride * t;
+
+          const arc = Math.sin(t * Math.PI);
+          footX = -side * (arc * lift * 0.6); // Foot pulls slightly inward in 2D
+          footY += -arc * 2;
+
+          kneeX = side * (arc * lift * 1.4);  // Knee bends outward dramatically
+          kneeY = footY * 0.5 - arc * 3;
+        }
+
+        return { footX, footY, kneeX, kneeY };
+      };
 
       // Pre-compute per-star animation offsets
       const animX: number[] = new Array(scorpioStars.length).fill(0);
       const animY: number[] = new Array(scorpioStars.length).fill(0);
 
-      // Claws: subtle breathing / opening-closing
-      for (let i = 0; i <= 4; i++) { // Left claw
-        const clawPhase = Math.sin(gaitPhase * 0.4 + i * 0.2);
-        animX[i] = clawPhase * -4; // Opens outward (left = negative X)
-        animY[i] = Math.sin(gaitPhase * 0.6) * 2;
+      // Claws: realistic pinch & sway
+      // Left Pedipalp: 0, 1, 2, 3, 4, 5
+      for (let i = 0; i <= 5; i++) {
+        const clawPhase = Math.sin(gaitPhase * 0.5 + i * 0.1);
+        animX[i] = clawPhase * -3;
+        animY[i] = Math.sin(gaitPhase * 0.5 + i * 0.1) * 2;
       }
-      for (let i = 5; i <= 9; i++) { // Right claw
-        const clawPhase = Math.sin(gaitPhase * 0.4 + (i - 5) * 0.2);
-        animX[i] = clawPhase * 4; // Opens outward (right = positive X)
-        animY[i] = Math.sin(gaitPhase * 0.6) * 2;
-      }
+      const leftFingerPinch = Math.sin(gaitPhase * 1.5) * 2;
+      animX[0] += leftFingerPinch;
+      animX[1] -= leftFingerPinch;
 
-      // Body: vertical bobbing
-      for (let i = 10; i <= 13; i++) {
+      // Right Pedipalp: 6, 7, 8, 9, 10, 11
+      for (let i = 6; i <= 11; i++) {
+        const clawPhase = Math.sin(gaitPhase * 0.5 + (i - 6) * 0.1);
+        animX[i] = clawPhase * 3;
+        animY[i] = Math.sin(gaitPhase * 0.5 + (i - 6) * 0.1) * 2;
+      }
+      const rightFingerPinch = Math.sin(gaitPhase * 1.5) * 2;
+      animX[6] -= rightFingerPinch;
+      animX[7] += rightFingerPinch;
+
+      // Body Spine: 12, 13, 14, 15, 16
+      for (let i = 12; i <= 16; i++) {
         animY[i] = bodyBob;
       }
 
-      // Left Legs (14-17): alternating pairs
-      // L1, L3 move together; L2, L4 move together (opposite phase)
-      const legStride = 10; // How far legs swing forward/back
-      const legLift = 5;    // How much legs lift up
-      animX[14] = Math.sin(gaitPhase) * legStride;
-      animY[14] = -Math.abs(Math.sin(gaitPhase)) * legLift;
-      animX[15] = Math.sin(gaitPhase + Math.PI) * legStride;
-      animY[15] = -Math.abs(Math.sin(gaitPhase + Math.PI)) * legLift;
-      animX[16] = Math.sin(gaitPhase) * legStride;
-      animY[16] = -Math.abs(Math.sin(gaitPhase)) * legLift;
-      animX[17] = Math.sin(gaitPhase + Math.PI) * legStride;
-      animY[17] = -Math.abs(Math.sin(gaitPhase + Math.PI)) * legLift;
+      // Left Legs (Indices 17 - 24): metachronal wave sequence
+      // L1
+      const l1 = getWalkOffsets(gaitPhase, -1);
+      animX[17] = l1.kneeX; animY[17] = l1.kneeY + bodyBob;
+      animX[18] = l1.footX; animY[18] = l1.footY;
 
-      // Right Legs (18-21): opposite phase to left legs (real walking gait)
-      animX[18] = Math.sin(gaitPhase + Math.PI) * legStride;
-      animY[18] = -Math.abs(Math.sin(gaitPhase + Math.PI)) * legLift;
-      animX[19] = Math.sin(gaitPhase) * legStride;
-      animY[19] = -Math.abs(Math.sin(gaitPhase)) * legLift;
-      animX[20] = Math.sin(gaitPhase + Math.PI) * legStride;
-      animY[20] = -Math.abs(Math.sin(gaitPhase + Math.PI)) * legLift;
-      animX[21] = Math.sin(gaitPhase) * legStride;
-      animY[21] = -Math.abs(Math.sin(gaitPhase)) * legLift;
+      // L2
+      const l2 = getWalkOffsets(gaitPhase + Math.PI * 0.5, -1);
+      animX[19] = l2.kneeX; animY[19] = l2.kneeY + bodyBob;
+      animX[20] = l2.footX; animY[20] = l2.footY;
 
-      // Tail (22-29): cascading wave sway — wave propagates with increasing amplitude
-      for (let i = 22; i <= 29; i++) {
-        const tailIdx = i - 22; // 0 to 7
-        const tailPhase = gaitPhase * 0.6 - tailIdx * 0.35; // Wave propagates along tail
-        const tailAmplitude = 2 + tailIdx * 2.5; // Increases toward stinger
+      // L3
+      const l3 = getWalkOffsets(gaitPhase + Math.PI, -1);
+      animX[21] = l3.kneeX; animY[21] = l3.kneeY + bodyBob;
+      animX[22] = l3.footX; animY[22] = l3.footY;
+
+      // L4
+      const l4 = getWalkOffsets(gaitPhase + Math.PI * 1.5, -1);
+      animX[23] = l4.kneeX; animY[23] = l4.kneeY + bodyBob;
+      animX[24] = l4.footX; animY[24] = l4.footY;
+
+      // Right Legs (Indices 25 - 32): offset to alternate with left legs
+      // R1
+      const r1 = getWalkOffsets(gaitPhase + Math.PI, 1);
+      animX[25] = r1.kneeX; animY[25] = r1.kneeY + bodyBob;
+      animX[26] = r1.footX; animY[26] = r1.footY;
+
+      // R2
+      const r2 = getWalkOffsets(gaitPhase + Math.PI * 1.5, 1);
+      animX[27] = r2.kneeX; animY[27] = r2.kneeY + bodyBob;
+      animX[28] = r2.footX; animY[28] = r2.footY;
+
+      // R3
+      const r3 = getWalkOffsets(gaitPhase, 1);
+      animX[29] = r3.kneeX; animY[29] = r3.kneeY + bodyBob;
+      animX[30] = r3.footX; animY[30] = r3.footY;
+
+      // R4
+      const r4 = getWalkOffsets(gaitPhase + Math.PI * 0.5, 1);
+      animX[31] = r4.kneeX; animY[31] = r4.kneeY + bodyBob;
+      animX[32] = r4.footX; animY[32] = r4.footY;
+
+      // Tail & Stinger sway (Indices 33 - 40)
+      for (let i = 33; i <= 40; i++) {
+        const tailIdx = i - 33;
+        const tailPhase = gaitPhase * 0.5 - tailIdx * 0.3;
+        const tailAmplitude = 2.0 + tailIdx * 2.0;
         animX[i] = Math.sin(tailPhase) * tailAmplitude;
-        animY[i] = Math.cos(tailPhase * 0.5) * (tailIdx * 0.8); // Slight vertical undulation
+        animY[i] = Math.cos(tailPhase * 0.4) * (tailIdx * 0.6) + bodyBob;
       }
 
-      // Pre-compute final screen positions (base + walk + animation + parallax)
+      // Pre-compute final screen positions with 2D rotation matrix
       const screenX: number[] = [];
       const screenY: number[] = [];
       const screenGlow: number[] = [];
       const sinTime = Math.sin(time * 0.003);
+      const cosR = Math.cos(rotationAngle);
+      const sinR = Math.sin(rotationAngle);
 
       for (let i = 0; i < scorpioStars.length; i++) {
         const s = scorpioStars[i];
-        screenX[i] = baseX + (s.rx + animX[i]) * scale + walkX - constellationOffsetX;
-        screenY[i] = baseY + (s.ry + animY[i]) * scale + walkY - constellationOffsetY;
-        screenGlow[i] = s.size * (s.isHeart ? 3.0 : 2.0) + sinTime * 1.5;
+
+        // Animated local coordinates relative to center
+        const localX = (s.rx + animX[i]) * scale;
+        const localY = (s.ry + animY[i]) * scale;
+
+        // Apply rotation
+        const rotX = localX * cosR - localY * sinR;
+        const rotY = localX * sinR + localY * cosR;
+
+        screenX[i] = baseX + rotX + walkX - constellationOffsetX;
+        screenY[i] = baseY + rotY + walkY - constellationOffsetY;
+        screenGlow[i] = s.size * (s.isHeart ? 3.2 : 2.2) + sinTime * 1.5;
       }
 
-      // 3. Draw lines — batched into single path
-      const pulseOpacity = 0.12 + Math.sin(time * 0.0015) * 0.04;
+      // 3. Draw Stardust Particles (Outlining claws, body, legs, and tail)
+      for (let i = 0; i < scorpioParticles.length; i++) {
+        const p = scorpioParticles[i];
+        p.alpha += p.twinkleSpeed;
+        if (p.alpha > 0.9 || p.alpha < 0.2) {
+          p.twinkleSpeed = -p.twinkleSpeed;
+        }
 
-      // Regular lines
+        const pA_x = screenX[p.nodeA];
+        const pA_y = screenY[p.nodeA];
+        const pB_x = screenX[p.nodeB];
+        const pB_y = screenY[p.nodeB];
+
+        const baseX = pA_x + p.t * (pB_x - pA_x);
+        const baseY = pA_y + p.t * (pB_y - pA_y);
+
+        const dx = pB_x - pA_x;
+        const dy = pB_y - pA_y;
+        const len = Math.sqrt(dx * dx + dy * dy) || 1;
+        const ux = dx / len;
+        const uy = dy / len;
+        const px = -uy;
+        const py = ux;
+
+        const finalX = baseX + p.offsetX * px + p.offsetY * ux;
+        const finalY = baseY + p.offsetX * py + p.offsetY * uy;
+
+        ctx.fillStyle = `${p.color}${p.alpha})`;
+        ctx.fillRect(finalX - p.size, finalY - p.size, p.size * 2, p.size * 2);
+      }
+
+      // 4. Draw Constellation lines (skipping legs)
+      const pulseOpacity = 0.15 + Math.sin(time * 0.0015) * 0.04;
+
+      // Regular lines (Spine and Claws)
       ctx.beginPath();
-      ctx.lineWidth = 0.8;
+      ctx.lineWidth = 1.0;
       for (const line of scorpioLines) {
         const i0 = line[0], i1 = line[1];
+        // Skip drawing lines for leg joint indices
+        if ((i0 >= 17 && i0 <= 32) || (i1 >= 17 && i1 <= 32)) continue;
         if (scorpioStars[i0].isHeart || scorpioStars[i1].isHeart) continue;
+
         ctx.moveTo(screenX[i0], screenY[i0]);
         ctx.lineTo(screenX[i1], screenY[i1]);
       }
-      ctx.strokeStyle = `rgba(99, 102, 241, ${pulseOpacity})`;
+      ctx.strokeStyle = `rgba(245, 158, 11, ${pulseOpacity})`; // Gold amber
       ctx.stroke();
 
-      // Heart-connected lines
+      // Heart-connected lines (Antares highlighted)
       ctx.beginPath();
+      ctx.lineWidth = 1.2;
       for (const line of scorpioLines) {
         const i0 = line[0], i1 = line[1];
+        if ((i0 >= 17 && i0 <= 32) || (i1 >= 17 && i1 <= 32)) continue;
         if (!scorpioStars[i0].isHeart && !scorpioStars[i1].isHeart) continue;
+
         ctx.moveTo(screenX[i0], screenY[i0]);
         ctx.lineTo(screenX[i1], screenY[i1]);
       }
-      ctx.strokeStyle = `rgba(239, 68, 68, ${pulseOpacity + 0.08})`;
+      ctx.strokeStyle = `rgba(249, 115, 22, ${pulseOpacity + 0.12})`; // Warm orange-red J-Spine
       ctx.stroke();
 
-      // 4. Draw Stars — simplified (no radial gradients for non-hovered)
+      // 5. Draw Constellation Star Cores and Flares (skipping invisible legs)
       let hoveredStarIndex: number | null = null;
       let minDistance = 55;
 
       if (mouse.x !== null && mouse.y !== null) {
         for (let i = 0; i < scorpioStars.length; i++) {
+          if (i >= 17 && i <= 32) continue; // Skip invisible legs
+
           const dx = mouse.x - screenX[i];
           const dy = mouse.y - screenY[i];
           const dist = Math.sqrt(dx * dx + dy * dy);
@@ -321,37 +579,31 @@ export default function ScorpioConstellation() {
       }
 
       for (let i = 0; i < scorpioStars.length; i++) {
+        if (i >= 17 && i <= 32) continue; // Skip invisible legs
+
         const s = scorpioStars[i];
         const sx = screenX[i];
         const sy = screenY[i];
         const isHovered = hoveredStarIndex === i;
-        const glowR = screenGlow[i] * (isHovered ? 1.6 : 1);
+        const glowR = screenGlow[i] * (isHovered ? 1.8 : 1);
 
-        // Simple glow — only for bright stars or hovered ones (perf optimization)
-        if (s.isHeart || s.size >= 5.0 || isHovered) {
-          const radGrad = ctx.createRadialGradient(sx, sy, s.size * 0.2, sx, sy, glowR);
-          radGrad.addColorStop(0, s.glowColor);
-          radGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
-          ctx.beginPath();
-          ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
-          ctx.fillStyle = radGrad;
-          ctx.fill();
-        }
+        // Radial glow
+        const radGrad = ctx.createRadialGradient(sx, sy, s.size * 0.2, sx, sy, glowR);
+        radGrad.addColorStop(0, s.glowColor);
+        radGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.beginPath();
+        ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
+        ctx.fillStyle = radGrad;
+        ctx.fill();
 
-        // Star core — use rect for small stars, arc for large
-        if (s.size < 4) {
-          const r = s.size * (isHovered ? 1.3 : 1);
-          ctx.fillStyle = s.color;
-          ctx.fillRect(sx - r, sy - r, r * 2, r * 2);
-        } else {
-          ctx.beginPath();
-          ctx.arc(sx, sy, s.size * (isHovered ? 1.3 : 1), 0, Math.PI * 2);
-          ctx.fillStyle = s.color;
-          ctx.fill();
-        }
+        // Core
+        ctx.beginPath();
+        ctx.arc(sx, sy, s.size * (isHovered ? 1.3 : 1), 0, Math.PI * 2);
+        ctx.fillStyle = s.color;
+        ctx.fill();
 
-        // Cross flares on major stars
-        if (s.isHeart || s.size >= 5.5) {
+        // Flares on major stars
+        if (s.isHeart || s.size >= 5.0) {
           const flareSize = s.size * 1.6 + Math.sin(time * 0.004) * 1.2;
           ctx.beginPath();
           ctx.strokeStyle = s.color;
@@ -364,47 +616,50 @@ export default function ScorpioConstellation() {
         }
       }
 
-      // 5. HUD for hovered star (only when actually hovering)
+      // 6. HUD display on hover
       if (hoveredStarIndex !== null) {
         const s = scorpioStars[hoveredStarIndex];
         const sx = screenX[hoveredStarIndex];
         const sy = screenY[hoveredStarIndex];
 
-        // Target circle
         ctx.beginPath();
         ctx.arc(sx, sy, 16, 0, Math.PI * 2);
-        ctx.strokeStyle = s.isHeart ? "rgba(239, 68, 68, 0.45)" : "rgba(34, 211, 238, 0.45)";
+        ctx.strokeStyle = s.isHeart ? "rgba(239, 68, 68, 0.45)" : "rgba(245, 158, 11, 0.45)";
         ctx.lineWidth = 1.0;
         ctx.stroke();
 
-        // Dashed outer
         ctx.beginPath();
         ctx.setLineDash([2, 4]);
         ctx.arc(sx, sy, 22, 0, Math.PI * 2);
-        ctx.strokeStyle = s.isHeart ? "rgba(239, 68, 68, 0.3)" : "rgba(34, 211, 238, 0.3)";
+        ctx.strokeStyle = s.isHeart ? "rgba(239, 68, 68, 0.3)" : "rgba(245, 158, 11, 0.3)";
         ctx.stroke();
         ctx.setLineDash([]);
 
-        // Leader line
-        const textOffsetX = s.rx > 0 ? 32 : -180;
+        const centerScreenX = baseX + walkX - constellationOffsetX;
+        const isOnRightSide = sx > centerScreenX;
+        const textOffsetX = isOnRightSide ? 32 : -180;
+
+        const centerScreenY = baseY + walkY - constellationOffsetY;
+        const isOnBottomHalf = sy > centerScreenY;
+        const signY = isOnBottomHalf ? 1 : -1;
+
         ctx.beginPath();
         ctx.moveTo(sx, sy);
-        ctx.lineTo(sx + (s.rx > 0 ? 20 : -20), sy + (s.ry > 0 ? 20 : -20));
-        ctx.lineTo(sx + textOffsetX, sy + (s.ry > 0 ? 20 : -20));
-        ctx.strokeStyle = s.isHeart ? "rgba(239, 68, 68, 0.4)" : "rgba(34, 211, 238, 0.4)";
+        ctx.lineTo(sx + (isOnRightSide ? 20 : -20), sy + (signY * 20));
+        ctx.lineTo(sx + textOffsetX, sy + (signY * 20));
+        ctx.strokeStyle = s.isHeart ? "rgba(239, 68, 68, 0.4)" : "rgba(245, 158, 11, 0.4)";
         ctx.lineWidth = 0.8;
         ctx.stroke();
 
-        // HUD Text
         ctx.font = "bold 11px Courier New, monospace";
-        ctx.fillStyle = s.isHeart ? "#fca5a5" : "#67e8f9";
-        ctx.fillText(s.name.toUpperCase(), sx + textOffsetX + (s.rx > 0 ? 5 : -5), sy + (s.ry > 0 ? 16 : -24));
+        ctx.fillStyle = s.isHeart ? "#fca5a5" : "#fef08a";
+        ctx.fillText(s.name.toUpperCase(), sx + textOffsetX + (isOnRightSide ? 5 : -5), sy + (signY * 16));
 
         ctx.font = "9px Courier New, monospace";
         ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
-        ctx.fillText(s.scientificName, sx + textOffsetX + (s.rx > 0 ? 5 : -5), sy + (s.ry > 0 ? 28 : -14));
+        ctx.fillText(s.scientificName, sx + textOffsetX + (isOnRightSide ? 5 : -5), sy + (signY * 28));
         if (s.info) {
-          ctx.fillText(s.info, sx + textOffsetX + (s.rx > 0 ? 5 : -5), sy + (s.ry > 0 ? 40 : -4));
+          ctx.fillText(s.info, sx + textOffsetX + (isOnRightSide ? 5 : -5), sy + (signY * 40));
         }
       }
     };

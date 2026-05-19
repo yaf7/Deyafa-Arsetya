@@ -17,9 +17,6 @@ export default function About() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-bold uppercase tracking-widest mb-6">
-            <Briefcase size={12} /> About Me
-          </span>
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider relative inline-block">
             Kenali{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">
@@ -28,7 +25,7 @@ export default function About() {
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full" />
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg mt-6">
-            A dedicated learner and developer focused on building functional, reliable digital solutions through continuous improvement.
+            Seorang pembelajar dan pengembang berdedikasi yang fokus pada pembangunan solusi digital fungsional dan andal melalui peningkatan berkelanjutan.
           </p>
         </motion.div>
 
@@ -61,7 +58,7 @@ export default function About() {
                 <Briefcase size={20} className="md:w-6 md:h-6" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] md:text-xs text-gray-400 uppercase font-bold tracking-wider">Experience</p>
+                <p className="text-[10px] md:text-xs text-gray-400 uppercase font-bold tracking-wider">Pengalaman</p>
                 <p className="font-bold text-white text-sm md:text-lg truncate">Web & Mobile Developer</p>
               </div>
             </motion.div>
@@ -93,7 +90,7 @@ export default function About() {
                 <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all duration-500 ease-out">
                   <GraduationCap size={20} />
                 </div>
-                <h4 className="font-display text-xl font-bold text-white mb-2">Education</h4>
+                <h4 className="font-display text-xl font-bold text-white mb-2">Pendidikan</h4>
                 <p className="text-sm text-gray-400 mb-1">DIII - Manajemen Informatika</p>
                 <p className="text-xs text-purple-400 font-medium">Politeknik Negeri Malang</p>
                 <p className="text-xs text-gray-500">Kampus Kediri</p>
@@ -104,9 +101,9 @@ export default function About() {
                 <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 mb-4 group-hover:scale-110 group-hover:bg-pink-500/20 transition-all duration-500 ease-out">
                   <MapPin size={20} />
                 </div>
-                <h4 className="font-display text-xl font-bold text-white mb-2">Location</h4>
+                <h4 className="font-display text-xl font-bold text-white mb-2">Lokasi</h4>
                 <p className="text-sm text-gray-400 mb-1">Kediri, Indonesia</p>
-                <p className="text-xs text-gray-500">Available remotely</p>
+                <p className="text-xs text-gray-500">Siap bekerja remote</p>
               </div>
 
               {/* Contact Email in Card Format */}
@@ -118,7 +115,7 @@ export default function About() {
                   <Mail size={22} />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 uppercase font-bold tracking-widest mb-1">Let&apos;s Connect</p>
+                  <p className="text-xs text-gray-500 uppercase font-bold tracking-widest mb-1">Mari Terhubung</p>
                   <p className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors duration-500 ease-out">yafaarsetya@gmail.com</p>
                 </div>
                 {/* Arrow indicator */}

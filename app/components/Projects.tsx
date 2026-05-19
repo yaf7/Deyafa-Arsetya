@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Lock, Eye, X, Award, Download } from "lucide-react";
 import React, { useState } from "react";
 
@@ -101,123 +101,117 @@ const GithubIcon = () => (
   </svg>
 );
 
-// 3D Tilt Card Component Using Framer Motion
-const TiltCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: { project: typeof PROJECTS[0] | any, onOpenGallery: (images: string[]) => void, onOpenCertificate?: (url: string) => void, index?: number }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
+// Optimized, static Project Card Component with high-end CSS transitions
+const ProjectCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: { project: typeof PROJECTS[0] | any, onOpenGallery: (images: string[]) => void, onOpenCertificate?: (url: string) => void, index?: number }) => {
   return (
     <motion.div
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="relative w-full rounded-2xl min-h-[480px] h-auto md:h-[450px] group cursor-pointer"
-      initial={{ opacity: 0, y: 60 }}
+      className="relative w-full rounded-2xl min-h-[480px] h-auto md:h-[450px] group overflow-hidden border border-white/10 bg-[#08080a] shadow-2xl transition-all duration-500 ease-out hover:border-purple-500/40 hover:shadow-[0_20px_50px_rgba(168,85,247,0.15)] hover:-translate-y-1.5"
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.2, ease: "easeOut", delay: index * 0.15 }}
-      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
+      viewport={{ once: true, margin: "-80px" }}
     >
-      <div
-        className="absolute inset-0 rounded-2xl bg-black border border-white/10 overflow-hidden shadow-2xl glass-card transition-colors duration-500 group-hover:border-purple-500/50"
-        style={{ transform: "translateZ(50px)" }} // Card base
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
-        <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700 blur-[2px] group-hover:blur-0" />
+      {/* Glowing Top Border Accent */}
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30" />
 
-        {/* Content Floating Above */}
-        <div className="absolute inset-0 z-20 p-6 md:p-8 flex flex-col justify-end" style={{ transform: "translateZ(80px)" }}>
-          {/* Project number index */}
-          <span className="absolute top-6 left-8 text-7xl font-black text-white/[0.04] select-none leading-none">{String(index + 1).padStart(2, '0')}</span>
+      {/* Card Background Image & Gradient Overlays */}
+      <div className="absolute inset-0 z-0">
+        {/* Subtle Ambient Vignette/Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-transparent z-10 transition-all duration-500 group-hover:via-black/75" />
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          className="w-full h-full object-cover opacity-50 group-hover:scale-105 group-hover:opacity-65 transition-all duration-700 ease-out blur-[1px] group-hover:blur-0" 
+        />
+      </div>
 
-          {project.comingSoon && (
-            <div className="absolute top-6 right-6">
-              <div className="relative group/badge">
-                <div className="absolute inset-0 bg-amber-500/20 blur-xl rounded-full group-hover/badge:bg-amber-500/30 transition-colors duration-500 ease-out" />
-                <span className="relative flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-300 bg-black/50 border border-amber-500/30 px-4 py-2 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-                  <Lock size={14} className="text-amber-400" /> Coming Soon
-                </span>
-              </div>
-            </div>
-          )}
-          <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-wide drop-shadow-lg">{project.title}</h3>
-          <p className="text-gray-300 mb-6 drop-shadow-md text-sm leading-relaxed">{project.description}</p>
+      {/* Content Container */}
+      <div className="absolute inset-0 z-20 p-6 md:p-8 flex flex-col justify-end">
+        {/* Big Editorial Index Number */}
+        <span className="absolute top-6 left-8 text-7xl font-black text-white/[0.03] select-none leading-none tracking-tighter transition-all duration-500 group-hover:text-purple-500/5 group-hover:scale-105">
+          {String(index + 1).padStart(2, '0')}
+        </span>
 
-          <div className="flex flex-wrap gap-3 mb-6">
-            {project.tags.map((tag: string) => (
-              <span key={tag} className="px-3 py-1 text-xs font-bold bg-white/10 backdrop-blur-md rounded-full text-purple-200 border border-purple-500/20 shadow-sm">
-                {tag}
+        {project.comingSoon && (
+          <div className="absolute top-6 right-6">
+            <div className="relative group/badge">
+              <div className="absolute inset-0 bg-amber-500/20 blur-xl rounded-full group-hover/badge:bg-amber-500/30 transition-colors duration-500 ease-out" />
+              <span className="relative flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-300 bg-black/50 border border-amber-500/30 px-4 py-2 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+                <Lock size={14} className="text-amber-400" /> Segera Hadir
               </span>
-            ))}
-          </div>
-
-          {!project.comingSoon && (
-            <div className="flex gap-4 items-center flex-wrap">
-              {project.viewDesign && (
-                <button
-                  onClick={() => {
-                    if (Array.isArray(project.viewDesign)) {
-                      onOpenGallery(project.viewDesign);
-                    } else {
-                      window.open(project.viewDesign as string, "_blank");
-                    }
-                  }}
-                  className="flex items-center gap-2 text-sm font-bold bg-white text-black px-4 py-2 rounded-full hover:bg-purple-100 transition-colors duration-500 ease-out shadow-[0_0_15px_rgba(255,255,255,0.2)]"
-                >
-                  <Eye size={16} /> View Design
-                </button>
-              )}
-              {project.certificate && (
-                <button
-                  onClick={() => onOpenCertificate?.(project.certificate as string)}
-                  className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-yellow-400 to-amber-600 text-black px-4 py-2 rounded-full hover:from-yellow-300 hover:to-amber-500 transition-colors duration-500 ease-out shadow-[0_0_20px_rgba(245,158,11,0.3)]"
-                >
-                  <Award size={16} /> Certificate
-                </button>
-              )}
-              {project.github ? (
-                <a href={project.github} className="flex items-center gap-2 text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full transition-colors duration-500 ease-out backdrop-blur-sm">
-                  <GithubIcon /> Code
-                </a>
-              ) : (
-                <span className="flex items-center gap-2 text-sm font-bold text-gray-400 bg-white/5 border border-white/5 px-4 py-2 rounded-full backdrop-blur-sm cursor-not-allowed">
-                  <Lock size={16} /> Private Source
-                </span>
-              )}
-              {project.download && (
-                <a href={project.download} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full hover:from-blue-400 hover:to-indigo-500 transition-colors duration-500 ease-out shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                  <Download size={16} /> Download App
-                </a>
-              )}
             </div>
-          )}
+          </div>
+        )}
+
+        <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-wide drop-shadow-lg group-hover:text-purple-300 transition-colors duration-300">
+          {project.title}
+        </h3>
+        
+        <p className="text-gray-300 mb-6 drop-shadow-md text-sm leading-relaxed max-w-xl">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-2.5 mb-6">
+          {project.tags.map((tag: string) => (
+            <span 
+              key={tag} 
+              className="px-3 py-1 text-xs font-bold bg-white/5 backdrop-blur-md rounded-full text-purple-200 border border-white/10 shadow-sm transition-all duration-300 group-hover:border-purple-500/30 group-hover:bg-purple-500/5"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
+
+        {!project.comingSoon && (
+          <div className="flex gap-4 items-center flex-wrap">
+            {project.viewDesign && (
+              <button
+                onClick={() => {
+                  if (Array.isArray(project.viewDesign)) {
+                    onOpenGallery(project.viewDesign);
+                  } else {
+                    window.open(project.viewDesign as string, "_blank");
+                  }
+                }}
+                className="flex items-center gap-2 text-sm font-bold bg-white text-black px-4 py-2 rounded-full hover:bg-purple-100 transition-all duration-300 ease-out shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] active:scale-95"
+              >
+                <Eye size={16} /> Lihat Desain
+              </button>
+            )}
+            {project.certificate && (
+              <button
+                onClick={() => onOpenCertificate?.(project.certificate as string)}
+                className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-yellow-400 to-amber-600 text-black px-4 py-2 rounded-full hover:from-yellow-300 hover:to-amber-500 transition-all duration-300 ease-out shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] active:scale-95"
+              >
+                <Award size={16} /> Sertifikat
+              </button>
+            )}
+            {project.github ? (
+              <a 
+                href={project.github} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full transition-all duration-300 ease-out backdrop-blur-sm hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] active:scale-95"
+              >
+                <GithubIcon /> Code
+              </a>
+            ) : (
+              <span className="flex items-center gap-2 text-sm font-bold text-gray-400 bg-white/5 border border-white/5 px-4 py-2 rounded-full backdrop-blur-sm cursor-not-allowed">
+                <Lock size={16} /> Sumber Privat
+              </span>
+            )}
+            {project.download && (
+              <a 
+                href={project.download} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full hover:from-blue-400 hover:to-indigo-500 transition-all duration-300 ease-out shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] active:scale-95"
+              >
+                <Download size={16} /> Unduh Aplikasi
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -251,16 +245,16 @@ export default function Projects() {
           className="text-center mb-20 md:mb-16"
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest text-white">
-            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">Projects</span>
+            Proyek <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">Pilihan</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            A collection of my digital projects
+            Kumpulan karya dan proyek digital pilihan yang telah saya bangun
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 perspective-[1000px] max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {PROJECTS.map((project, i) => (
-            <TiltCard
+            <ProjectCard
               key={project.title}
               project={project}
               index={i}
@@ -298,7 +292,7 @@ export default function Projects() {
                 {/* Title */}
                 <div className="flex-1 text-center">
                   <h3 className="text-white font-bold text-sm tracking-widest uppercase opacity-80 decoration-white">
-                    {selectedProject.title} Gallery
+                    Galeri {selectedProject.title}
                   </h3>
                 </div>
 
@@ -307,7 +301,7 @@ export default function Projects() {
                   <button
                     onClick={() => setSelectedProject(null)}
                     className="text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 p-2 rounded-full transition-all duration-500 ease-out"
-                    title="Close Gallery"
+                    title="Tutup Galeri"
                   >
                     <X size={18} />
                   </button>

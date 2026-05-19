@@ -211,13 +211,13 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
               </span>
-              <span className="text-xs font-medium text-emerald-200 tracking-wide uppercase">Open for Collaboration</span>
+              <span className="text-xs font-medium text-emerald-200 tracking-wide uppercase">Terbuka untuk Kolaborasi</span>
             </motion.div>
 
             {/* Animated Name — Letter by Letter */}
             <div className="relative mb-6" style={{ perspective: "1000px" }}>
               {/* First name */}
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none">
+              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none">
                 <span className="block mb-1">
                   {firstName.split("").map((letter, i) => (
                     <motion.span
@@ -288,7 +288,7 @@ export default function Hero() {
               >
                 <span className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent transition-all duration-700 ease-out group-hover:h-full group-hover:opacity-10 opacity-0" />
                 <span className="relative flex items-center gap-2">
-                  View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-500 ease-out" />
+                  Lihat Proyek <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-500 ease-out" />
                 </span>
               </a>
             </motion.div>
@@ -343,7 +343,7 @@ export default function Hero() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
-                <span className="text-xs font-bold text-white tracking-wide">Available for Work</span>
+                <span className="text-xs font-bold text-white tracking-wide">Tersedia untuk Bekerja</span>
               </motion.div>
             </div>
           </motion.div>
@@ -358,7 +358,7 @@ export default function Hero() {
         transition={{ delay: 3.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-medium">Scroll</span>
+        <span className="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-medium">Gulir</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

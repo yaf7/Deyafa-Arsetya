@@ -78,10 +78,10 @@ export default function Footer() {
           viewport={{ once: true }}
           className="font-display text-2xl md:text-5xl lg:text-6xl font-black mb-4 tracking-wider md:tracking-widest text-center leading-tight"
         >
-          <span className="text-white">LET&apos;S BUILD</span>
+          <span className="text-white">MARI KITA BANGUN</span>
           <br />
-          <span className="text-white">SOMETHING </span>
-          <span className="gradient-text-animated">GREAT</span>
+          <span className="text-white">SESUATU YANG </span>
+          <span className="gradient-text-animated">HEBAT</span>
         </motion.h2>
 
         {/* Subtitle */}
@@ -92,7 +92,7 @@ export default function Footer() {
           viewport={{ once: true }}
           className="text-gray-500 text-sm md:text-base mb-12 tracking-wider"
         >
-          Got a project? Let&apos;s talk.
+          Punya proyek menarik? Mari berdiskusi.
         </motion.p>
 
         {/* Magnetic Social Buttons */}

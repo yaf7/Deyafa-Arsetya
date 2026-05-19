@@ -36,11 +36,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home", id: "home" },
-    { name: "About", href: "#about", id: "about" },
-    { name: "Tech Stack", href: "#tech", id: "tech" },
-    { name: "Research", href: "#publications", id: "publications" },
-    { name: "Projects", href: "#projects", id: "projects" },
+    { name: "Beranda", href: "#home", id: "home" },
+    { name: "Tentang", href: "#about", id: "about" },
+    { name: "Teknologi", href: "#tech", id: "tech" },
+    { name: "Riset", href: "#publications", id: "publications" },
+    { name: "Proyek", href: "#projects", id: "projects" },
   ];
 
   return (
