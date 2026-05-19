@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import FloatingDecorations from "./components/FloatingDecorations";
 import CursorGlow from "./components/CursorGlow";
 import MobileFAB from "./components/MobileFAB";
+import ScorpioConstellation from "./components/ScorpioConstellation";
 
 export default function Home() {
   return (
@@ -41,6 +42,7 @@ export default function Home() {
         <div className="absolute bottom-[2%] right-[5%] w-[600px] h-[600px] rounded-full bg-gradient-to-tl from-amber-600/15 to-orange-600/15 blur-[140px]" />
       </div>
 
+      <ScorpioConstellation />
       <FloatingDecorations />
       
       <Navbar />
