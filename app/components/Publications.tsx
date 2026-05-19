@@ -20,7 +20,7 @@ export default function Publications() {
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-widest mb-6">
             <BookOpen size={12} /> Research & Publications
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-black mb-4 uppercase tracking-widest text-white">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest text-white">
             Academic <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">Research</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg mt-4">

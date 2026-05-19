@@ -19,7 +19,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "deyafa.dev — Web & Mobile Developer",
+  title: "deyafa.dev",
   description: "Portfolio of Deyafa Arsetya — Web & Mobile Developer based in Kediri, Indonesia. Specialized in Laravel, React, Next.js, and Kotlin.",
 };
 
@@ -35,7 +35,7 @@ export default function RootLayout({
       >
         {/* Elegant Deep Slate Blue Background */}
         <div className="fixed inset-0 z-[-1] pointer-events-none bg-gradient-to-br from-[#1e293b] via-[#0f172a] to-[#0B1120]" />
-        
+
         {children}
       </body>
     </html>

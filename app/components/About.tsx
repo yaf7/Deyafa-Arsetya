@@ -20,7 +20,7 @@ export default function About() {
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-bold uppercase tracking-widest mb-6">
             <Briefcase size={12} /> About Me
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-black mb-4 uppercase tracking-wider relative inline-block">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider relative inline-block">
             Kenali{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">
               Saya

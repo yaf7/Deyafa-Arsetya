@@ -18,12 +18,13 @@ export default function InteractiveBackground({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const mouse = { x: null as number | null, y: null as number | null, radius: 160 };
+    const mouse = { x: null as number | null, y: null as number | null, radius: 140 };
+    let isVisible = true;
 
     interface Particle {
       x: number;
@@ -33,42 +34,39 @@ export default function InteractiveBackground({
       radius: number;
       baseRadius: number;
       color: string;
-      glowIntensity: number;
     }
 
     const init = () => {
       const isMobile = window.innerWidth < 768;
-      const count = isMobile ? 30 : 90;
+      const count = isMobile ? 20 : 50; // Reduced from 30/90
       particles = [];
 
-      // Color scheme matching the purple-blue gradient theme
       const colors = [
-        "rgba(139, 92, 246, 0.4)", // Purple/Violet
-        "rgba(99, 102, 241, 0.4)",  // Indigo
-        "rgba(6, 182, 212, 0.4)",   // Cyan
-        "rgba(236, 72, 153, 0.35)", // Pink
+        "rgba(139, 92, 246, 0.35)",
+        "rgba(99, 102, 241, 0.35)",
+        "rgba(6, 182, 212, 0.35)",
+        "rgba(236, 72, 153, 0.3)",
       ];
 
       for (let i = 0; i < count; i++) {
-        const radius = Math.random() * 2 + 0.8;
+        const radius = Math.random() * 1.8 + 0.8;
         particles.push({
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
           radius: radius,
           baseRadius: radius,
           color: colors[Math.floor(Math.random() * colors.length)],
-          glowIntensity: Math.random() * 0.5 + 0.5,
         });
       }
     };
 
     const handleResize = () => {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap DPR at 2
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
       init();
@@ -77,7 +75,11 @@ export default function InteractiveBackground({
     handleResize();
     window.addEventListener("resize", handleResize);
 
+    // Throttled mouse handler
+    let mouseThrottleTimer: ReturnType<typeof setTimeout> | null = null;
     const handleMouseMove = (e: MouseEvent) => {
+      if (mouseThrottleTimer) return;
+      mouseThrottleTimer = setTimeout(() => { mouseThrottleTimer = null; }, 32); // ~30fps mouse tracking
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     };
@@ -87,97 +89,102 @@ export default function InteractiveBackground({
       mouse.y = null;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    // Pause when tab is hidden
+    const handleVisibility = () => {
+      isVisible = !document.hidden;
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(draw);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    const CONNECTION_DIST = 90; // Reduced from 110
+    const CONNECTION_DIST_SQ = CONNECTION_DIST * CONNECTION_DIST;
 
     const draw = () => {
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      if (!isVisible) return;
 
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      ctx.clearRect(0, 0, w, h);
+
+      // Update particle positions
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-
-        // Particle movement
         p.x += p.vx;
         p.y += p.vy;
 
-        // Wrap around boundaries
-        if (p.x < 0) p.x = window.innerWidth;
-        if (p.x > window.innerWidth) p.x = 0;
-        if (p.y < 0) p.y = window.innerHeight;
-        if (p.y > window.innerHeight) p.y = 0;
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
 
-        // Mouse interactions
+        // Mouse interaction (simplified)
         if (mouse.x !== null && mouse.y !== null) {
           const dx = mouse.x - p.x;
           const dy = mouse.y - p.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
+          const rSq = mouse.radius * mouse.radius;
 
-          if (dist < mouse.radius) {
-            // Calculate push force (inverse of distance)
+          if (distSq < rSq) {
+            const dist = Math.sqrt(distSq);
             const force = (mouse.radius - dist) / mouse.radius;
-            // Gently nudge particle away from mouse
-            p.x -= (dx / dist) * force * 1.5;
-            p.y -= (dy / dist) * force * 1.5;
-
-            // Grow particle slightly on hover
-            p.radius += (p.baseRadius * (1.5 + force) - p.radius) * 0.1;
+            p.x -= (dx / dist) * force * 1.2;
+            p.y -= (dy / dist) * force * 1.2;
+            p.radius += (p.baseRadius * 1.3 - p.radius) * 0.08;
           } else {
-            // Return to original size
-            p.radius += (p.baseRadius - p.radius) * 0.1;
+            p.radius += (p.baseRadius - p.radius) * 0.06;
           }
         } else {
-          // Return to original size
-          p.radius += (p.baseRadius - p.radius) * 0.1;
+          p.radius += (p.baseRadius - p.radius) * 0.06;
         }
 
-        // Draw particle node
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        // Draw particle as simple filled rect (faster than arc)
         ctx.fillStyle = p.color;
-        
-        if (type === "dust") {
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = p.color;
-        }
-        
-        ctx.fill();
-        ctx.shadowBlur = 0; // Reset shadow for lines
+        ctx.fillRect(p.x - p.radius, p.y - p.radius, p.radius * 2, p.radius * 2);
+      }
 
-        // Draw connecting lines between close particles
-        if (type === "constellation") {
+      // Draw connections — batch all lines into one path per color
+      if (type === "constellation") {
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
           for (let j = i + 1; j < particles.length; j++) {
             const p2 = particles[j];
             const dx = p.x - p2.x;
             const dy = p.y - p2.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+            const distSq = dx * dx + dy * dy;
 
-            if (dist < 110) {
-              const alpha = ((110 - dist) / 110) * 0.12;
-              ctx.beginPath();
+            if (distSq < CONNECTION_DIST_SQ) {
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = lineColor.replace(/[\d.]+\)$/, `${alpha})`);
-              ctx.lineWidth = 0.6;
-              ctx.stroke();
             }
           }
+        }
+        ctx.strokeStyle = lineColor.replace(/[\d.]+\)$/, `0.08)`);
+        ctx.stroke();
 
-          // Draw connection lines to mouse cursor
-          if (mouse.x !== null && mouse.y !== null) {
+        // Mouse cursor connections — single path
+        if (mouse.x !== null && mouse.y !== null) {
+          ctx.beginPath();
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
             const dx = p.x - mouse.x;
             const dy = p.y - mouse.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+            const distSq = dx * dx + dy * dy;
 
-            if (dist < mouse.radius) {
-              const alpha = ((mouse.radius - dist) / mouse.radius) * 0.22;
-              ctx.beginPath();
+            if (distSq < mouse.radius * mouse.radius) {
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(mouse.x, mouse.y);
-              ctx.strokeStyle = lineColor.replace(/[\d.]+\)$/, `${alpha})`);
-              ctx.lineWidth = 0.8;
-              ctx.stroke();
             }
           }
+          ctx.strokeStyle = lineColor.replace(/[\d.]+\)$/, `0.12)`);
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
         }
       }
 
@@ -190,6 +197,7 @@ export default function InteractiveBackground({
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("visibilitychange", handleVisibility);
       cancelAnimationFrame(animationFrameId);
     };
   }, [type, lineColor]);

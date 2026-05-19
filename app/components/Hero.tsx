@@ -117,11 +117,11 @@ export default function Hero() {
       {/* Additional floating gradient orbs */}
       <motion.div
         style={{ x: springX, y: springY }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"
+        className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-600/15 rounded-full blur-[70px] pointer-events-none"
       />
       <motion.div
         style={{ x: springX, y: springY }}
-        className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none"
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/8 rounded-full blur-[80px] pointer-events-none"
       />
 
       {/* Grid pattern overlay */}
@@ -186,7 +186,7 @@ export default function Hero() {
             <div className="relative w-[120px] h-[120px]">
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 rounded-full"
                 style={{ background: "conic-gradient(from 0deg, #7c3aed, #4f46e5, #06b6d4, #7c3aed)", padding: "2px" }}
               >
@@ -306,7 +306,7 @@ export default function Hero() {
               {/* Rotating gradient border */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 rounded-full"
                 style={{
                   background: "conic-gradient(from 0deg, #7c3aed, #4f46e5, #06b6d4, #7c3aed)",

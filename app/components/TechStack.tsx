@@ -81,7 +81,7 @@ export default function TechStack() {
            viewport={{ once: true }}
            className="text-center mb-4"
         >
-          <h2 className="font-display text-4xl md:text-5xl font-black mb-4 uppercase tracking-widest text-white">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest text-white">
             Tech <span className="text-purple-500">Stack</span>
           </h2>
           <p className="text-gray-400">Tools and technologies framing my digital architecture.</p>

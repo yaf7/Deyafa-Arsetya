@@ -25,21 +25,21 @@ export default function Home() {
       {/* Mobile FAB Contact Button */}
       <MobileFAB />
 
-      {/* Decorative Scrolling Orbs (Bulatan Gradasi Cahaya) */}
+      {/* Decorative Scrolling Orbs (Bulatan Gradasi Cahaya) — GPU optimized */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[-1]">
         {/* Top: Hero Section (Indigo to Purple) */}
-        <div className="absolute top-0 -left-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-600/20 to-purple-600/20 blur-[130px]" />
-        <div className="absolute top-[5%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-fuchsia-600/20 to-pink-600/20 blur-[120px]" />
+        <div className="absolute top-0 -left-[10%] w-[450px] h-[450px] rounded-full bg-gradient-to-br from-indigo-600/15 to-purple-600/15 blur-[80px]" />
+        <div className="absolute top-[5%] -right-[10%] w-[400px] h-[400px] rounded-full bg-gradient-to-bl from-fuchsia-600/15 to-pink-600/15 blur-[80px]" />
         
         {/* Middle Top: About & Tech Stack (Blue to Cyan) */}
-        <div className="absolute top-[25%] left-[5%] w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-blue-600/20 to-cyan-600/20 blur-[150px]" />
+        <div className="absolute top-[25%] left-[5%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-blue-600/15 to-cyan-600/15 blur-[90px]" />
         
         {/* Middle: Publications & Projects (Violet to Purple) */}
-        <div className="absolute top-[50%] -right-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-r from-violet-600/15 to-purple-600/15 blur-[140px]" />
+        <div className="absolute top-[50%] -right-[10%] w-[450px] h-[450px] rounded-full bg-gradient-to-r from-violet-600/10 to-purple-600/10 blur-[90px]" />
         
         {/* Bottom: Footer (Emerald to Teal & Amber) */}
-        <div className="absolute top-[75%] -left-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-emerald-600/15 to-teal-600/15 blur-[130px]" />
-        <div className="absolute bottom-[2%] right-[5%] w-[600px] h-[600px] rounded-full bg-gradient-to-tl from-amber-600/15 to-orange-600/15 blur-[140px]" />
+        <div className="absolute top-[75%] -left-[10%] w-[400px] h-[400px] rounded-full bg-gradient-to-br from-emerald-600/10 to-teal-600/10 blur-[80px]" />
+        <div className="absolute bottom-[2%] right-[5%] w-[450px] h-[450px] rounded-full bg-gradient-to-tl from-amber-600/10 to-orange-600/10 blur-[90px]" />
       </div>
 
       <ScorpioConstellation />
