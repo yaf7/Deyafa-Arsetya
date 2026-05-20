@@ -56,8 +56,19 @@ export default function ScorpioConstellation() {
     // Persistent state for smooth turning and walking physics
     let currentRotation = null as number | null;
     let gaitPhase = 0;
-    let prevPos = null as { x: number; y: number } | null;
     let lastTime = 0;
+
+    // State machine for lifelike scorpion behavior
+    let scorpionX = 0;
+    let scorpionY = 0;
+    let targetWanderX = 0;
+    let targetWanderY = 0;
+    let behaviorState: "IDLE" | "WALKING" = "IDLE";
+    let stateTime = 0;
+    let stateDuration = 2000;
+    let walkingWeight = 0;
+    let prevWalkX = 0;
+    let prevWalkY = 0;
 
     // Sting animation state
     let stingTime = 0;
@@ -372,94 +383,127 @@ export default function ScorpioConstellation() {
         }
       }
 
-      // Walking Wandering
-      const walkSpeed = 0.00018;
-      const wanderRangeX = isMobile ? 60 : 180;
-      const wanderRangeY = isMobile ? 40 : 120;
+      // State Machine for Lifelike Scorpion Movement
+      stateTime += dt;
 
-      // Lower frequencies for sweeping, gentle curves instead of rapid squiggles
-      const getWanderPos = (t: number) => {
-        const x = Math.sin(t * walkSpeed) * (wanderRangeX * 0.65)
-          + Math.sin(t * walkSpeed * 0.5 + 1.2) * (wanderRangeX * 0.25)
-          + Math.sin(t * walkSpeed * 0.15) * (wanderRangeX * 0.1);
-        const y = Math.cos(t * walkSpeed * 0.7) * (wanderRangeY * 0.65)
-          + Math.cos(t * walkSpeed * 0.4 + 0.7) * (wanderRangeY * 0.25)
-          + Math.sin(t * walkSpeed * 0.2) * (wanderRangeY * 0.1);
-        return { x, y };
-      };
-
-      const posCurrent = getWanderPos(time);
-      const posNext = getWanderPos(time + 100);
-      const dx = posNext.x - posCurrent.x;
-      const dy = posNext.y - posCurrent.y;
-      const speed = Math.sqrt(dx * dx + dy * dy);
+      // Mouse detection for interactive behavior:
+      const cx = baseX + scorpionX - constellationOffsetX;
+      const cy = baseY + scorpionY - constellationOffsetY;
       
-      const heading = Math.atan2(dy, dx);
-      
-      // Face the direction of travel, with smooth interpolation
-      let targetRotation = currentRotation !== null ? currentRotation : (heading + Math.PI / 2);
-      if (speed > 0.05) {
-        targetRotation = heading + Math.PI / 2;
+      let mouseDist = 9999;
+      let angleToMouse = 0;
+      if (mouse.x !== null && mouse.y !== null) {
+        const dxMouse = mouse.x - cx;
+        const dyMouse = mouse.y - cy;
+        mouseDist = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+        angleToMouse = Math.atan2(dyMouse, dxMouse);
       }
 
-      if (currentRotation === null) {
-        currentRotation = targetRotation;
-      } else {
-        let diff = targetRotation - currentRotation;
-        // Normalize angle difference to [-PI, PI] to take the shortest angular path
-        diff = Math.atan2(Math.sin(diff), Math.cos(diff));
+      // State machine logic
+      if (behaviorState === "IDLE") {
+        // Target walking weight goes to 0 (smoothly stand)
+        walkingWeight += (0 - walkingWeight) * 0.12;
         
-        // Smooth lerp (0.008) provides inertia and realistic slow body-turning
-        currentRotation += diff * 0.008;
+        // Face the mouse if it's active and close
+        let desiredHeading = currentRotation;
+        if (mouse.active && mouseDist < 350) {
+          desiredHeading = angleToMouse + Math.PI / 2;
+        }
+
+        if (desiredHeading !== null && currentRotation !== null) {
+          let diff = desiredHeading - currentRotation;
+          diff = Math.atan2(Math.sin(diff), Math.cos(diff));
+          currentRotation += diff * 0.05; // Turn towards mouse
+        }
+
+        // Trigger a new walk when the idle timer expires
+        if (stateTime >= stateDuration) {
+          behaviorState = "WALKING";
+          stateTime = 0;
+          stateDuration = 2500 + Math.random() * 3000; // Walk for 2.5 to 5.5s
+          
+          // Wander target
+          const wanderAngle = Math.random() * Math.PI * 2;
+          const wanderDist = 60 + Math.random() * 110;
+          targetWanderX = Math.cos(wanderAngle) * wanderDist;
+          targetWanderY = Math.sin(wanderAngle) * wanderDist;
+          
+          // Clamp target
+          const maxWanderRangeX = isMobile ? 50 : 180;
+          const maxWanderRangeY = isMobile ? 35 : 110;
+          targetWanderX = Math.max(-maxWanderRangeX, Math.min(maxWanderRangeX, targetWanderX));
+          targetWanderY = Math.max(-maxWanderRangeY, Math.min(maxWanderRangeY, targetWanderY));
+        }
+      } else if (behaviorState === "WALKING") {
+        // Target walking weight goes to 1
+        walkingWeight += (1 - walkingWeight) * 0.1;
+
+        // Move towards target position
+        const dxWander = targetWanderX - scorpionX;
+        const dyWander = targetWanderY - scorpionY;
+        const distToTarget = Math.sqrt(dxWander * dxWander + dyWander * dyWander);
+
+        const speedMultiplier = isMobile ? 0.065 : 0.11;
+        const moveStep = speedMultiplier * dt;
+
+        if (distToTarget > 6 && stateTime < stateDuration) {
+          scorpionX += (dxWander / distToTarget) * moveStep;
+          scorpionY += (dyWander / distToTarget) * moveStep;
+
+          const walkingHeading = Math.atan2(dyWander, dxWander) + Math.PI / 2;
+          if (currentRotation === null) {
+            currentRotation = walkingHeading;
+          } else {
+            let diff = walkingHeading - currentRotation;
+            diff = Math.atan2(Math.sin(diff), Math.cos(diff));
+            currentRotation += diff * 0.08;
+          }
+        } else {
+          behaviorState = "IDLE";
+          stateTime = 0;
+          stateDuration = 2000 + Math.random() * 3000; // Idle for 2 to 5 seconds
+        }
       }
 
-      const rotationAngle = currentRotation;
+      const rotationAngle = currentRotation !== null ? currentRotation : 0;
+      const walkX = scorpionX;
+      const walkY = scorpionY;
 
-      const walkX = posCurrent.x;
-      const walkY = posCurrent.y;
+      // Calculate speed for leg gait phase
+      const dxFrame = scorpionX - prevWalkX;
+      const dyFrame = scorpionY - prevWalkY;
+      const speed = Math.sqrt(dxFrame * dxFrame + dyFrame * dyFrame);
+      prevWalkX = scorpionX;
+      prevWalkY = scorpionY;
 
-      // Handle tab suspension/resume: reset previous position if time difference is too large
-      if (dt > 100) {
-        prevPos = null;
-      }
-
-      // Calculate distance walked this frame to drive the leg gait dynamically
-      let frameDistance = 0;
-      if (prevPos !== null) {
-        const dxFrame = posCurrent.x - prevPos.x;
-        const dyFrame = posCurrent.y - prevPos.y;
-        frameDistance = Math.sqrt(dxFrame * dxFrame + dyFrame * dyFrame);
-      }
-      prevPos = posCurrent;
-
-      // Accumulate gait phase based on displacement
-      const gaitSpeedFactor = isMobile ? 0.05 : 0.028;
-      gaitPhase += frameDistance * gaitSpeedFactor;
+      const gaitSpeedFactor = isMobile ? 0.28 : 0.18;
+      gaitPhase += speed * gaitSpeedFactor;
       
-      const bodyBob = Math.sin(gaitPhase * 2) * 2;
+      const bodyBob = Math.sin(gaitPhase * 2) * 2 * walkingWeight;
 
       // Pre-compute per-star animation offsets for non-leg components
       const animX: number[] = new Array(scorpioStars.length).fill(0);
       const animY: number[] = new Array(scorpioStars.length).fill(0);
 
-      // Claws: realistic pinch & sway
+      // Claws: realistic pinch & sway (always moving organically, with extra action when walking)
+      const clawTimePhase = time * 0.0015;
       // Left Pedipalp: 0, 1, 2, 3, 4, 5
       for (let i = 0; i <= 5; i++) {
-        const clawPhase = Math.sin(gaitPhase * 0.5 + i * 0.1);
-        animX[i] = clawPhase * -3;
-        animY[i] = Math.sin(gaitPhase * 0.5 + i * 0.1) * 2;
+        const clawPhase = Math.sin(clawTimePhase + i * 0.15) + Math.sin(gaitPhase * 0.3);
+        animX[i] = clawPhase * -3 * scale;
+        animY[i] = Math.cos(clawTimePhase * 0.8 + i * 0.1) * 2 * scale;
       }
-      const leftFingerPinch = Math.sin(gaitPhase * 1.5) * 2;
+      const leftFingerPinch = (Math.sin(clawTimePhase * 2.0) * 1.5 + Math.sin(gaitPhase * 0.8) * 1.0) * scale;
       animX[0] += leftFingerPinch;
       animX[1] -= leftFingerPinch;
 
       // Right Pedipalp: 6, 7, 8, 9, 10, 11
       for (let i = 6; i <= 11; i++) {
-        const clawPhase = Math.sin(gaitPhase * 0.5 + (i - 6) * 0.1);
-        animX[i] = clawPhase * 3;
-        animY[i] = Math.sin(gaitPhase * 0.5 + (i - 6) * 0.1) * 2;
+        const clawPhase = Math.sin(clawTimePhase + (i - 6) * 0.15) + Math.sin(gaitPhase * 0.3);
+        animX[i] = clawPhase * 3 * scale;
+        animY[i] = Math.cos(clawTimePhase * 0.8 + (i - 6) * 0.1) * 2 * scale;
       }
-      const rightFingerPinch = Math.sin(gaitPhase * 1.5) * 2;
+      const rightFingerPinch = (Math.sin(clawTimePhase * 2.0) * 1.5 + Math.sin(gaitPhase * 0.8) * 1.0) * scale;
       animX[6] -= rightFingerPinch;
       animX[7] += rightFingerPinch;
 
@@ -475,11 +519,11 @@ export default function ScorpioConstellation() {
       for (let i = 33; i <= 40; i++) {
         const tailIdx = i - 33;
         
-        // Normal sway (dampened during sting to let the sting take over)
-        const tailPhase = gaitPhase * 0.5 - tailIdx * 0.3;
-        const tailAmplitude = 2.0 + tailIdx * 2.0;
-        const swayX = Math.sin(tailPhase) * tailAmplitude;
-        const swayY = Math.cos(tailPhase * 0.4) * (tailIdx * 0.6) + bodyBob;
+        // Normal sway based on time and walking gait
+        const tailPhase = (time * 0.0014) + (gaitPhase * 0.25) - tailIdx * 0.35;
+        const tailAmplitude = 2.5 + tailIdx * 2.5;
+        const swayX = Math.sin(tailPhase) * tailAmplitude * scale;
+        const swayY = Math.cos(tailPhase * 0.5) * (tailIdx * 0.8) * scale + bodyBob;
 
         let stingOffsetX = 0;
         let stingOffsetY = 0;
@@ -503,8 +547,8 @@ export default function ScorpioConstellation() {
             M = 1.1 * ease;
             swayWeight = 1.0 - (0.5 * ease);
           }
-          stingOffsetX = stingTargetsX[tailIdx] * M;
-          stingOffsetY = stingTargetsY[tailIdx] * M;
+          stingOffsetX = stingTargetsX[tailIdx] * M * scale;
+          stingOffsetY = stingTargetsY[tailIdx] * M * scale;
         }
 
         animX[i] = swayX * swayWeight + stingOffsetX;
@@ -553,8 +597,11 @@ export default function ScorpioConstellation() {
         const homeLocalY = leg.ry * scale;
         const homeRotX = homeLocalX * cosR - homeLocalY * sinR;
         const homeRotY = homeLocalX * sinR + homeLocalY * cosR;
-        const homeX = cx + homeRotX;
-        const homeY = cy + homeRotY;
+
+        // Add a tiny organic breathing/twitching movement to the home position when standing idle
+        const idleTwitch = Math.sin(time * 0.0015 + leg.phaseOffset) * 1.5 * scale * (1 - walkingWeight);
+        const homeX = cx + homeRotX + cosR * idleTwitch * leg.side;
+        const homeY = cy + homeRotY + sinR * idleTwitch * leg.side;
 
         // Calculate the rotated natural rest knee position
         const kneeLocalX = leg.krx * scale;
@@ -579,6 +626,10 @@ export default function ScorpioConstellation() {
         const normP = ((phi % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
 
         const isStance = normP < Math.PI;
+        const t = (normP - Math.PI) / Math.PI;
+
+        let stepWorldX = leg.worldX;
+        let stepWorldY = leg.worldY;
 
         if (isStance) {
           // Stance Phase: The foot stays planted on the ground
@@ -598,19 +649,20 @@ export default function ScorpioConstellation() {
             }
           }
           
-          // Keep the foot at the planted position
-          leg.worldX = leg.plantX;
-          leg.worldY = leg.plantY;
+          stepWorldX = leg.plantX;
+          stepWorldY = leg.plantY;
 
           // Drag effect: if the body moves too far, the foot must slide to not overstretch
-          const dxHome = homeX - leg.worldX;
-          const dyHome = homeY - leg.worldY;
+          const dxHome = homeX - stepWorldX;
+          const dyHome = homeY - stepWorldY;
           const distHome = Math.sqrt(dxHome * dxHome + dyHome * dyHome);
           const maxStretch = 30 * scale;
           if (distHome > maxStretch) {
             const pull = (distHome - maxStretch) / distHome;
-            leg.worldX += dxHome * pull;
-            leg.worldY += dyHome * pull;
+            stepWorldX += dxHome * pull;
+            stepWorldY += dyHome * pull;
+            leg.plantX = stepWorldX;
+            leg.plantY = stepWorldY;
           }
         } else {
           // Swing Phase: The foot lifts and steps forward to a new target
@@ -621,36 +673,34 @@ export default function ScorpioConstellation() {
             leg.startY = leg.worldY;
           }
 
-          // Calculate dynamic step target in world space
-          // In local coordinates, negative Y is forward. So stepping forward means ry - stride
-          const strideLength = 20; // local units
-          const targetLocalX = leg.rx * scale;
-          const targetLocalY = (leg.ry - strideLength) * scale;
-          const targetRotX = targetLocalX * cosR - targetLocalY * sinR;
-          const targetRotY = targetLocalX * sinR + targetLocalY * cosR;
-          const targetX = cx + targetRotX;
-          const targetY = cy + targetRotY;
+          // Calculate dynamic step target in world space based on velocity
+          const vx = dxFrame;
+          const vy = dyFrame;
+          const strideMultiplier = 6.0;
 
-          // Progress of swing (0 to 1)
-          const t = (normP - Math.PI) / Math.PI;
+          const targetX = homeX + vx * strideMultiplier;
+          const targetY = homeY + vy * strideMultiplier;
           
           // Interpolate to the target position
-          leg.worldX = leg.startX + (targetX - leg.startX) * t;
-          leg.worldY = leg.startY + (targetY - leg.startY) * t;
+          stepWorldX = leg.startX + (targetX - leg.startX) * t;
+          stepWorldY = leg.startY + (targetY - leg.startY) * t;
 
           // Add vertical lift (lift leg outwards)
           const liftHeight = 12 * scale * Math.sin(t * Math.PI);
           // Outward lift direction based on current body rotation
-          leg.worldX += cosR * liftHeight * leg.side;
-          leg.worldY += sinR * liftHeight * leg.side;
+          stepWorldX += cosR * liftHeight * leg.side;
+          stepWorldY += sinR * liftHeight * leg.side;
         }
+
+        // Blend between walking procedural step and stationary home position based on walkingWeight
+        leg.worldX = stepWorldX * walkingWeight + homeX * (1 - walkingWeight);
+        leg.worldY = stepWorldY * walkingWeight + homeY * (1 - walkingWeight);
 
         // Convert the foot's world position back to body-local coordinates
         const lx = (leg.worldX - cx) * cosR + (leg.worldY - cy) * sinR;
         const ly = -(leg.worldX - cx) * sinR + (leg.worldY - cy) * cosR;
 
         // Apply strict anatomical boundaries (clamping) in body space
-        // Left legs (side = -1) stay on the left (negative lx), right legs (side = 1) stay on the right (positive lx)
         const clampedLx = leg.side === -1 
           ? Math.max(-170 * scale, Math.min(-45 * scale, lx)) 
           : Math.max(45 * scale, Math.min(170 * scale, lx));
