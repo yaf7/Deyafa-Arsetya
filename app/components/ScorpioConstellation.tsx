@@ -53,6 +53,31 @@ export default function ScorpioConstellation() {
     const targetMouseOffset = { x: 0, y: 0 };
     const currentMouseOffset = { x: 0, y: 0 };
 
+    // Persistent state for smooth turning and walking physics
+    let currentRotation = null as number | null;
+    let gaitPhase = 0;
+    let prevPos = null as { x: number; y: number } | null;
+    let lastTime = 0;
+
+    // Sting animation state
+    let stingTime = 0;
+    let stingActive = false;
+    let lastStingTime = 0;
+    const stingDuration = 900; // 900ms sting duration
+
+    const legStates = [
+      // Left Legs (L1, L2, L3, L4)
+      { baseNode: 13, kneeNode: 17, footNode: 18, side: -1, phaseOffset: 0, rx: -130, ry: -80, krx: -75, kry: -95, planted: false, worldX: 0, worldY: 0, plantX: 0, plantY: 0, startX: 0, startY: 0 },
+      { baseNode: 13, kneeNode: 19, footNode: 20, side: -1, phaseOffset: Math.PI * 0.5, rx: -145, ry: -35, krx: -85, kry: -50, planted: false, worldX: 0, worldY: 0, plantX: 0, plantY: 0, startX: 0, startY: 0 },
+      { baseNode: 15, kneeNode: 21, footNode: 22, side: -1, phaseOffset: Math.PI, rx: -145, ry: 20, krx: -85, kry: 0, planted: false, worldX: 0, worldY: 0, plantX: 0, plantY: 0, startX: 0, startY: 0 },
+      { baseNode: 16, kneeNode: 23, footNode: 24, side: -1, phaseOffset: Math.PI * 1.5, rx: -130, ry: 75, krx: -75, kry: 45, planted: false, worldX: 0, worldY: 0, plantX: 0, plantY: 0, startX: 0, startY: 0 },
+      // Right Legs (R1, R2, R3, R4)
+      { baseNode: 13, kneeNode: 25, footNode: 26, side: 1, phaseOffset: Math.PI, rx: 130, ry: -80, krx: 75, kry: -95, planted: false, worldX: 0, worldY: 0, plantX: 0, plantY: 0, startX: 0, startY: 0 },
+      { baseNode: 13, kneeNode: 27, footNode: 28, side: 1, phaseOffset: Math.PI * 1.5, rx: 145, ry: -35, krx: 85, kry: -50, planted: false, worldX: 0, worldY: 0, plantX: 0, plantY: 0, startX: 0, startY: 0 },
+      { baseNode: 15, kneeNode: 29, footNode: 30, side: 1, phaseOffset: 0, rx: 145, ry: 20, krx: 85, kry: 0, planted: false, worldX: 0, worldY: 0, plantX: 0, plantY: 0, startX: 0, startY: 0 },
+      { baseNode: 16, kneeNode: 31, footNode: 32, side: 1, phaseOffset: Math.PI * 0.5, rx: 130, ry: 75, krx: 75, kry: 45, planted: false, worldX: 0, worldY: 0, plantX: 0, plantY: 0, startX: 0, startY: 0 },
+    ];
+
     // ===== REALISTIC SCORPION ANIMAL SHAPE SKELETON =====
     const scorpioStars: ScorpioStar[] = [
       // ── LEFT CLAW (Indices 0 - 5) ──
@@ -188,27 +213,27 @@ export default function ScorpioConstellation() {
         }
       };
 
-      // Left Claw (Fingers, Palm, Arms)
-      generateParticlesForSegment(12, 5, 15, 7, 'gold');
-      generateParticlesForSegment(5, 4, 18, 9, 'gold');
-      generateParticlesForSegment(4, 3, 20, 11, 'gold');
-      generateParticlesForSegment(3, 2, 28, 13, 'gold');
-      generateParticlesForSegment(2, 0, 22, 9, 'blue');
-      generateParticlesForSegment(2, 1, 22, 9, 'blue');
-
+      // Left Claw (Fingers, Palm, Arms - widened to match powerful pedipalps)
+      generateParticlesForSegment(12, 5, 20, 10, 'gold');
+      generateParticlesForSegment(5, 4, 25, 12, 'gold');
+      generateParticlesForSegment(4, 3, 30, 15, 'gold');
+      generateParticlesForSegment(3, 2, 40, 18, 'gold');
+      generateParticlesForSegment(2, 0, 30, 12, 'blue');
+      generateParticlesForSegment(2, 1, 30, 12, 'blue');
+ 
       // Right Claw (Fingers, Palm, Arms)
-      generateParticlesForSegment(12, 11, 15, 7, 'gold');
-      generateParticlesForSegment(11, 10, 18, 9, 'gold');
-      generateParticlesForSegment(10, 9, 20, 11, 'gold');
-      generateParticlesForSegment(9, 8, 28, 13, 'gold');
-      generateParticlesForSegment(8, 6, 22, 9, 'blue');
-      generateParticlesForSegment(8, 7, 22, 9, 'blue');
-
-      // Body (Thick oval, dense star cluster)
-      generateParticlesForSegment(12, 13, 60, 20, 'gold');
-      generateParticlesForSegment(13, 14, 80, 25, 'gold');
-      generateParticlesForSegment(14, 15, 80, 23, 'gold');
-      generateParticlesForSegment(15, 16, 60, 18, 'gold');
+      generateParticlesForSegment(12, 11, 20, 10, 'gold');
+      generateParticlesForSegment(11, 10, 25, 12, 'gold');
+      generateParticlesForSegment(10, 9, 30, 15, 'gold');
+      generateParticlesForSegment(9, 8, 40, 18, 'gold');
+      generateParticlesForSegment(8, 6, 30, 12, 'blue');
+      generateParticlesForSegment(8, 7, 30, 12, 'blue');
+ 
+      // Body (Thick oval, dense star cluster - widened to match a real scorpion mesosoma)
+      generateParticlesForSegment(12, 13, 130, 36, 'gold');
+      generateParticlesForSegment(13, 14, 170, 46, 'gold');
+      generateParticlesForSegment(14, 15, 170, 44, 'gold');
+      generateParticlesForSegment(15, 16, 130, 32, 'gold');
 
       // Left Legs (Jointed, thin distinct outlines)
       generateParticlesForSegment(13, 17, 12, 5, 'blue');
@@ -326,18 +351,40 @@ export default function ScorpioConstellation() {
       const constellationOffsetX = currentMouseOffset.x * 0.4;
       const constellationOffsetY = currentMouseOffset.y * 0.4;
 
+      // Calculate delta time
+      if (lastTime === 0) lastTime = time;
+      const dt = time - lastTime;
+      lastTime = time;
+
+      // Trigger sting occasionally (e.g. random chance after 7 seconds)
+      const timeSinceLastSting = time - lastStingTime;
+      if (!stingActive && timeSinceLastSting > 7000 && Math.random() < 0.005) {
+        stingActive = true;
+        stingTime = 0;
+        lastStingTime = time;
+      }
+
+      if (stingActive) {
+        stingTime += dt;
+        if (stingTime >= stingDuration) {
+          stingActive = false;
+          stingTime = 0;
+        }
+      }
+
       // Walking Wandering
       const walkSpeed = 0.00018;
       const wanderRangeX = isMobile ? 60 : 180;
       const wanderRangeY = isMobile ? 40 : 120;
 
+      // Lower frequencies for sweeping, gentle curves instead of rapid squiggles
       const getWanderPos = (t: number) => {
-        const x = Math.sin(t * walkSpeed) * (wanderRangeX * 0.6)
-          + Math.sin(t * walkSpeed * 1.7 + 1.2) * (wanderRangeX * 0.3)
-          + Math.sin(t * walkSpeed * 0.3) * (wanderRangeX * 0.1);
-        const y = Math.cos(t * walkSpeed * 0.8) * (wanderRangeY * 0.6)
-          + Math.cos(t * walkSpeed * 1.3 + 0.7) * (wanderRangeY * 0.3)
-          + Math.sin(t * walkSpeed * 0.4) * (wanderRangeY * 0.1);
+        const x = Math.sin(t * walkSpeed) * (wanderRangeX * 0.65)
+          + Math.sin(t * walkSpeed * 0.5 + 1.2) * (wanderRangeX * 0.25)
+          + Math.sin(t * walkSpeed * 0.15) * (wanderRangeX * 0.1);
+        const y = Math.cos(t * walkSpeed * 0.7) * (wanderRangeY * 0.65)
+          + Math.cos(t * walkSpeed * 0.4 + 0.7) * (wanderRangeY * 0.25)
+          + Math.sin(t * walkSpeed * 0.2) * (wanderRangeY * 0.1);
         return { x, y };
       };
 
@@ -345,54 +392,53 @@ export default function ScorpioConstellation() {
       const posNext = getWanderPos(time + 100);
       const dx = posNext.x - posCurrent.x;
       const dy = posNext.y - posCurrent.y;
+      const speed = Math.sqrt(dx * dx + dy * dy);
+      
       const heading = Math.atan2(dy, dx);
-      // Face the direction of travel
-      const rotationAngle = heading + Math.PI / 2;
+      
+      // Face the direction of travel, with smooth interpolation
+      let targetRotation = currentRotation !== null ? currentRotation : (heading + Math.PI / 2);
+      if (speed > 0.05) {
+        targetRotation = heading + Math.PI / 2;
+      }
+
+      if (currentRotation === null) {
+        currentRotation = targetRotation;
+      } else {
+        let diff = targetRotation - currentRotation;
+        // Normalize angle difference to [-PI, PI] to take the shortest angular path
+        diff = Math.atan2(Math.sin(diff), Math.cos(diff));
+        
+        // Smooth lerp (0.008) provides inertia and realistic slow body-turning
+        currentRotation += diff * 0.008;
+      }
+
+      const rotationAngle = currentRotation;
 
       const walkX = posCurrent.x;
       const walkY = posCurrent.y;
 
-      // Walking Gait Cycle
-      const gaitSpeed = 0.0025;
-      const gaitPhase = time * gaitSpeed;
+      // Handle tab suspension/resume: reset previous position if time difference is too large
+      if (dt > 100) {
+        prevPos = null;
+      }
+
+      // Calculate distance walked this frame to drive the leg gait dynamically
+      let frameDistance = 0;
+      if (prevPos !== null) {
+        const dxFrame = posCurrent.x - prevPos.x;
+        const dyFrame = posCurrent.y - prevPos.y;
+        frameDistance = Math.sqrt(dxFrame * dxFrame + dyFrame * dyFrame);
+      }
+      prevPos = posCurrent;
+
+      // Accumulate gait phase based on displacement
+      const gaitSpeedFactor = isMobile ? 0.05 : 0.028;
+      gaitPhase += frameDistance * gaitSpeedFactor;
+      
       const bodyBob = Math.sin(gaitPhase * 2) * 2;
 
-      // Helper for realistic gait offsets (stance vs swing phases)
-      const getWalkOffsets = (p: number, side: number) => {
-        const stride = 14; // Y-axis stride (walking direction)
-        const lift = 8;    // X-axis joint lift
-        const normP = ((p % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-
-        let footX = 0;
-        let footY = 0;
-        let kneeX = 0;
-        let kneeY = 0;
-
-        if (normP < Math.PI) {
-          // Stance phase (foot pushes backward on the ground)
-          const t = normP / Math.PI;
-          footY = -stride + 2 * stride * t;
-          footX = 0;
-
-          kneeY = footY * 0.5;
-          kneeX = 0;
-        } else {
-          // Swing phase (foot lifts and steps forward)
-          const t = (normP - Math.PI) / Math.PI;
-          footY = stride - 2 * stride * t;
-
-          const arc = Math.sin(t * Math.PI);
-          footX = -side * (arc * lift * 0.6); // Foot pulls slightly inward in 2D
-          footY += -arc * 2;
-
-          kneeX = side * (arc * lift * 1.4);  // Knee bends outward dramatically
-          kneeY = footY * 0.5 - arc * 3;
-        }
-
-        return { footX, footY, kneeX, kneeY };
-      };
-
-      // Pre-compute per-star animation offsets
+      // Pre-compute per-star animation offsets for non-leg components
       const animX: number[] = new Array(scorpioStars.length).fill(0);
       const animY: number[] = new Array(scorpioStars.length).fill(0);
 
@@ -422,55 +468,47 @@ export default function ScorpioConstellation() {
         animY[i] = bodyBob;
       }
 
-      // Left Legs (Indices 17 - 24): metachronal wave sequence
-      // L1
-      const l1 = getWalkOffsets(gaitPhase, -1);
-      animX[17] = l1.kneeX; animY[17] = l1.kneeY + bodyBob;
-      animX[18] = l1.footX; animY[18] = l1.footY;
+      // Tail & Stinger sway & strike (Indices 33 - 40)
+      const stingTargetsX = [0, -10, -25, -70, -135, -180, -200, -195];
+      const stingTargetsY = [0, -55, -145, -230, -275, -290, -295, -315];
 
-      // L2
-      const l2 = getWalkOffsets(gaitPhase + Math.PI * 0.5, -1);
-      animX[19] = l2.kneeX; animY[19] = l2.kneeY + bodyBob;
-      animX[20] = l2.footX; animY[20] = l2.footY;
-
-      // L3
-      const l3 = getWalkOffsets(gaitPhase + Math.PI, -1);
-      animX[21] = l3.kneeX; animY[21] = l3.kneeY + bodyBob;
-      animX[22] = l3.footX; animY[22] = l3.footY;
-
-      // L4
-      const l4 = getWalkOffsets(gaitPhase + Math.PI * 1.5, -1);
-      animX[23] = l4.kneeX; animY[23] = l4.kneeY + bodyBob;
-      animX[24] = l4.footX; animY[24] = l4.footY;
-
-      // Right Legs (Indices 25 - 32): offset to alternate with left legs
-      // R1
-      const r1 = getWalkOffsets(gaitPhase + Math.PI, 1);
-      animX[25] = r1.kneeX; animY[25] = r1.kneeY + bodyBob;
-      animX[26] = r1.footX; animY[26] = r1.footY;
-
-      // R2
-      const r2 = getWalkOffsets(gaitPhase + Math.PI * 1.5, 1);
-      animX[27] = r2.kneeX; animY[27] = r2.kneeY + bodyBob;
-      animX[28] = r2.footX; animY[28] = r2.footY;
-
-      // R3
-      const r3 = getWalkOffsets(gaitPhase, 1);
-      animX[29] = r3.kneeX; animY[29] = r3.kneeY + bodyBob;
-      animX[30] = r3.footX; animY[30] = r3.footY;
-
-      // R4
-      const r4 = getWalkOffsets(gaitPhase + Math.PI * 0.5, 1);
-      animX[31] = r4.kneeX; animY[31] = r4.kneeY + bodyBob;
-      animX[32] = r4.footX; animY[32] = r4.footY;
-
-      // Tail & Stinger sway (Indices 33 - 40)
       for (let i = 33; i <= 40; i++) {
         const tailIdx = i - 33;
+        
+        // Normal sway (dampened during sting to let the sting take over)
         const tailPhase = gaitPhase * 0.5 - tailIdx * 0.3;
         const tailAmplitude = 2.0 + tailIdx * 2.0;
-        animX[i] = Math.sin(tailPhase) * tailAmplitude;
-        animY[i] = Math.cos(tailPhase * 0.4) * (tailIdx * 0.6) + bodyBob;
+        const swayX = Math.sin(tailPhase) * tailAmplitude;
+        const swayY = Math.cos(tailPhase * 0.4) * (tailIdx * 0.6) + bodyBob;
+
+        let stingOffsetX = 0;
+        let stingOffsetY = 0;
+        let swayWeight = 1.0;
+
+        if (stingActive) {
+          const t = stingTime / stingDuration;
+          let M = 0;
+          if (t < 0.3) {
+            const tWind = t / 0.3;
+            M = -Math.sin(tWind * Math.PI) * 0.08;
+            swayWeight = 1.0 - (tWind * 0.5);
+          } else if (t < 0.5) {
+            const tThrust = (t - 0.3) / 0.2;
+            const ease = Math.sin(tThrust * Math.PI / 2);
+            M = -0.08 * (1 - ease) + 1.1 * ease;
+            swayWeight = 0.5 * (1 - ease);
+          } else {
+            const tRetract = (t - 0.5) / 0.5;
+            const ease = Math.pow(1 - tRetract, 2);
+            M = 1.1 * ease;
+            swayWeight = 1.0 - (0.5 * ease);
+          }
+          stingOffsetX = stingTargetsX[tailIdx] * M;
+          stingOffsetY = stingTargetsY[tailIdx] * M;
+        }
+
+        animX[i] = swayX * swayWeight + stingOffsetX;
+        animY[i] = swayY * swayWeight + stingOffsetY;
       }
 
       // Pre-compute final screen positions with 2D rotation matrix
@@ -482,6 +520,9 @@ export default function ScorpioConstellation() {
       const sinR = Math.sin(rotationAngle);
 
       for (let i = 0; i < scorpioStars.length; i++) {
+        // Skip leg joints during this pre-compute loop (we will calculate them procedurally next)
+        if (i >= 17 && i <= 32) continue;
+
         const s = scorpioStars[i];
 
         // Animated local coordinates relative to center
@@ -496,6 +537,153 @@ export default function ScorpioConstellation() {
         screenY[i] = baseY + rotY + walkY - constellationOffsetY;
         screenGlow[i] = s.size * (s.isHeart ? 3.2 : 2.2) + sinTime * 1.5;
       }
+
+      // Procedural Leg Simulation: Ground-planted Stance & Swing Phases with Anatomical Joint Bending
+      legStates.forEach((leg) => {
+        // 1. Get the world position of the body base node
+        const bx = screenX[leg.baseNode];
+        const by = screenY[leg.baseNode];
+
+        // Body center for local space conversions
+        const cx = baseX + walkX - constellationOffsetX;
+        const cy = baseY + walkY - constellationOffsetY;
+
+        // 2. Calculate the "home position" of the foot in world space
+        const homeLocalX = leg.rx * scale;
+        const homeLocalY = leg.ry * scale;
+        const homeRotX = homeLocalX * cosR - homeLocalY * sinR;
+        const homeRotY = homeLocalX * sinR + homeLocalY * cosR;
+        const homeX = cx + homeRotX;
+        const homeY = cy + homeRotY;
+
+        // Calculate the rotated natural rest knee position
+        const kneeLocalX = leg.krx * scale;
+        const kneeLocalY = leg.kry * scale;
+        const kneeRotX = kneeLocalX * cosR - kneeLocalY * sinR;
+        const kneeRotY = kneeLocalX * sinR + kneeLocalY * cosR;
+        const restKneeX = cx + kneeRotX;
+        const restKneeY = cy + kneeRotY;
+
+        // Initialize positions if first run
+        if (leg.worldX === 0 || leg.worldY === 0) {
+          leg.worldX = homeX;
+          leg.worldY = homeY;
+          leg.plantX = homeX;
+          leg.plantY = homeY;
+          leg.startX = homeX;
+          leg.startY = homeY;
+        }
+
+        // 3. Determine the phase of this leg
+        const phi = gaitPhase + leg.phaseOffset;
+        const normP = ((phi % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+
+        const isStance = normP < Math.PI;
+
+        if (isStance) {
+          // Stance Phase: The foot stays planted on the ground
+          if (!leg.planted) {
+            // Transition from swing to stance: plant the foot!
+            leg.planted = true;
+            const dxHome = homeX - leg.worldX;
+            const dyHome = homeY - leg.worldY;
+            const distHome = Math.sqrt(dxHome * dxHome + dyHome * dyHome);
+            
+            if (distHome > 35 * scale) {
+              leg.plantX = homeX;
+              leg.plantY = homeY;
+            } else {
+              leg.plantX = leg.worldX;
+              leg.plantY = leg.worldY;
+            }
+          }
+          
+          // Keep the foot at the planted position
+          leg.worldX = leg.plantX;
+          leg.worldY = leg.plantY;
+
+          // Drag effect: if the body moves too far, the foot must slide to not overstretch
+          const dxHome = homeX - leg.worldX;
+          const dyHome = homeY - leg.worldY;
+          const distHome = Math.sqrt(dxHome * dxHome + dyHome * dyHome);
+          const maxStretch = 30 * scale;
+          if (distHome > maxStretch) {
+            const pull = (distHome - maxStretch) / distHome;
+            leg.worldX += dxHome * pull;
+            leg.worldY += dyHome * pull;
+          }
+        } else {
+          // Swing Phase: The foot lifts and steps forward to a new target
+          if (leg.planted) {
+            // Transition from stance to swing: record start position
+            leg.planted = false;
+            leg.startX = leg.worldX;
+            leg.startY = leg.worldY;
+          }
+
+          // Calculate dynamic step target in world space
+          // In local coordinates, negative Y is forward. So stepping forward means ry - stride
+          const strideLength = 20; // local units
+          const targetLocalX = leg.rx * scale;
+          const targetLocalY = (leg.ry - strideLength) * scale;
+          const targetRotX = targetLocalX * cosR - targetLocalY * sinR;
+          const targetRotY = targetLocalX * sinR + targetLocalY * cosR;
+          const targetX = cx + targetRotX;
+          const targetY = cy + targetRotY;
+
+          // Progress of swing (0 to 1)
+          const t = (normP - Math.PI) / Math.PI;
+          
+          // Interpolate to the target position
+          leg.worldX = leg.startX + (targetX - leg.startX) * t;
+          leg.worldY = leg.startY + (targetY - leg.startY) * t;
+
+          // Add vertical lift (lift leg outwards)
+          const liftHeight = 12 * scale * Math.sin(t * Math.PI);
+          // Outward lift direction based on current body rotation
+          leg.worldX += cosR * liftHeight * leg.side;
+          leg.worldY += sinR * liftHeight * leg.side;
+        }
+
+        // Convert the foot's world position back to body-local coordinates
+        const lx = (leg.worldX - cx) * cosR + (leg.worldY - cy) * sinR;
+        const ly = -(leg.worldX - cx) * sinR + (leg.worldY - cy) * cosR;
+
+        // Apply strict anatomical boundaries (clamping) in body space
+        // Left legs (side = -1) stay on the left (negative lx), right legs (side = 1) stay on the right (positive lx)
+        const clampedLx = leg.side === -1 
+          ? Math.max(-170 * scale, Math.min(-45 * scale, lx)) 
+          : Math.max(45 * scale, Math.min(170 * scale, lx));
+        
+        // Prevent legs from overlapping along the Y axis of the body
+        const clampedLy = Math.max((leg.ry - 20) * scale, Math.min((leg.ry + 20) * scale, ly));
+
+        // Convert clamped local coordinates back to world coordinates
+        leg.worldX = cx + clampedLx * cosR - clampedLy * sinR;
+        leg.worldY = cy + clampedLx * sinR + clampedLy * cosR;
+
+        // If in stance, sync the planted position to the clamped coordinates to prevent snapping
+        if (isStance) {
+          leg.plantX = leg.worldX;
+          leg.plantY = leg.worldY;
+        }
+
+        // 4. Anatomical Knee Bending:
+        // Adjust the natural knee position by half of the foot's deviation from its ideal home position
+        const footDeviationX = leg.worldX - homeX;
+        const footDeviationY = leg.worldY - homeY;
+        const kneeX = restKneeX + footDeviationX * 0.5;
+        const kneeY = restKneeY + footDeviationY * 0.5;
+
+        // 5. Store the final screen positions for rendering
+        screenX[leg.footNode] = leg.worldX;
+        screenY[leg.footNode] = leg.worldY;
+        screenX[leg.kneeNode] = kneeX;
+        screenY[leg.kneeNode] = kneeY;
+
+        screenGlow[leg.footNode] = 0;
+        screenGlow[leg.kneeNode] = 0;
+      });
 
       // 3. Draw Stardust Particles (Outlining claws, body, legs, and tail)
       for (let i = 0; i < scorpioParticles.length; i++) {
@@ -585,11 +773,18 @@ export default function ScorpioConstellation() {
         const sx = screenX[i];
         const sy = screenY[i];
         const isHovered = hoveredStarIndex === i;
-        const glowR = screenGlow[i] * (isHovered ? 1.8 : 1);
+        let glowR = screenGlow[i] * (isHovered ? 1.8 : 1);
+
+        // Extra glow on stinger during active sting
+        if (i === 40 && stingActive) {
+          const t = stingTime / stingDuration;
+          const pulse = t < 0.5 ? (t / 0.5) : (1 - (t - 0.5) / 0.5);
+          glowR += pulse * 18 * scale;
+        }
 
         // Radial glow
         const radGrad = ctx.createRadialGradient(sx, sy, s.size * 0.2, sx, sy, glowR);
-        radGrad.addColorStop(0, s.glowColor);
+        radGrad.addColorStop(0, i === 40 && stingActive ? "#f97316" : s.glowColor);
         radGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.beginPath();
         ctx.arc(sx, sy, glowR, 0, Math.PI * 2);
@@ -599,14 +794,19 @@ export default function ScorpioConstellation() {
         // Core
         ctx.beginPath();
         ctx.arc(sx, sy, s.size * (isHovered ? 1.3 : 1), 0, Math.PI * 2);
-        ctx.fillStyle = s.color;
+        ctx.fillStyle = i === 40 && stingActive ? "#ff8c3a" : s.color;
         ctx.fill();
 
         // Flares on major stars
         if (s.isHeart || s.size >= 5.0) {
-          const flareSize = s.size * 1.6 + Math.sin(time * 0.004) * 1.2;
+          let flareSize = s.size * 1.6 + Math.sin(time * 0.004) * 1.2;
+          if (i === 40 && stingActive) {
+            const t = stingTime / stingDuration;
+            const pulse = t < 0.5 ? (t / 0.5) : (1 - (t - 0.5) / 0.5);
+            flareSize += pulse * 10 * scale;
+          }
           ctx.beginPath();
-          ctx.strokeStyle = s.color;
+          ctx.strokeStyle = i === 40 && stingActive ? "#ff8c3a" : s.color;
           ctx.lineWidth = 0.7;
           ctx.moveTo(sx - flareSize, sy);
           ctx.lineTo(sx + flareSize, sy);
@@ -684,8 +884,8 @@ export default function ScorpioConstellation() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[0] w-full h-full select-none overflow-hidden">
       <canvas
-        ref={canvasRef}
-        className="w-full h-full mix-blend-screen opacity-75"
+         ref={canvasRef}
+         className="w-full h-full mix-blend-screen opacity-75"
       />
     </div>
   );
