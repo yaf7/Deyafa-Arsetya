@@ -19,7 +19,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "deyafa.dev",
+  title: "deyafa.portfolio",
   description: "Portfolio of Deyafa Arsetya — Web & Mobile Developer based in Kediri, Indonesia. Specialized in Laravel, React, Next.js, and Kotlin.",
 };
 
