@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Lock, Eye, X, Award, Download } from "lucide-react";
+import { Lock, X, Award, Download } from "lucide-react";
 import React, { useState } from "react";
 
 const PROJECTS = [
@@ -9,89 +9,45 @@ const PROJECTS = [
     title: "Sistem Registrasi NPWPD – BPPKAD Kota Kediri",
     description: "Implementasi modul pendaftaran pajak daerah berbasis Laravel untuk BPPKAD Kota Kediri. Menghadirkan solusi digital yang mempercepat alur administrasi publik secara transparan, aman, dan terstruktur.",
     tags: ["Laravel", "PHP", "Alpine.js", "MySQL", "Vite"],
-    image: "/dokumen-project-npwpd/bppkad_1.png",
+    image: "/gambar-project/npwpd_bppkad.png",
     github: null,
-    certificate: "/dokumen-project-npwpd/sertifikat/deyafa_sertifikat.jpeg",
-    device: "desktop",
-    presentation: "stitched",
-    viewDesign: [
-      "/dokumen-project-npwpd/bppkad_1.png",
-      "/dokumen-project-npwpd/bppkad_2.png",
-      "/dokumen-project-npwpd/bppkad_3.png",
-      "/dokumen-project-npwpd/bppkad_4.png",
-      "/dokumen-project-npwpd/bppkad_5.png",
-      "/dokumen-project-npwpd/bppkad_6.png",
-      "/dokumen-project-npwpd/bppkad_7.png",
-      "/dokumen-project-npwpd/bppkad_8.png",
-    ]
+    certificate: "/sertifikat/deyafa_sertifikat.jpeg"
   },
   {
     title: "YFScanner – Pemindai Dokumen Mobile Android",
     description: "Aplikasi pemindai dokumen berbasis Android yang dikembangkan dengan Kotlin. Dirancang untuk memudahkan digitalisasi dokumen fisik ke dalam format digital secara cepat, ringan, dan efisien langsung dari perangkat mobile.",
     tags: ["Kotlin", "Android", "CameraX", "Mobile"],
-    image: "/yfscanner/yfscanner1.jpeg",
+    image: "/gambar-project/yfscanner.jpeg",
     github: "https://github.com/yaf7/YFScanner",
-    download: "https://github.com/yaf7/YFScanner/releases/tag/v1.0.0",
-    device: "mobile",
-    presentation: "separated",
-    viewDesign: [
-      "/yfscanner/yfscanner1.jpeg",
-      "/yfscanner/yfscanner2.jpeg",
-      "/yfscanner/yfscanner3.jpeg",
-      "/yfscanner/yfscanner4.jpeg",
-      "/yfscanner/yfscanner5.jpeg",
-      "/yfscanner/yfscanner6.jpeg",
-      "/yfscanner/yfscanner7.jpeg",
-      "/yfscanner/yfscanner8.jpeg",
-    ]
+    download: "https://github.com/yaf7/YFScanner/releases/tag/v1.0.0"
   },
   {
     title: "Sistem Informasi Manajemen Donasi – LAZISNU",
     description: "Sistem Informasi Manajemen donasi berbasis Laravel untuk LAZISNU, dilengkapi dengan implementasi simulasi Xendit Payment Gateway untuk otomatisasi verifikasi pembayaran.",
     tags: ["Laravel", "PHP", "MySQL", "Xendit"],
-    image: "/sim-lazisnu/lazisnu1.png",
-    github: "https://github.com/yaf7/SIM-LAZISNU",
-    device: "desktop",
-    presentation: "separated",
-    viewDesign: [
-      "/sim-lazisnu/lazisnu1.png",
-      "/sim-lazisnu/lazisnu2.png",
-      "/sim-lazisnu/lazisnu3.png",
-      "/sim-lazisnu/lazisnu4.png",
-      "/sim-lazisnu/lazisnu5.png",
-      "/sim-lazisnu/lazisnu6.png",
-      "/sim-lazisnu/lazisnu7.png",
-      "/sim-lazisnu/lazisnu8.png",
-      "/sim-lazisnu/lazisnu9.png",
-      "/sim-lazisnu/lazisnu10.png"
-    ]
+    image: "/gambar-project/lazisnu.png",
+    github: "https://github.com/yaf7/SIM-LAZISNU"
   },
   {
     title: "Sistem Informasi Reservasi Meeting Room – Amaze Hotel",
     description: "Sistem manajemen reservasi ruang pertemuan berbasis Laravel untuk Amaze Hotel Kediri. Terintegrasi dengan Midtrans Payment Gateway (Sandbox) untuk otomatisasi transaksi dan dilengkapi fitur kustomisasi paket meeting serta menu buffet secara real-time.",
     tags: ["Laravel", "PHP", "MySQL", "Midtrans"],
-    image: "/Reservasi-Meeting-Room-Amaze-Hotel/tampilan-luar-project-meeting-room.png",
-    comingSoon: true,
-    device: "desktop",
-    presentation: "separated"
+    image: "/gambar-project/amaze-hotel.png",
+    comingSoon: true
   },
   {
     title: "Griya Karsa: Sistem Pemetaan Infrastruktur FTTH Berbasis GIS",
     description: "Sistem Informasi Geografis (GIS) berbasis Web untuk pemetaan infrastruktur FTTH, manajemen titik ODP/ODC, dan monitoring layanan internet pada proyek Griya Karsa.",
     tags: ["Laravel", "PHP", "GIS", "FTTH", "Mapping", "LeafletJS", "MySQL"],
-    image: "/Griya-Karsa-FTTH-Mapping/tampilan-luar-project-griyakarsa.png",
-    comingSoon: true,
-    device: "desktop",
-    presentation: "separated"
+    image: "/gambar-project/griya-karsa.png",
+    comingSoon: true
   },
   {
     title: "NextGen Photobooth: Kreator Kolase & Strip Foto Instan",
     description: "Platform photobooth digital yang menghadirkan pengalaman studio foto. Buat strip foto estetik dengan filter real-time dan ekspor kualitas tinggi dalam hitungan detik.",
     tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Canvas API"],
-    image: "/NexGen-Photobooth/tampilan-luar-project-nexgen-photobooth.png",
-    comingSoon: true,
-    device: "desktop",
-    presentation: "separated"
+    image: "/gambar-project/nextgen-photobooth.png",
+    comingSoon: true
   }
 ];
 
@@ -102,7 +58,7 @@ const GithubIcon = () => (
 );
 
 // Optimized, static Project Card Component with high-end CSS transitions
-const ProjectCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: { project: typeof PROJECTS[0] | any, onOpenGallery: (images: string[]) => void, onOpenCertificate?: (url: string) => void, index?: number }) => {
+const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeof PROJECTS[0] | any, onOpenCertificate?: (url: string) => void, index?: number }) => {
   return (
     <motion.div
       className="relative w-full rounded-2xl min-h-[480px] h-auto md:h-[450px] group overflow-hidden border border-white/10 bg-[#08080a] shadow-2xl transition-all duration-500 ease-out hover:border-purple-500/40 hover:shadow-[0_20px_50px_rgba(168,85,247,0.15)] hover:-translate-y-1.5"
@@ -118,10 +74,10 @@ const ProjectCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: {
       <div className="absolute inset-0 z-0">
         {/* Subtle Ambient Vignette/Gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-transparent z-10 transition-all duration-500 group-hover:via-black/75" />
-        <img 
-          src={project.image} 
-          alt={project.title} 
-          className="w-full h-full object-cover opacity-50 group-hover:scale-105 group-hover:opacity-65 transition-all duration-700 ease-out blur-[1px] group-hover:blur-0" 
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover opacity-50 group-hover:scale-105 group-hover:opacity-65 transition-all duration-700 ease-out blur-[1px] group-hover:blur-0"
         />
       </div>
 
@@ -146,15 +102,15 @@ const ProjectCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: {
         <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-wide drop-shadow-lg group-hover:text-purple-300 transition-colors duration-300">
           {project.title}
         </h3>
-        
+
         <p className="text-gray-300 mb-6 drop-shadow-md text-sm leading-relaxed max-w-xl">
           {project.description}
         </p>
 
         <div className="flex flex-wrap gap-2.5 mb-6">
           {project.tags.map((tag: string) => (
-            <span 
-              key={tag} 
+            <span
+              key={tag}
               className="px-3 py-1 text-xs font-bold bg-white/5 backdrop-blur-md rounded-full text-purple-200 border border-white/10 shadow-sm transition-all duration-300 group-hover:border-purple-500/30 group-hover:bg-purple-500/5"
             >
               {tag}
@@ -164,20 +120,6 @@ const ProjectCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: {
 
         {!project.comingSoon && (
           <div className="flex gap-4 items-center flex-wrap">
-            {project.viewDesign && (
-              <button
-                onClick={() => {
-                  if (Array.isArray(project.viewDesign)) {
-                    onOpenGallery(project.viewDesign);
-                  } else {
-                    window.open(project.viewDesign as string, "_blank");
-                  }
-                }}
-                className="flex items-center gap-2 text-sm font-bold bg-white text-black px-4 py-2 rounded-full hover:bg-purple-100 transition-all duration-300 ease-out shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] active:scale-95"
-              >
-                <Eye size={16} /> Lihat Desain
-              </button>
-            )}
             {project.certificate && (
               <button
                 onClick={() => onOpenCertificate?.(project.certificate as string)}
@@ -187,8 +129,8 @@ const ProjectCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: {
               </button>
             )}
             {project.github ? (
-              <a 
-                href={project.github} 
+              <a
+                href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full transition-all duration-300 ease-out backdrop-blur-sm hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] active:scale-95"
@@ -201,10 +143,10 @@ const ProjectCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: {
               </span>
             )}
             {project.download && (
-              <a 
-                href={project.download} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={project.download}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full hover:from-blue-400 hover:to-indigo-500 transition-all duration-300 ease-out shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] active:scale-95"
               >
                 <Download size={16} /> Unduh Aplikasi
@@ -218,17 +160,16 @@ const ProjectCard = ({ project, onOpenGallery, onOpenCertificate, index = 0 }: {
 }
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<typeof PROJECTS[0] | null>(null);
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
 
   // Lock body scroll when modal is open
   React.useEffect(() => {
-    if (selectedProject || selectedCertificate) {
+    if (selectedCertificate) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [selectedProject, selectedCertificate]);
+  }, [selectedCertificate]);
 
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
@@ -258,157 +199,11 @@ export default function Projects() {
               key={project.title}
               project={project}
               index={i}
-              onOpenGallery={() => setSelectedProject(project as any)}
               onOpenCertificate={project.certificate ? () => setSelectedCertificate(project.certificate as string) : undefined}
             />
           ))}
         </div>
       </div>
-
-      {/* Enhanced Gallery Modal */}
-      {selectedProject && Array.isArray(selectedProject.viewDesign) && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[999] bg-black/90 backdrop-blur-xl flex justify-center items-start overflow-y-auto p-4 sm:p-8"
-        >
-          <div className="w-full max-w-5xl relative mt-4 mb-20">
-            {/* Glowing Background Glow behind the modal */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-[2rem] opacity-20 blur-2xl z-0" />
-
-            {/* Main Modal Container */}
-            <div className="relative z-10 w-full bg-[#0a0a0a] rounded-2xl overflow-hidden border border-white/10 shadow-2xl flex flex-col">
-
-              {/* Sticky Header: Mac Style Window Controls */}
-              <div className="sticky top-0 z-[100] w-full bg-[#111111]/80 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between">
-                {/* Mac Controls */}
-                <div className="flex gap-2 items-center w-1/4">
-                  <div className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.5)]"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
-                </div>
-
-                {/* Title */}
-                <div className="flex-1 text-center">
-                  <h3 className="text-white font-bold text-sm tracking-widest uppercase opacity-80 decoration-white">
-                    Galeri {selectedProject.title}
-                  </h3>
-                </div>
-
-                {/* Close Button */}
-                <div className="w-1/4 flex justify-end">
-                  <button
-                    onClick={() => setSelectedProject(null)}
-                    className="text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 p-2 rounded-full transition-all duration-500 ease-out"
-                    title="Tutup Galeri"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Modal Content Info */}
-              <div className="p-8 md:p-12 pb-8 bg-gradient-to-b from-[#111] to-[#0a0a0a] border-b border-white/5">
-                <h2 className="text-3xl font-black text-white mb-4">{selectedProject.title}</h2>
-                <p className="text-gray-400 mb-6 max-w-3xl leading-relaxed text-lg">{selectedProject.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 text-xs font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Refined Aesthetic Image Gallery */}
-              <div className="w-full relative bg-[#070707] flex flex-col items-center gap-20 p-8 md:p-24 pb-40 overflow-hidden">
-                {/* Background ambient light for the gallery */}
-                <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
-                <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
-
-                {(() => {
-                  const isMobileWidth = selectedProject.device === "mobile";
-                  const contentWidth = isMobileWidth ? "max-w-sm md:max-w-md" : "max-w-2xl";
-                  const showStitched = selectedProject.presentation === "stitched";
-
-                  return (
-                    <>
-                      {/* Stitched Intro Section (Images 1, 2, 3) inside a Browser Window */}
-                      {showStitched && (
-                        <motion.div
-                          initial={{ y: 50, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ duration: 1.2, ease: "easeOut" }}
-                          className={`w-full ${contentWidth} flex flex-col rounded-xl md:rounded-[20px] overflow-hidden shadow-[0_0_80px_rgba(168,85,247,0.15)] bg-black ring-1 ring-white/10 relative z-10`}
-                        >
-                          {/* Aesthetic Header */}
-                          <div className="w-full bg-[#0d0d0d] flex items-center px-5 py-3 border-b border-white/10">
-                            <div className="flex gap-2 opacity-80">
-                              <div className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
-                              <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]"></div>
-                              <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
-                            </div>
-                            <div className="flex-1 flex justify-center">
-                              {/* Minimalist Address Bar */}
-                              <div className="bg-white/5 w-24 md:w-32 h-5 md:h-6 rounded-lg border border-white/5 flex items-center justify-center opacity-50">
-                                <Lock size={10} className="text-gray-400" />
-                              </div>
-                            </div>
-                            <div className="flex gap-2 opacity-0 w-12"></div>
-                          </div>
-
-                          {/* Stitched Images */}
-                          <div className="w-full flex flex-col bg-black">
-                            {(selectedProject.viewDesign as string[]).slice(0, 3).map((img, idx) => (
-                              <img
-                                key={idx}
-                                src={img}
-                                alt={`${selectedProject.title} stitched design part ${idx + 1}`}
-                                className="w-full h-auto block m-0 p-0 border-none select-none pointer-events-none opacity-90 hover:opacity-100 transition-opacity duration-700"
-                                loading={idx === 0 ? "eager" : "lazy"}
-                              />
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-
-                      {/* Display Canvas Frames (All if separated, or Remaining if stitched) */}
-                      {((selectedProject.viewDesign as string[]).length > 3 || !showStitched) && (
-                        <div className={`flex flex-col items-center gap-16 w-full ${contentWidth} ${!showStitched ? 'mt-0' : 'mt-16'} relative z-10`}>
-
-                          {/* Gapped Image Display Inside Canvas Frames */}
-                          {(selectedProject.viewDesign as string[]).slice(showStitched ? 3 : 0).map((img, idx) => (
-                            <motion.div
-                              initial={{ opacity: 0, y: 30 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              viewport={{ once: true, margin: "-100px" }}
-                              transition={{ duration: 1.2, ease: "easeOut" }}
-                              key={idx}
-                              className="w-full rounded-[24px] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.6)] border border-white/5 group relative bg-black ring-1 ring-white/10"
-                            >
-                              {/* Canvas / Mount Padding */}
-                              <div className="p-3 md:p-5 bg-gradient-to-b from-white/5 to-transparent">
-                                <img
-                                  src={img}
-                                  alt={`${selectedProject.title} screen ${idx + (!showStitched ? 1 : 4)}`}
-                                  className="w-full h-auto block rounded-xl ring-1 ring-black/50 transform group-hover:scale-[1.01] transition-transform duration-700 select-none pointer-events-none opacity-90 group-hover:opacity-100"
-                                  loading="lazy"
-                                />
-                              </div>
-                            </motion.div>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  );
-                })()}
-
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      )}
 
       {/* Certificate Modal */}
       {selectedCertificate && (
