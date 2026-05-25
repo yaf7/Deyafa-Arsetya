@@ -41,6 +41,7 @@ export default function Navbar() {
     { name: "Teknologi", href: "#tech", id: "tech" },
     { name: "Riset", href: "#publications", id: "publications" },
     { name: "Proyek", href: "#projects", id: "projects" },
+    { name: "Sertifikat", href: "#certificates", id: "certificates" },
   ];
 
   return (

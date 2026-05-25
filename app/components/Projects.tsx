@@ -11,7 +11,7 @@ const PROJECTS = [
     tags: ["Laravel", "PHP", "Alpine.js", "MySQL", "Vite"],
     image: "/gambar-project/npwpd_bppkad.png",
     github: null,
-    certificate: "/sertifikat/deyafa_sertifikat.jpeg"
+    certificate: "/sertifikat/deyafa_sertifikat.jpg"
   },
   {
     title: "YFScanner – Pemindai Dokumen Mobile Android",
@@ -82,7 +82,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
       </div>
 
       {/* Content Container */}
-      <div className="absolute inset-0 z-20 p-6 md:p-8 flex flex-col justify-end">
+      <div className="absolute inset-0 z-20 p-5 md:p-8 flex flex-col justify-end">
         {/* Big Editorial Index Number */}
         <span className="absolute top-6 left-8 text-7xl font-black text-white/[0.03] select-none leading-none tracking-tighter transition-all duration-500 group-hover:text-purple-500/5 group-hover:scale-105">
           {String(index + 1).padStart(2, '0')}
@@ -99,11 +99,11 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
           </div>
         )}
 
-        <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-wide drop-shadow-lg group-hover:text-purple-300 transition-colors duration-300">
+        <h3 className="text-lg md:text-xl lg:text-2xl font-black text-white mb-2 leading-tight tracking-wide drop-shadow-lg group-hover:text-purple-300 transition-colors duration-300 line-clamp-3">
           {project.title}
         </h3>
 
-        <p className="text-gray-300 mb-6 drop-shadow-md text-sm leading-relaxed max-w-xl">
+        <p className="text-gray-300 mb-4 md:mb-6 drop-shadow-md text-xs sm:text-sm leading-relaxed max-w-xl line-clamp-3 md:line-clamp-none">
           {project.description}
         </p>
 
