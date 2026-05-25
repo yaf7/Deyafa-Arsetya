@@ -9,6 +9,8 @@ import FloatingDecorations from "./components/FloatingDecorations";
 import CursorGlow from "./components/CursorGlow";
 import MobileFAB from "./components/MobileFAB";
 import ScorpioConstellation from "./components/ScorpioConstellation";
+import Certificates from "./components/Certificates";
+import EffectsManager from "./components/EffectsManager";
 
 export default function Home() {
   return (
@@ -19,8 +21,8 @@ export default function Home() {
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
       />
 
-      {/* Cursor Glow Effect */}
-      <CursorGlow />
+      {/* Effects Manager for Animations (Performance Optimization) */}
+      <EffectsManager />
 
       {/* Mobile FAB Contact Button */}
       <MobileFAB />
@@ -42,8 +44,7 @@ export default function Home() {
         <div className="absolute bottom-[2%] right-[5%] w-[450px] h-[450px] rounded-full bg-gradient-to-tl from-amber-600/10 to-orange-600/10 blur-[90px]" />
       </div>
 
-      <ScorpioConstellation />
-      <FloatingDecorations />
+      {/* Animations are now handled by EffectsManager */}
       
       <Navbar />
       <Hero />
@@ -51,6 +52,7 @@ export default function Home() {
       <TechStack />
       <Publications />
       <Projects />
+      <Certificates />
       <Footer />
     </main>
   );

@@ -33,21 +33,21 @@ const PROJECTS = [
     description: "Sistem manajemen reservasi ruang pertemuan berbasis Laravel untuk Amaze Hotel Kediri. Terintegrasi dengan Midtrans Payment Gateway (Sandbox) untuk otomatisasi transaksi dan dilengkapi fitur kustomisasi paket meeting serta menu buffet secara real-time.",
     tags: ["Laravel", "PHP", "MySQL", "Midtrans"],
     image: "/gambar-project/amaze-hotel.png",
-    comingSoon: true
+    github: "https://github.com/yaf7/deyafaarsetya-amaze-hotel-meeting-room"
   },
   {
     title: "Griya Karsa: Sistem Pemetaan Infrastruktur FTTH Berbasis GIS",
     description: "Sistem Informasi Geografis (GIS) berbasis Web untuk pemetaan infrastruktur FTTH, manajemen titik ODP/ODC, dan monitoring layanan internet pada proyek Griya Karsa.",
     tags: ["Laravel", "PHP", "GIS", "FTTH", "Mapping", "LeafletJS", "MySQL"],
     image: "/gambar-project/griya-karsa.png",
-    comingSoon: true
+    github: "https://github.com/yaf7/griya-karsa-ftth-mapping"
   },
   {
     title: "NextGen Photobooth: Kreator Kolase & Strip Foto Instan",
     description: "Platform photobooth digital yang menghadirkan pengalaman studio foto. Buat strip foto estetik dengan filter real-time dan ekspor kualitas tinggi dalam hitungan detik.",
     tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Canvas API"],
     image: "/gambar-project/nextgen-photobooth.png",
-    comingSoon: true
+    github: "https://github.com/yaf7/NextGen-Photobooth"
   }
 ];
 
