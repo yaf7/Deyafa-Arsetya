@@ -13,7 +13,7 @@ import Certificates from "./components/Certificates";
 
 export default function Home() {
   return (
-    <main className="relative bg-transparent w-full min-h-screen text-white overflow-x-hidden selection:bg-purple-900 selection:text-white">
+    <main className="relative bg-transparent w-full min-h-screen text-white overflow-x-hidden selection:bg-emerald-900 selection:text-white">
       {/* Global Grain/Noise Texture for Premium feel */}
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.04] z-[100]"
@@ -27,19 +27,19 @@ export default function Home() {
 
       {/* Decorative Scrolling Orbs (Bulatan Gradasi Cahaya) — GPU optimized */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[-1]">
-        {/* Top: Hero Section (Indigo to Purple) */}
-        <div className="absolute top-0 -left-[10%] w-[450px] h-[450px] rounded-full bg-gradient-to-br from-indigo-600/15 to-purple-600/15 blur-[80px]" />
-        <div className="absolute top-[5%] -right-[10%] w-[400px] h-[400px] rounded-full bg-gradient-to-bl from-fuchsia-600/15 to-pink-600/15 blur-[80px]" />
+        {/* Top: Hero Section (Teal to Emerald) */}
+        <div className="absolute top-0 -left-[10%] w-[450px] h-[450px] rounded-full bg-gradient-to-br from-teal-600/15 to-emerald-600/15 blur-[80px]" />
+        <div className="absolute top-[5%] -right-[10%] w-[400px] h-[400px] rounded-full bg-gradient-to-bl from-emerald-600/15 to-zinc-600/15 blur-[80px]" />
         
-        {/* Middle Top: About & Tech Stack (Blue to Cyan) */}
-        <div className="absolute top-[25%] left-[5%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-blue-600/15 to-cyan-600/15 blur-[90px]" />
+        {/* Middle Top: About & Tech Stack (Cyan to Emerald) */}
+        <div className="absolute top-[25%] left-[5%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-cyan-600/15 to-emerald-600/15 blur-[90px]" />
         
-        {/* Middle: Publications & Projects (Violet to Purple) */}
-        <div className="absolute top-[50%] -right-[10%] w-[450px] h-[450px] rounded-full bg-gradient-to-r from-violet-600/10 to-purple-600/10 blur-[90px]" />
+        {/* Middle: Publications & Projects (Teal to Zinc) */}
+        <div className="absolute top-[50%] -right-[10%] w-[450px] h-[450px] rounded-full bg-gradient-to-r from-teal-600/10 to-zinc-600/10 blur-[90px]" />
         
-        {/* Bottom: Footer (Emerald to Teal & Amber) */}
+        {/* Bottom: Footer (Emerald to Teal & Zinc) */}
         <div className="absolute top-[75%] -left-[10%] w-[400px] h-[400px] rounded-full bg-gradient-to-br from-emerald-600/10 to-teal-600/10 blur-[80px]" />
-        <div className="absolute bottom-[2%] right-[5%] w-[450px] h-[450px] rounded-full bg-gradient-to-tl from-amber-600/10 to-orange-600/10 blur-[90px]" />
+        <div className="absolute bottom-[2%] right-[5%] w-[450px] h-[450px] rounded-full bg-gradient-to-tl from-zinc-600/10 to-emerald-600/10 blur-[90px]" />
       </div>
 
       <ScorpioConstellation />

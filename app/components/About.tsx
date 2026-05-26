@@ -18,11 +18,11 @@ export default function About() {
           className="text-center mb-16"
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider relative inline-block">
-            Kenali{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">
+            <span className="gradient-silver">Kenali</span>{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">
               Saya
             </span>
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full" />
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-zinc-400 to-emerald-500 rounded-full" />
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg mt-6">
             Seorang pembelajar dan pengembang berdedikasi yang fokus pada pembangunan solusi digital fungsional dan andal melalui peningkatan berkelanjutan.
@@ -32,34 +32,46 @@ export default function About() {
 
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          {/* Profile / Image Side */}
+          {/* Profile / Image Side (ID Card Theme) */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="md:col-span-5 relative group"
+            initial={{ opacity: 0, y: -200, rotate: -15 }}
+            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 60, damping: 8, mass: 1, delay: 0.1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            className="md:col-span-5 relative flex justify-center mt-24 md:mt-12 origin-top"
+            style={{ perspective: "1000px" }}
           >
-            <div className="absolute -inset-1 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl blur opacity-30 group-hover:opacity-70 transition duration-500" />
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden glass border border-white/10 flex items-center justify-center p-1 bg-black/40">
-              {/* Profile image */}
-              <div className="w-full h-full bg-zinc-900 rounded-xl overflow-hidden relative group-hover:scale-[1.02] transition-transform duration-500 flex items-center justify-center">
-                <span className="text-9xl font-black text-white/5 uppercase select-none tracking-tighter absolute">DEYAFA</span>
-                <img src="/Foto-Deyafa-Arsetya.jpg" alt="Deyafa Arsetya Profile" className="w-full h-full object-cover object-top filter grayscale hover:grayscale-0 transition-all duration-700 blend-luminosity opacity-80" />
-              </div>
+            {/* Lanyard Strap */}
+            <div className="absolute -top-20 md:-top-72 left-1/2 -translate-x-1/2 w-4 md:w-6 h-24 md:h-72 bg-gradient-to-r from-emerald-900 via-emerald-600 to-emerald-900 z-0 shadow-[0_0_15px_rgba(147,51,234,0.4)] flex justify-center border-x border-emerald-950">
+                {/* Stitching detail */}
+                <div className="w-[1px] md:w-[2px] h-full bg-white/20 border-l border-black/40 border-dashed" />
             </div>
-            {/* 3D floating badge */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-6 right-2 md:-right-6 glass border border-white/20 p-3 md:p-4 rounded-2xl shadow-2xl bg-black/80 flex items-center gap-3 md:gap-4 max-w-[280px] md:max-w-none"
+
+            {/* The ID Card */}
+            <motion.div 
+              whileHover={{ rotateY: 10, rotateX: 5 }}
+              transition={{ type: "spring", stiffness: 100, damping: 10 }}
+              className="relative w-full max-w-[220px] sm:max-w-[260px] md:max-w-[280px] bg-white/5 backdrop-blur-xl rounded-[1.5rem] p-3 md:p-4 shadow-2xl shadow-emerald-900/40 flex flex-col items-center border border-white/20 z-10"
+              style={{ transformStyle: "preserve-3d" }}
             >
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-purple-600/20 flex items-center justify-center text-purple-400 flex-shrink-0">
-                <Briefcase size={20} className="md:w-6 md:h-6" />
+              {/* Lanyard Clip */}
+              <div className="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2 w-6 md:w-8 h-8 md:h-10 bg-gradient-to-b from-zinc-200 to-zinc-400 rounded-md z-20 shadow-xl border border-zinc-500 flex flex-col items-center justify-end pb-1 md:pb-1.5">
+                 <div className="w-2 md:w-3 h-2 md:h-3 border-2 md:border-[3px] border-zinc-700 rounded-full" />
               </div>
-              <div className="min-w-0">
-                <p className="text-[10px] md:text-xs text-gray-400 uppercase font-bold tracking-wider">Pengalaman</p>
-                <p className="font-bold text-white text-sm md:text-lg truncate">Web & Mobile Developer</p>
+
+              {/* Hole punch */}
+              <div className="w-10 md:w-12 h-2 md:h-2.5 bg-black/60 rounded-full mt-2 md:mt-3 mb-4 md:mb-5 shadow-[inset_0_3px_6px_rgba(0,0,0,0.8)] border border-white/10" />
+              
+              {/* Profile image container */}
+              <div className="w-full aspect-[4/5] rounded-xl overflow-hidden relative shadow-2xl border-4 border-white/10 mb-4 md:mb-5 bg-zinc-900 group" style={{ transform: "translateZ(30px)" }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/30 to-teal-600/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-overlay" />
+                <span className="text-4xl md:text-6xl font-black text-white/5 uppercase select-none tracking-tighter absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">DEYAFA</span>
+                <img src="/foto-aboutme.png" alt="Deyafa Arsetya Profile" className="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-700 relative z-0 opacity-90" />
+              </div>
+              
+              {/* ID Details */}
+              <div className="w-full flex-grow flex flex-col items-center text-center pb-1 md:pb-2" style={{ transform: "translateZ(20px)" }}>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-black text-white tracking-wide uppercase whitespace-nowrap">Deyafa Arsetya</h3>
               </div>
             </motion.div>
           </motion.div>
@@ -72,8 +84,8 @@ export default function About() {
             viewport={{ once: true }}
             className="md:col-span-7 flex flex-col justify-center"
           >
-            <h3 className="font-display text-3xl md:text-4xl font-bold mb-6 text-white leading-tight">
-              &quot;Membangun Kapabilitas dari Titik Nol.&quot;
+            <h3 className="font-display text-3xl md:text-4xl font-bold mb-6 leading-tight">
+              <span className="gradient-silver">&quot;Membangun Kapabilitas dari Titik Nol.&quot;</span>
             </h3>
             <p className="text-gray-400 text-lg leading-relaxed mb-4">
               Perjalanan saya di dunia teknologi tidak dimulai dengan bakat instan, melainkan dari selembar kertas kosong. Mengawali langkah di Manajemen Informatika POLINEMA tanpa latar belakang pemrograman adalah tantangan sekaligus pembuktian dedikasi saya.
@@ -87,18 +99,18 @@ export default function About() {
 
               {/* Education Card */}
               <div className="bento-card p-6 group">
-                <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all duration-500 ease-out">
+                <div className="w-10 h-10 rounded-lg bg-teal-500/10 flex items-center justify-center text-teal-400 mb-4 group-hover:scale-110 group-hover:bg-teal-500/20 transition-all duration-500 ease-out">
                   <GraduationCap size={20} />
                 </div>
                 <h4 className="font-display text-xl font-bold text-white mb-2">Pendidikan</h4>
                 <p className="text-sm text-gray-400 mb-1">DIII - Manajemen Informatika</p>
-                <p className="text-xs text-purple-400 font-medium">Politeknik Negeri Malang</p>
+                <p className="text-xs text-emerald-400 font-medium">Politeknik Negeri Malang</p>
                 <p className="text-xs text-gray-500">Kampus Kediri</p>
               </div>
 
               {/* Location Card */}
               <div className="bento-card p-6 group">
-                <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 mb-4 group-hover:scale-110 group-hover:bg-pink-500/20 transition-all duration-500 ease-out">
+                <div className="w-10 h-10 rounded-lg bg-zinc-400/10 flex items-center justify-center text-zinc-300 mb-4 group-hover:scale-110 group-hover:bg-zinc-400/20 transition-all duration-500 ease-out">
                   <MapPin size={20} />
                 </div>
                 <h4 className="font-display text-xl font-bold text-white mb-2">Lokasi</h4>
@@ -111,15 +123,15 @@ export default function About() {
                 href="mailto:yafaarsetya@gmail.com"
                 className="bento-card p-6 group sm:col-span-2 flex items-center gap-5 cursor-pointer"
               >
-                <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/30 group-hover:scale-110 group-hover:shadow-purple-500/50 transition-all duration-500 ease-out">
+                <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/30 group-hover:scale-110 group-hover:shadow-emerald-500/50 transition-all duration-500 ease-out">
                   <Mail size={22} />
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase font-bold tracking-widest mb-1">Mari Terhubung</p>
-                  <p className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors duration-500 ease-out">yafaarsetya@gmail.com</p>
+                  <p className="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors duration-500 ease-out">yafaarsetya@gmail.com</p>
                 </div>
                 {/* Arrow indicator */}
-                <div className="ml-auto text-gray-600 group-hover:text-purple-400 group-hover:translate-x-1 transition-all duration-500">
+                <div className="ml-auto text-gray-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all duration-500">
                   →
                 </div>
               </a>

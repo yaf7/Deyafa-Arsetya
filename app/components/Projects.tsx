@@ -61,14 +61,14 @@ const GithubIcon = () => (
 const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeof PROJECTS[0] | any, onOpenCertificate?: (url: string) => void, index?: number }) => {
   return (
     <motion.div
-      className="relative w-full rounded-2xl min-h-[480px] h-auto md:h-[450px] group overflow-hidden border border-white/10 bg-[#08080a] shadow-2xl transition-all duration-500 ease-out hover:border-purple-500/40 hover:shadow-[0_20px_50px_rgba(168,85,247,0.15)] hover:-translate-y-1.5"
+      className="relative w-full rounded-2xl min-h-[480px] h-auto md:h-[450px] group overflow-hidden border border-zinc-700/50 bg-[#08080a] shadow-2xl transition-all duration-500 ease-out hover:border-zinc-500/40 hover:shadow-[0_20px_50px_rgba(16,185,129,0.12)] hover:-translate-y-1.5"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
       viewport={{ once: true, margin: "-80px" }}
     >
       {/* Glowing Top Border Accent */}
-      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30" />
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-zinc-400 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30" />
 
       {/* Card Background Image & Gradient Overlays */}
       <div className="absolute inset-0 z-0">
@@ -84,7 +84,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
       {/* Content Container */}
       <div className="absolute inset-0 z-20 p-5 md:p-8 flex flex-col justify-end">
         {/* Big Editorial Index Number */}
-        <span className="absolute top-6 left-8 text-7xl font-black text-white/[0.03] select-none leading-none tracking-tighter transition-all duration-500 group-hover:text-purple-500/5 group-hover:scale-105">
+        <span className="absolute top-6 left-8 text-7xl font-black text-white/[0.03] select-none leading-none tracking-tighter transition-all duration-500 group-hover:text-emerald-500/5 group-hover:scale-105">
           {String(index + 1).padStart(2, '0')}
         </span>
 
@@ -99,7 +99,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
           </div>
         )}
 
-        <h3 className="text-lg md:text-xl lg:text-2xl font-black text-white mb-2 leading-tight tracking-wide drop-shadow-lg group-hover:text-purple-300 transition-colors duration-300 line-clamp-3">
+        <h3 className="text-lg md:text-xl lg:text-2xl font-black text-white mb-2 leading-tight tracking-wide drop-shadow-lg group-hover:text-emerald-300 transition-colors duration-300 line-clamp-3">
           {project.title}
         </h3>
 
@@ -111,7 +111,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
           {project.tags.map((tag: string) => (
             <span
               key={tag}
-              className="px-3 py-1 text-xs font-bold bg-white/5 backdrop-blur-md rounded-full text-purple-200 border border-white/10 shadow-sm transition-all duration-300 group-hover:border-purple-500/30 group-hover:bg-purple-500/5"
+              className="px-3 py-1 text-xs font-bold bg-white/5 backdrop-blur-md rounded-full text-emerald-200 border border-white/10 shadow-sm transition-all duration-300 group-hover:border-emerald-500/30 group-hover:bg-emerald-500/5"
             >
               {tag}
             </span>
@@ -147,7 +147,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
                 href={project.download}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full hover:from-blue-400 hover:to-indigo-500 transition-all duration-300 ease-out shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] active:scale-95"
+                className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-teal- to-teal-600 text-white px-4 py-2 rounded-full hover:from-teal- hover:to-teal-500 transition-all duration-300 ease-out shadow-[0_0_20px_rgba(20,184,166,0.3)] hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] active:scale-95"
               >
                 <Download size={16} /> Unduh Aplikasi
               </a>
@@ -174,8 +174,8 @@ export default function Projects() {
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute left-0 top-1/4 w-[500px] h-[500px] bg-indigo-900/10 rounded-full blur-[150px] -z-10" />
-      <div className="absolute right-0 bottom-1/4 w-[400px] h-[400px] bg-purple-900/10 rounded-full blur-[150px] -z-10" />
+      <div className="absolute left-0 top-1/4 w-[500px] h-[500px] bg-teal-900/10 rounded-full blur-[150px] -z-10" />
+      <div className="absolute right-0 bottom-1/4 w-[400px] h-[400px] bg-emerald-900/10 rounded-full blur-[150px] -z-10" />
 
       <div className="container mx-auto px-6 md:px-12 z-10">
         <motion.div
@@ -185,15 +185,15 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mb-20 md:mb-16"
         >
-          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest text-white">
-            Proyek <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">Pilihan</span>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
+            <span className="gradient-silver">Proyek</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-600">Pilihan</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Kumpulan karya dan proyek digital pilihan yang telah saya bangun
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
           {PROJECTS.map((project, i) => (
             <ProjectCard
               key={project.title}
@@ -225,7 +225,7 @@ export default function Projects() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, delay: 0.2 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen"
           />
 
           <motion.div

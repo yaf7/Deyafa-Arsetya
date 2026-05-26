@@ -19,8 +19,11 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "deyafa.portfolio",
+  title: "DEYAFA.PORTFOLIO",
   description: "Portfolio of Deyafa Arsetya — Web & Mobile Developer based in Kediri, Indonesia. Specialized in Laravel, React, Next.js, and Kotlin.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -31,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} antialiased min-h-screen bg-[#0B1120] text-white selection:bg-purple-900 selection:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} antialiased min-h-screen bg-[#0B1120] text-white selection:bg-emerald-900 selection:text-white`}
       >
         {/* Elegant Deep Slate Blue Background */}
         <div className="fixed inset-0 z-[-1] pointer-events-none bg-gradient-to-br from-[#1e293b] via-[#0f172a] to-[#0B1120]" />

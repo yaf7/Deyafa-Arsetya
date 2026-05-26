@@ -6,8 +6,8 @@ import { BookOpen, ExternalLink, GraduationCap, Library, Network } from "lucide-
 export default function Publications() {
   return (
     <section id="publications" className="py-24 relative overflow-hidden bg-transparent">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
-      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-indigo-900/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-zinc-400/25 to-transparent" />
+      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-teal-900/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <motion.div
@@ -17,11 +17,11 @@ export default function Publications() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-bold uppercase tracking-widest mb-6">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-/10 border border-teal-/20 text-teal- text-xs font-bold uppercase tracking-widest mb-6">
             <BookOpen size={12} /> Riset & Publikasi
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest text-white">
-            Riset <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">Akademik</span>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
+            <span className="gradient-silver">Riset</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal- to-teal-600">Akademik</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg mt-4">
             Mendokumentasikan implementasi teknis dan arsitektur sistem melalui riset akademik serta publikasi ilmiah.
@@ -36,11 +36,11 @@ export default function Publications() {
             viewport={{ once: true }}
             className="lg:col-span-8 group relative"
           >
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/30 to-purple-600/30 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-teal-/30 to-emerald-600/30 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
             <div className="relative bento-card p-8 md:p-10 h-full flex flex-col justify-between">
               <div>
                 <div className="flex items-start justify-between mb-6">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-xs font-bold uppercase tracking-widest">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-teal-/30 bg-teal-/10 text-teal- text-xs font-bold uppercase tracking-widest">
                     <BookOpen size={14} /> Router: Jurnal Teknik Informatika & Terapan
                   </div>
                   <span className="text-6xl font-black text-white/5 select-none leading-none">01</span>
@@ -53,7 +53,7 @@ export default function Publications() {
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
                   {["Framework Laravel", "NPWPD", "Public Service", "System Architecture", "Transparency"].map(keyword => (
-                    <span key={keyword} className="bg-white/5 border border-white/10 px-3 py-1 text-xs font-medium text-gray-300 rounded-full hover:border-blue-500/30 hover:text-blue-300 transition-colors duration-300">
+                    <span key={keyword} className="bg-white/5 border border-white/10 px-3 py-1 text-xs font-medium text-gray-300 rounded-full hover:border-teal-/30 hover:text-teal- transition-colors duration-300">
                       {keyword}
                     </span>
                   ))}
@@ -61,7 +61,7 @@ export default function Publications() {
               </div>
               <div className="mt-auto">
                 <a href="https://doi.org/10.62951/router.v3i4.821" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-bold bg-white text-black px-6 py-3 rounded-full hover:bg-blue-50 transition-colors duration-500 ease-out shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] group/btn">
+                  className="inline-flex items-center gap-2 text-sm font-bold bg-white text-black px-6 py-3 rounded-full hover:bg-teal- transition-colors duration-500 ease-out shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] group/btn">
                   Lihat Publikasi DOI <ExternalLink size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
                 </a>
               </div>
@@ -79,22 +79,22 @@ export default function Publications() {
             <a href="https://scholar.google.co.id/scholar?hl=id&as_sdt=0%2C5&q=deyafa+arsetya&btnG=" target="_blank" rel="noopener noreferrer"
               className="bento-card p-6 flex items-center justify-between group">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform duration-500 ease-out">
+                <div className="w-12 h-12 rounded-full bg-teal-/20 flex items-center justify-center text-teal- group-hover:scale-110 transition-transform duration-500 ease-out">
                   <GraduationCap size={22} />
                 </div>
                 <div><h5 className="font-bold text-white text-lg">Google Scholar</h5><p className="text-xs text-gray-400">Sitasi & Karya Ilmiah</p></div>
               </div>
-              <ExternalLink size={16} className="text-gray-600 group-hover:text-blue-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
+              <ExternalLink size={16} className="text-gray-600 group-hover:text-teal- group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
             </a>
             <a href="https://www.semanticscholar.org/author/Deyafa-Arsetya/2409669148" target="_blank" rel="noopener noreferrer"
               className="bento-card p-6 flex items-center justify-between group">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform duration-500 ease-out">
+                <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform duration-500 ease-out">
                   <Library size={22} />
                 </div>
                 <div><h5 className="font-bold text-white text-lg">Semantic Scholar</h5><p className="text-xs text-gray-400">Grafik Riset</p></div>
               </div>
-              <ExternalLink size={16} className="text-gray-600 group-hover:text-purple-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
+              <ExternalLink size={16} className="text-gray-600 group-hover:text-emerald-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
             </a>
             <a href="https://www.researchgate.net/scientific-contributions/Deyafa-Arsetya-2339219170" target="_blank" rel="noopener noreferrer"
               className="bento-card p-6 flex items-center justify-between group">

@@ -57,8 +57,8 @@ export default function Certificates() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest text-white">
-            Sertifikat & <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">Pencapaian</span>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
+            <span className="gradient-silver">Sertifikat &</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">Pencapaian</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Dokumentasi pelatihan, partisipasi, dan validasi keahlian yang telah saya pelajari.

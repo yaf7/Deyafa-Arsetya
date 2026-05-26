@@ -66,17 +66,20 @@ export default function Navbar() {
              className="relative"
            >
               {/* Glowing shadow behind the logo for 3D depth */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-0 group-hover:opacity-60 blur-md transition duration-500" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full opacity-0 group-hover:opacity-60 blur-md transition duration-500" />
               
-              {/* Replace with the transparent logo-yafa.png */}
               <Image 
                  src="/logo-yafa.png" 
                  alt="Deyafa Arsetya Logo" 
                  width={56} 
                  height={56} 
-                 className="object-contain relative z-10 drop-shadow-[0_0_10px_rgba(168,85,247,0.4)] group-hover:drop-shadow-[0_15px_25px_rgba(168,85,247,0.6)] group-hover:-translate-y-1 transition-all duration-500" 
+                 className="object-contain relative z-10 drop-shadow-[0_0_10px_rgba(16,185,129,0.4)] group-hover:drop-shadow-[0_15px_25px_rgba(16,185,129,0.6)] group-hover:-translate-y-1 transition-all duration-500" 
               />
            </motion.div>
+           <div className="flex flex-col">
+             <span className="font-display font-black text-sm md:text-base tracking-widest leading-none text-white">DEYAFA</span>
+             <span className="font-display font-bold text-[10px] md:text-xs tracking-[0.3em] leading-tight gradient-silver">.PORTFOLIO</span>
+           </div>
         </motion.a>
 
         {/* Desktop Nav with Active Indicator */}
@@ -88,7 +91,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 className={`text-sm font-medium transition-all duration-500 ease-out uppercase tracking-widest relative group py-1 ${
-                  isActive ? "text-white" : "text-gray-400 hover:text-white"
+                  isActive ? "text-white" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 {link.name}
@@ -97,14 +100,14 @@ export default function Navbar() {
                 {isActive && (
                   <motion.div
                     layoutId="activeNavDot"
-                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.8)]"
+                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
 
                 {/* Hover underline (only when not active) */}
                 {!isActive && (
-                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-purple-500/50 transition-all duration-500 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-zinc-400/50 transition-all duration-500 group-hover:w-full" />
                 )}
               </a>
             );
@@ -177,12 +180,12 @@ export default function Navbar() {
                   transition={{ delay: i * 0.05, duration: 0.3 }}
                   className={`text-sm font-medium transition-colors duration-500 ease-out uppercase tracking-widest py-3 border-b border-white/5 flex items-center gap-3 ${
                     activeSection === link.id 
-                      ? "text-purple-400" 
-                      : "text-gray-300 hover:text-purple-400"
+                      ? "text-emerald-400" 
+                      : "text-gray-300 hover:text-emerald-400"
                   }`}
                 >
                   {activeSection === link.id && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_6px_rgba(168,85,247,0.8)]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.8)]" />
                   )}
                   {link.name}
                 </motion.a>

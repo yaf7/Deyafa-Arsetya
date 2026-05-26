@@ -58,7 +58,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-transparent border-t border-white/5 py-16 md:py-28 overflow-hidden">
       {/* Subtle background glow */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-purple-900/10 blur-[100px] pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-emerald-900/10 blur-[100px] pointer-events-none" />
       
       {/* Animated gradient line at top */}
       <motion.div
@@ -66,7 +66,7 @@ export default function Footer() {
         whileInView={{ scaleX: 1 }}
         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true }}
-        className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/40 to-transparent origin-left"
+        className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-zinc-400/40 to-transparent origin-left"
       />
 
       <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center">
@@ -78,9 +78,9 @@ export default function Footer() {
           viewport={{ once: true }}
           className="font-display text-2xl md:text-5xl lg:text-6xl font-black mb-4 tracking-wider md:tracking-widest text-center leading-tight"
         >
-          <span className="text-white">MARI KITA BANGUN</span>
+          <span className="gradient-silver">MARI KITA BANGUN</span>
           <br />
-          <span className="text-white">SESUATU YANG </span>
+          <span className="gradient-silver">SESUATU YANG </span>
           <span className="gradient-text-animated">HEBAT</span>
         </motion.h2>
 
@@ -113,7 +113,7 @@ export default function Footer() {
               href={href}
               target={type !== "email" ? "_blank" : undefined}
               rel={type !== "email" ? "noopener noreferrer" : undefined}
-              className="w-14 h-14 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-purple-600/80 border border-white/5 hover:border-purple-500 transition-colors duration-500 hover:shadow-[0_0_25px_rgba(168,85,247,0.3)]"
+              className="w-14 h-14 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-zinc-600/80 border border-white/5 hover:border-zinc-400 transition-colors duration-500 hover:shadow-[0_0_25px_rgba(161,161,170,0.3)]"
             >
               <SocialIcon type={type} />
             </MagneticButton>

@@ -70,8 +70,8 @@ export default function TechStack() {
   return (
     <section id="tech" className="py-24 relative bg-transparent overflow-hidden">
       {/* Background accents */}
-      <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
-      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-purple-900/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-400/30 to-transparent" />
+      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-emerald-900/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 md:px-12 z-10 relative mb-16">
         <motion.div
@@ -81,8 +81,8 @@ export default function TechStack() {
            viewport={{ once: true }}
            className="text-center mb-4"
         >
-          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest text-white">
-            Teknologi <span className="text-purple-500">Utama</span>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
+            <span className="gradient-silver">Teknologi</span> <span className="text-emerald-500">Utama</span>
           </h2>
           <p className="text-gray-400">Perkakas dan teknologi yang membentuk arsitektur digital saya.</p>
         </motion.div>

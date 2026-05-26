@@ -10,7 +10,7 @@ interface InteractiveBackgroundProps {
 
 export default function InteractiveBackground({
   type = "constellation",
-  lineColor = "rgba(99, 102, 241, 0.15)", // Indigo fallback
+  lineColor = "rgba(20, 184, 166, 0.15)", // Indigo fallback
 }: InteractiveBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -43,7 +43,7 @@ export default function InteractiveBackground({
 
       const colors = [
         "rgba(139, 92, 246, 0.35)",
-        "rgba(99, 102, 241, 0.35)",
+        "rgba(20, 184, 166, 0.35)",
         "rgba(6, 182, 212, 0.35)",
         "rgba(236, 72, 153, 0.3)",
       ];

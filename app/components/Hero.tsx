@@ -43,48 +43,14 @@ const letterVariants = {
   }),
 };
 
-// Floating tech badge data
-const TECH_BADGES = [
-  {
-    name: "React",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-    color: "#61DAFB",
-    glow: "rgba(97,218,251,0.35)",
-    pos: "top-[10%] right-[1%] md:top-[10%] md:right-[2%]",
-    delay: 0,
-    duration: 11,
-    spin: true,
-  },
-  {
-    name: "Laravel",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg",
-    color: "#FF2D20",
-    glow: "rgba(255,45,32,0.35)",
-    pos: "bottom-[22%] right-[1%] md:bottom-[20%] md:right-[2%]",
-    delay: 2,
-    duration: 14,
-    spin: false,
-  },
-  {
-    name: "Kotlin",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg",
-    color: "#7F52FF",
-    glow: "rgba(127,82,255,0.35)",
-    pos: "bottom-[8%] left-[1%] md:bottom-[12%] md:left-[2%]",
-    delay: 4,
-    duration: 13,
-    spin: false,
-  },
-  {
-    name: "Next.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-    color: "#ffffff",
-    glow: "rgba(255,255,255,0.2)",
-    pos: "top-[10%] left-[1%] md:top-[12%] md:left-[2%]",
-    delay: 1,
-    duration: 16,
-    spin: false,
-  },
+// Orbital planet/satellite data
+const ORBITING_PLANETS = [
+  { size: 12, color: "#a1a1aa", glow: "rgba(161,161,170,0.5)", orbitSize: 155, duration: 8, delay: 0 },
+  { size: 16, color: "#10b981", glow: "rgba(16,185,129,0.5)", orbitSize: 175, duration: 12, delay: -3 },
+  { size: 10, color: "#06b6d4", glow: "rgba(6,182,212,0.4)", orbitSize: 200, duration: 16, delay: -7 },
+  { size: 8, color: "#d4d4d8", glow: "rgba(212,212,216,0.4)", orbitSize: 140, duration: 10, delay: -5 },
+  { size: 6, color: "#34d399", glow: "rgba(52,211,153,0.4)", orbitSize: 220, duration: 20, delay: -2 },
+  { size: 5, color: "#71717a", glow: "rgba(113,113,122,0.3)", orbitSize: 240, duration: 25, delay: -10 },
 ];
 
 export default function Hero() {
@@ -117,11 +83,11 @@ export default function Hero() {
       {/* Additional floating gradient orbs */}
       <motion.div
         style={{ x: springX, y: springY }}
-        className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-600/15 rounded-full blur-[70px] pointer-events-none"
+        className="absolute top-1/4 left-1/4 w-72 h-72 bg-emerald-600/15 rounded-full blur-[70px] pointer-events-none"
       />
       <motion.div
         style={{ x: springX, y: springY }}
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/8 rounded-full blur-[80px] pointer-events-none"
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-teal-600/8 rounded-full blur-[80px] pointer-events-none"
       />
 
       {/* Grid pattern overlay */}
@@ -133,66 +99,74 @@ export default function Hero() {
         }}
       />
 
-      {/* Floating Tech Badges */}
-      {TECH_BADGES.map((badge) => (
-        <motion.div
-          key={badge.name}
-          animate={{ y: [0, -18, 0], rotate: [0, badge.spin ? 360 : 4, badge.spin ? 720 : 0] }}
-          transition={{
-            duration: badge.duration,
-            repeat: Infinity,
-            ease: badge.spin ? "linear" : "easeInOut",
-            delay: badge.delay,
-          }}
-          style={{ x: springX, y: springY }}
-          className={`absolute ${badge.pos} z-[5] opacity-75 md:opacity-90`}
-        >
-          <div
-            className="flex flex-col items-center gap-1.5 p-3 md:p-4 rounded-2xl glass border border-white/10 backdrop-blur-md shadow-xl"
-            style={{ boxShadow: `0 8px 32px ${badge.glow}, 0 0 0 1px rgba(255,255,255,0.05)` }}
-          >
-            <div className="relative">
-              <div
-                className="absolute inset-0 rounded-full blur-xl opacity-60"
-                style={{ backgroundColor: badge.color }}
-              />
-              <img
-                src={badge.icon}
-                alt={badge.name}
-                className={`w-7 h-7 md:w-10 md:h-10 relative z-10 ${badge.name === "Next.js" ? "filter invert" : ""}`}
-              />
-            </div>
-            <span
-              className="text-[9px] md:text-[11px] font-black uppercase tracking-widest"
-              style={{ color: badge.color }}
-            >
-              {badge.name}
-            </span>
-          </div>
-        </motion.div>
-      ))}
+
 
       {/* ============ MAIN CONTENT — Two Column Layout ============ */}
       <div className="container mx-auto px-6 z-10">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
 
-          {/* MOBILE ONLY: Small centered photo */}
+          {/* MOBILE ONLY: Small centered photo with mini orbits */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
             className="lg:hidden flex-shrink-0 flex items-center justify-center mt-2"
           >
-            <div className="relative w-[120px] h-[120px]">
+            <div className="relative w-[160px] h-[160px]">
+              {/* Mobile orbit rings */}
+              {[70, 88, 106, 124].map((r, i) => (
+                <div
+                  key={i}
+                  className="absolute rounded-full pointer-events-none"
+                  style={{
+                    width: `${r * 2}px`,
+                    height: `${r * 2}px`,
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    border: `1px solid rgba(255,255,255,0.12)`,
+                  }}
+                />
+              ))}
+              {/* Mobile orbiting dots — scaled down */}
+              {ORBITING_PLANETS.slice(0, 4).map((planet, i) => {
+                const mobileOrbit = 70 + i * 18; // 70, 88, 106, 124
+                return (
+                  <div
+                    key={i}
+                    className="absolute left-1/2 top-1/2 pointer-events-none"
+                    style={{
+                      width: `${mobileOrbit * 2}px`,
+                      height: `${mobileOrbit * 2}px`,
+                      marginLeft: `${-mobileOrbit}px`,
+                      marginTop: `${-mobileOrbit}px`,
+                      animation: `orbit ${planet.duration}s linear infinite`,
+                      animationDelay: `${planet.delay}s`,
+                    }}
+                  >
+                    <div
+                      className="rounded-full"
+                      style={{
+                        width: `${Math.max(planet.size * 0.6, 4)}px`,
+                        height: `${Math.max(planet.size * 0.6, 4)}px`,
+                        backgroundColor: planet.color,
+                        boxShadow: `0 0 ${planet.size}px ${planet.glow}`,
+                      }}
+                    />
+                  </div>
+                );
+              })}
+              {/* Rotating border */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-full"
-                style={{ background: "conic-gradient(from 0deg, #7c3aed, #4f46e5, #06b6d4, #7c3aed)", padding: "2px" }}
+                className="absolute inset-[16px] rounded-full"
+                style={{ background: "conic-gradient(from 0deg, #059669, #14b8a6, #06b6d4, #059669)", padding: "2px" }}
               >
                 <div className="w-full h-full rounded-full bg-[#0B1120]" />
               </motion.div>
-              <div className="absolute inset-[4px] rounded-full overflow-hidden">
+              {/* Photo */}
+              <div className="absolute inset-[20px] rounded-full overflow-hidden">
                 <img src="/Foto-Deyafa-Arsetya.jpg" alt="Deyafa Arsetya" className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700" />
               </div>
             </div>
@@ -257,7 +231,7 @@ export default function Hero() {
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 1.2, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent mt-4 origin-left"
+                className="h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent mt-4 origin-left"
               />
             </div>
 
@@ -270,7 +244,7 @@ export default function Hero() {
             >
               <span>{displayed}</span>
               <span
-                className={`inline-block w-[2px] h-6 bg-purple-400 ml-1 ${done ? 'opacity-0' : ''}`}
+                className={`inline-block w-[2px] h-6 bg-emerald-400 ml-1 ${done ? 'opacity-0' : ''}`}
                 style={{ animation: started && !done ? 'typing-cursor 0.7s infinite' : 'none' }}
               />
             </motion.p>
@@ -284,9 +258,9 @@ export default function Hero() {
             >
               <a
                 href="#projects"
-                className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-500 ease-out bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] overflow-hidden"
+                className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-500 ease-out bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] overflow-hidden"
               >
-                <span className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent transition-all duration-700 ease-out group-hover:h-full group-hover:opacity-10 opacity-0" />
+                <span className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent transition-all duration-700 ease-out group-hover:h-full group-hover:opacity-10 opacity-0" />
                 <span className="relative flex items-center gap-2">
                   Lihat Proyek <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-500 ease-out" />
                 </span>
@@ -294,22 +268,66 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT: Profile Photo — Desktop only */}
+          {/* RIGHT: Profile Photo with Orbital System — Desktop only */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85, x: 60 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
             className="relative flex-shrink-0 hidden lg:flex items-center justify-center"
           >
-            {/* Outer glowing ring */}
             <div className="relative w-[260px] h-[260px] xl:w-[310px] xl:h-[310px]">
+
+              {/* Orbit ring lines (decorative) */}
+              {[140, 155, 175, 200, 220, 240].map((r, i) => (
+                <div
+                  key={i}
+                  className="absolute rounded-full border pointer-events-none"
+                  style={{
+                    width: `${r * 2}px`,
+                    height: `${r * 2}px`,
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    borderColor: `rgba(255,255,255,0.1)`,
+                  }}
+                />
+              ))}
+
+              {/* Orbiting Planets / Satellites */}
+              {ORBITING_PLANETS.map((planet, i) => (
+                <div
+                  key={i}
+                  className="absolute left-1/2 top-1/2 pointer-events-none z-[5]"
+                  style={{
+                    width: `${planet.orbitSize * 2}px`,
+                    height: `${planet.orbitSize * 2}px`,
+                    marginLeft: `${-planet.orbitSize}px`,
+                    marginTop: `${-planet.orbitSize}px`,
+                    animation: `orbit ${planet.duration}s linear infinite`,
+                    animationDelay: `${planet.delay}s`,
+                  }}
+                >
+                  <div className="relative">
+                    <div
+                      className="rounded-full"
+                      style={{
+                        width: `${planet.size}px`,
+                        height: `${planet.size}px`,
+                        backgroundColor: planet.color,
+                        boxShadow: `0 0 ${planet.size * 2}px ${planet.glow}, 0 0 ${planet.size * 4}px ${planet.glow.replace(/[\d.]+\)$/, '0.2)')}`,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+
               {/* Rotating gradient border */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 rounded-full"
                 style={{
-                  background: "conic-gradient(from 0deg, #7c3aed, #4f46e5, #06b6d4, #7c3aed)",
+                  background: "conic-gradient(from 0deg, #059669, #14b8a6, #06b6d4, #059669)",
                   padding: "3px",
                 }}
               >
@@ -319,11 +337,11 @@ export default function Hero() {
               {/* Static glow behind photo */}
               <div
                 className="absolute inset-0 rounded-full hero-photo-ring"
-                style={{ background: "radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)" }}
+                style={{ background: "radial-gradient(circle, rgba(5,150,105,0.15) 0%, transparent 70%)" }}
               />
 
               {/* Actual Photo */}
-              <div className="absolute inset-[6px] rounded-full overflow-hidden border-2 border-purple-500/20">
+              <div className="absolute inset-[6px] rounded-full overflow-hidden border-2 border-emerald-500/20">
                 <Image
                   src="/Foto-Deyafa-Arsetya.jpg"
                   alt="Deyafa Arsetya"
@@ -337,7 +355,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-5 left-1/2 -translate-x-1/2 glass border border-white/15 px-4 py-2 rounded-full flex items-center gap-2 shadow-xl whitespace-nowrap"
+                className="absolute -bottom-5 left-1/2 -translate-x-1/2 glass border border-white/15 px-4 py-2 rounded-full flex items-center gap-2 shadow-xl whitespace-nowrap z-10"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
