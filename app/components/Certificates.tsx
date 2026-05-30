@@ -20,11 +20,18 @@ const CERTIFICATES = [
     link: "#",
   },
   {
-    title: "Certificate of Completion: Python Programming",
-    issuer: "SpecialSkill Indonesia",
+    title: "Certificate of Completion: Belajar Dasar Pemrograman Web",
+    issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Mei 2026",
-    image: "/sertifikat/sertifikat-specialskill.png",
-    link: "https://specialskill.id/certificate?cert_hash=4e7d3c57cf6b12bc",
+    image: "/sertifikat/Belajar-Dasar-Pemrograman-Web.pdf",
+    link: "https://www.dicoding.com/certificates/QLZ99G117Z5D",
+  },
+  {
+    title: "Certificate of Completion: Introduction to Financial Literacy",
+    issuer: "Dicoding Indonesia × DBS Foundation",
+    date: "Mei 2026",
+    image: "/sertifikat/Introduction-to-Financial-Literacy.pdf",
+    link: "https://www.dicoding.com/certificates/07Z67MLDJPQR",
   },
   {
     title: "Certificate of Participation: Zero Day Defense (SOC War Room)",
@@ -32,6 +39,13 @@ const CERTIFICATES = [
     date: "Maret 2026",
     image: "/sertifikat/(Bulk 2) sertifikat soc war room-25-1.png",
     link: "#",
+  },
+  {
+    title: "Certificate of Completion: Python Programming",
+    issuer: "SpecialSkill Indonesia",
+    date: "Mei 2026",
+    image: "/sertifikat/sertifikat-specialskill.png",
+    link: "https://specialskill.id/certificate?cert_hash=4e7d3c57cf6b12bc",
   }
 ];
 
@@ -95,7 +109,7 @@ export default function Certificates() {
                     className="text-xs md:text-sm font-bold text-white bg-white/5 border border-white/10 px-4 py-2.5 rounded-lg hover:bg-white/10 transition-all active:scale-95"
                     onClick={(e) => { e.stopPropagation(); setSelectedCert(cert.image); }}
                   >
-                    Lihat Gambar
+                    Lihat Sertifikat
                   </button>
                   {cert.link !== "#" && (
                     <a
@@ -142,8 +156,12 @@ export default function Certificates() {
               <X size={20} />
             </button>
             <div className="w-full rounded-xl overflow-hidden border border-white/10 shadow-[0_0_100px_rgba(245,158,11,0.15)] bg-black/50">
-              {/* Gunakan tag img standar atau div placeholder */}
-              <img src={selectedCert} alt="Sertifikat Detail" className="w-full h-auto object-contain min-h-[300px] max-h-[80vh] flex items-center justify-center bg-[#111] text-gray-500 italic" />
+              {/* Gunakan tag img standar, iframe untuk PDF, atau div placeholder */}
+              {selectedCert.endsWith(".pdf") ? (
+                <iframe src={selectedCert} className="w-full h-[80vh] min-h-[500px]" title="Sertifikat Detail" />
+              ) : (
+                <img src={selectedCert} alt="Sertifikat Detail" className="w-full h-auto object-contain min-h-[300px] max-h-[80vh] flex items-center justify-center bg-[#111] text-gray-500 italic" />
+              )}
             </div>
           </motion.div>
         </motion.div>
