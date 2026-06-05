@@ -55,7 +55,7 @@ function MarqueeRow({ items, reverse = false }: { items: typeof STACK_ROW1; reve
                   className={`w-8 h-8 md:w-12 md:h-12 relative z-10 transition-transform duration-500 group-hover:scale-110 ${tech.name === "Next.js" ? "filter invert" : ""}`}
                 />
               </div>
-              <span className="text-sm md:text-base font-semibold text-gray-400 group-hover:text-white transition-colors duration-500 whitespace-nowrap">
+              <span className="text-sm md:text-base font-semibold text-white group-hover:text-white transition-colors duration-500 whitespace-nowrap">
                 {tech.name}
               </span>
             </div>
@@ -82,9 +82,9 @@ export default function TechStack() {
            className="text-center mb-4"
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
-            <span className="gradient-silver">Teknologi</span> <span className="text-emerald-500">Utama</span>
+            <span className="text-white">Teknologi</span> <span className="text-emerald-500">Utama</span>
           </h2>
-          <p className="text-gray-400">Perkakas dan teknologi yang membentuk arsitektur digital saya.</p>
+          <p className="text-white">Perkakas dan teknologi yang membentuk arsitektur digital saya.</p>
         </motion.div>
       </div>
 

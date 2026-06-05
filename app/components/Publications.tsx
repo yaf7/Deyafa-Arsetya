@@ -21,9 +21,9 @@ export default function Publications() {
             <BookOpen size={12} /> Riset & Publikasi
           </span>
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
-            <span className="gradient-silver">Riset</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal- to-teal-600">Akademik</span>
+            <span className="text-white">Riset</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal- to-teal-600">Akademik</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg mt-4">
+          <p className="text-white max-w-2xl mx-auto text-lg mt-4">
             Mendokumentasikan implementasi teknis dan arsitektur sistem melalui riset akademik serta publikasi ilmiah.
           </p>
         </motion.div>
@@ -48,12 +48,12 @@ export default function Publications() {
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-500 ease-out">
                   Sistem Informasi Modul Registrasi NPWPD Berbasis Laravel pada BPPKAD Kota Kediri
                 </h3>
-                <p className="text-gray-400 mb-8 leading-relaxed">
+                <p className="text-white mb-8 leading-relaxed">
                   Modul registrasi NPWPD ini dikembangkan dengan framework Laravel untuk BPPKAD Kota Kediri, dirancang secara khusus untuk menyederhanakan alur administrasi dan meningkatkan efisiensi layanan publik daerah.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
                   {["Framework Laravel", "NPWPD", "Public Service", "System Architecture", "Transparency"].map(keyword => (
-                    <span key={keyword} className="bg-white/5 border border-white/10 px-3 py-1 text-xs font-medium text-gray-300 rounded-full hover:border-teal-/30 hover:text-teal- transition-colors duration-300">
+                    <span key={keyword} className="bg-white/5 border border-white/10 px-3 py-1 text-xs font-medium text-white rounded-full hover:border-teal-/30 hover:text-teal- transition-colors duration-300">
                       {keyword}
                     </span>
                   ))}
@@ -75,16 +75,16 @@ export default function Publications() {
             viewport={{ once: true }}
             className="lg:col-span-4 flex flex-col gap-4"
           >
-            <h4 className="text-sm font-black text-gray-500 uppercase tracking-widest mb-2 pl-2">Jejak Akademik</h4>
+            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-2 pl-2">Jejak Akademik</h4>
             <a href="https://scholar.google.co.id/scholar?hl=id&as_sdt=0%2C5&q=deyafa+arsetya&btnG=" target="_blank" rel="noopener noreferrer"
               className="bento-card p-6 flex items-center justify-between group">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-teal-/20 flex items-center justify-center text-teal- group-hover:scale-110 transition-transform duration-500 ease-out">
                   <GraduationCap size={22} />
                 </div>
-                <div><h5 className="font-bold text-white text-lg">Google Scholar</h5><p className="text-xs text-gray-400">Sitasi & Karya Ilmiah</p></div>
+                <div><h5 className="font-bold text-white text-lg">Google Scholar</h5><p className="text-xs text-white">Sitasi & Karya Ilmiah</p></div>
               </div>
-              <ExternalLink size={16} className="text-gray-600 group-hover:text-teal- group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
+              <ExternalLink size={16} className="text-white group-hover:text-teal- group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
             </a>
             <a href="https://www.semanticscholar.org/author/Deyafa-Arsetya/2409669148" target="_blank" rel="noopener noreferrer"
               className="bento-card p-6 flex items-center justify-between group">
@@ -92,9 +92,9 @@ export default function Publications() {
                 <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform duration-500 ease-out">
                   <Library size={22} />
                 </div>
-                <div><h5 className="font-bold text-white text-lg">Semantic Scholar</h5><p className="text-xs text-gray-400">Grafik Riset</p></div>
+                <div><h5 className="font-bold text-white text-lg">Semantic Scholar</h5><p className="text-xs text-white">Grafik Riset</p></div>
               </div>
-              <ExternalLink size={16} className="text-gray-600 group-hover:text-emerald-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
+              <ExternalLink size={16} className="text-white group-hover:text-emerald-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
             </a>
             <a href="https://www.researchgate.net/scientific-contributions/Deyafa-Arsetya-2339219170" target="_blank" rel="noopener noreferrer"
               className="bento-card p-6 flex items-center justify-between group">
@@ -102,9 +102,9 @@ export default function Publications() {
                 <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 transition-transform duration-500 ease-out">
                   <Network size={22} />
                 </div>
-                <div><h5 className="font-bold text-white text-lg">ResearchGate</h5><p className="text-xs text-gray-400">Jaringan Ilmiah</p></div>
+                <div><h5 className="font-bold text-white text-lg">ResearchGate</h5><p className="text-xs text-white">Jaringan Ilmiah</p></div>
               </div>
-              <ExternalLink size={16} className="text-gray-600 group-hover:text-green-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
+              <ExternalLink size={16} className="text-white group-hover:text-green-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-out" />
             </a>
           </motion.div>
         </div>

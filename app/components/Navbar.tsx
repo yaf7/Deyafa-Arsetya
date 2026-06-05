@@ -78,7 +78,7 @@ export default function Navbar() {
            </motion.div>
            <div className="flex flex-col">
              <span className="font-display font-black text-sm md:text-base tracking-widest leading-none text-white">DEYAFA</span>
-             <span className="font-display font-bold text-[10px] md:text-xs tracking-[0.3em] leading-tight gradient-silver">.PORTFOLIO</span>
+             <span className="font-display font-bold text-[10px] md:text-xs tracking-[0.3em] leading-tight text-white">.PORTFOLIO</span>
            </div>
         </motion.a>
 
@@ -91,7 +91,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 className={`text-sm font-medium transition-all duration-500 ease-out uppercase tracking-widest relative group py-1 ${
-                  isActive ? "text-white" : "text-zinc-400 hover:text-white"
+                  isActive ? "text-white" : "text-white hover:text-white"
                 }`}
               >
                 {link.name}
@@ -118,7 +118,7 @@ export default function Navbar() {
         <div className="md:hidden flex items-center">
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-gray-300 hover:text-white focus:outline-none relative w-8 h-8 flex items-center justify-center"
+            className="text-white hover:text-white focus:outline-none relative w-8 h-8 flex items-center justify-center"
           >
             <motion.span
               animate={{ rotate: isMobileMenuOpen ? 45 : 0, y: isMobileMenuOpen ? 0 : -6 }}
@@ -181,7 +181,7 @@ export default function Navbar() {
                   className={`text-sm font-medium transition-colors duration-500 ease-out uppercase tracking-widest py-3 border-b border-white/5 flex items-center gap-3 ${
                     activeSection === link.id 
                       ? "text-emerald-400" 
-                      : "text-gray-300 hover:text-emerald-400"
+                      : "text-white hover:text-emerald-400"
                   }`}
                 >
                   {activeSection === link.id && (

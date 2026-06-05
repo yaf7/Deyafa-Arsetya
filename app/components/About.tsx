@@ -18,13 +18,13 @@ export default function About() {
           className="text-center mb-16"
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider relative inline-block">
-            <span className="gradient-silver">Kenali</span>{" "}
+            <span className="text-white">Kenali</span>{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">
               Saya
             </span>
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-zinc-400 to-emerald-500 rounded-full" />
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg mt-6">
+          <p className="text-white max-w-2xl mx-auto text-lg mt-6">
             Seorang pembelajar dan pengembang berdedikasi yang fokus pada pembangunan solusi digital fungsional dan andal melalui peningkatan berkelanjutan.
           </p>
         </motion.div>
@@ -85,13 +85,13 @@ export default function About() {
             className="md:col-span-7 flex flex-col justify-center"
           >
             <h3 className="font-display text-3xl md:text-4xl font-bold mb-6 leading-tight">
-              <span className="gradient-silver">&quot;Membangun Kapabilitas dari Titik Nol.&quot;</span>
+              <span className="text-white">&quot;Membangun Kapabilitas dari Titik Nol.&quot;</span>
             </h3>
-            <p className="text-gray-400 text-lg leading-relaxed mb-4">
+            <p className="text-white text-lg leading-relaxed mb-4">
               Perjalanan saya di dunia teknologi tidak dimulai dengan bakat instan, melainkan dari selembar kertas kosong. Mengawali langkah di Manajemen Informatika POLINEMA tanpa latar belakang pemrograman adalah tantangan sekaligus pembuktian dedikasi saya.
             </p>
-            <p className="text-gray-400 text-base leading-relaxed mb-8">
-              Bagi saya, keterbatasan adalah ruang untuk bertumbuh. Melalui disiplin dan ribuan jam eksperimen, saya mentransformasi rasa ingin tahu menjadi kompetensi nyata. Kini, sebagai Web & Mobile Developer berbasis di Kediri, saya berdedikasi menciptakan solusi digital yang presisi dan berdampak. Saya tidak hanya menulis kode; saya merancang solusi digital yang lebih cerdas.
+            <p className="text-white text-base leading-relaxed mb-8">
+              Bagi saya, keterbatasan adalah ruang untuk bertumbuh. Melalui disiplin dan ribuan jam eksperimen, saya mentransformasi rasa ingin tahu menjadi kompetensi nyata. Kini, sebagai Web & Mobile Developer, System Analyst, dan Data Analyst berbasis di Kediri, saya berdedikasi menciptakan solusi digital yang presisi dan berdampak. Saya tidak hanya menulis kode; saya merancang solusi digital yang lebih cerdas.
             </p>
 
             {/* Bento Information Grid */}
@@ -103,19 +103,19 @@ export default function About() {
                   <GraduationCap size={20} />
                 </div>
                 <h4 className="font-display text-xl font-bold text-white mb-2">Pendidikan</h4>
-                <p className="text-sm text-gray-400 mb-1">DIII - Manajemen Informatika</p>
+                <p className="text-sm text-white mb-1">DIII - Manajemen Informatika</p>
                 <p className="text-xs text-emerald-400 font-medium">Politeknik Negeri Malang</p>
-                <p className="text-xs text-gray-500">Kampus Kediri</p>
+                <p className="text-xs text-white">Kampus Kediri</p>
               </div>
 
               {/* Location Card */}
               <div className="bento-card p-6 group">
-                <div className="w-10 h-10 rounded-lg bg-zinc-400/10 flex items-center justify-center text-zinc-300 mb-4 group-hover:scale-110 group-hover:bg-zinc-400/20 transition-all duration-500 ease-out">
+                <div className="w-10 h-10 rounded-lg bg-zinc-400/10 flex items-center justify-center text-white mb-4 group-hover:scale-110 group-hover:bg-zinc-400/20 transition-all duration-500 ease-out">
                   <MapPin size={20} />
                 </div>
                 <h4 className="font-display text-xl font-bold text-white mb-2">Lokasi</h4>
-                <p className="text-sm text-gray-400 mb-1">Kediri, Indonesia</p>
-                <p className="text-xs text-gray-500">Siap bekerja remote</p>
+                <p className="text-sm text-white mb-1">Kediri, Indonesia</p>
+                <p className="text-xs text-white">Siap bekerja remote</p>
               </div>
 
               {/* Contact Email in Card Format */}
@@ -127,11 +127,11 @@ export default function About() {
                   <Mail size={22} />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 uppercase font-bold tracking-widest mb-1">Mari Terhubung</p>
+                  <p className="text-xs text-white uppercase font-bold tracking-widest mb-1">Mari Terhubung</p>
                   <p className="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors duration-500 ease-out">yafaarsetya@gmail.com</p>
                 </div>
                 {/* Arrow indicator */}
-                <div className="ml-auto text-gray-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all duration-500">
+                <div className="ml-auto text-white group-hover:text-emerald-400 group-hover:translate-x-1 transition-all duration-500">
                   →
                 </div>
               </a>

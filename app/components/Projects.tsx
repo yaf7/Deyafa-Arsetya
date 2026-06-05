@@ -103,7 +103,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
           {project.title}
         </h3>
 
-        <p className="text-gray-300 mb-4 md:mb-6 drop-shadow-md text-xs sm:text-sm leading-relaxed max-w-xl line-clamp-3 md:line-clamp-none">
+        <p className="text-white mb-4 md:mb-6 drop-shadow-md text-xs sm:text-sm leading-relaxed max-w-xl line-clamp-3 md:line-clamp-none">
           {project.description}
         </p>
 
@@ -138,7 +138,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
                 <GithubIcon /> Code
               </a>
             ) : (
-              <span className="flex items-center gap-2 text-sm font-bold text-gray-400 bg-white/5 border border-white/5 px-4 py-2 rounded-full backdrop-blur-sm cursor-not-allowed">
+              <span className="flex items-center gap-2 text-sm font-bold text-white bg-white/5 border border-white/5 px-4 py-2 rounded-full backdrop-blur-sm cursor-not-allowed">
                 <Lock size={16} /> Sumber Privat
               </span>
             )}
@@ -186,9 +186,9 @@ export default function Projects() {
           className="text-center mb-20 md:mb-16"
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
-            <span className="gradient-silver">Proyek</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-600">Pilihan</span>
+            <span className="text-white">Proyek</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-600">Pilihan</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-white max-w-2xl mx-auto">
             Kumpulan karya dan proyek digital pilihan yang telah saya bangun
           </p>
         </motion.div>
