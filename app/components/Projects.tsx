@@ -10,7 +10,7 @@ const PROJECTS = [
     description: "Implementasi modul pendaftaran pajak daerah berbasis Laravel untuk BPPKAD Kota Kediri. Menghadirkan solusi digital yang mempercepat alur administrasi publik secara transparan, aman, dan terstruktur.",
     tags: ["Laravel", "PHP", "Alpine.js", "MySQL", "Vite"],
     image: "/gambar-project/npwpd_bppkad.png",
-    github: null,
+    github: "https://github.com/yaf7/bppkad-kota-kediri",
     certificate: "/sertifikat/deyafa_sertifikat.jpg"
   },
   {
@@ -48,6 +48,20 @@ const PROJECTS = [
     tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Canvas API"],
     image: "/gambar-project/nextgen-photobooth.png",
     github: "https://github.com/yaf7/NextGen-Photobooth"
+  },
+  {
+    title: "Indibiz Business Portal",
+    description: "Mengembangkan landing page B2B interaktif untuk layanan Indibiz (Telkom Indonesia) menggunakan framework Laravel. Proyek ini difokuskan pada penyajian katalog produk \"HSI Bisnis\" yang dinamis melalui integrasi JavaScript, dirancang khusus untuk meningkatkan engagement dan mengonversi pengunjung menjadi prospek bisnis melalui navigasi yang responsif dan user-friendly.",
+    tags: ["Laravel", "JavaScript", "HTML5", "CSS3", "SCSS", "LESS"],
+    image: "/gambar-project/indibiz.png",
+    github: "https://github.com/yaf7/indibiz-project"
+  },
+  {
+    title: "Unfollytics",
+    description: "Aplikasi web Pendeteksi unfollowers Instagram secara aman menggunakan ekstraksi data JSON resmi.",
+    tags: ["Next.js", "React", "Tailwind CSS"],
+    image: "/gambar-project/unfollytics.png",
+    github: "https://github.com/yaf7/unfollytics"
   }
 ];
 
