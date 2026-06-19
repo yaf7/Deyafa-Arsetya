@@ -24,21 +24,21 @@ const CERTIFICATES = [
     issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Juni 2026",
     image: "/sertifikat/Belajar-Membuat-Aplikasi-Web-dengan-React.pdf",
-    link: "#",
+    link: "https://www.dicoding.com/certificates/1OP8RM32LZQK",
   },
   {
     title: "Certificate of Completion: Belajar Membuat Front-End Web untuk Pemula",
     issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Mei 2026",
     image: "/sertifikat/Belajar-Membuat-Front-End-Web-untuk-Pemula.pdf",
-    link: "#",
+    link: "https://www.dicoding.com/certificates/0LZ0YM693X65",
   },
   {
     title: "Certificate of Completion: Belajar Dasar Pemrograman JavaScript",
     issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Mei 2026",
     image: "/sertifikat/Belajar-Dasar-Pemrograman-JavaScript.pdf",
-    link: "#",
+    link: "https://www.dicoding.com/certificates/07Z67M0V2PQR",
   },
   {
     title: "Certificate of Completion: Belajar Dasar Pemrograman Web",
@@ -46,6 +46,13 @@ const CERTIFICATES = [
     date: "Mei 2026",
     image: "/sertifikat/Belajar-Dasar-Pemrograman-Web.pdf",
     link: "https://www.dicoding.com/certificates/QLZ99G117Z5D",
+  },
+  {
+    title: "Certificate of Completion: Memulai Pemrograman dengan Python",
+    issuer: "Dicoding Indonesia x Pijak Flash Class",
+    date: "Juni 2026",
+    image: "/sertifikat/sertifikat_python.pdf",
+    link: "https://www.dicoding.com/certificates/GRX5W1LWKZ0M",
   },
   {
     title: "Certificate of Participation: Zero Day Defense (SOC War Room)",
