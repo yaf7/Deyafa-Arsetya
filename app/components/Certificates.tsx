@@ -9,76 +9,98 @@ const CERTIFICATES = [
     title: "Full-Stack Developer Internship: NPWPD Registration Information System (BPPKAD Kota Kediri)",
     issuer: "BPPKAD Kota Kediri",
     date: "Juni – Agustus 2025",
-    image: "/sertifikat/deyafa_sertifikat.jpg",
+    images: ["/sertifikat/deyafa_sertifikat.jpg"],
     link: "#",
   },
   {
     title: "Certificate of Course Completion: Operating Systems Basics",
     issuer: "Cisco Networking Academy",
     date: "Mei 2024",
-    image: "/sertifikat/Cisco-Networking.png",
+    images: ["/sertifikat/Cisco-Networking.png"],
     link: "#",
   },
   {
     title: "Certificate of Completion: Belajar Membuat Aplikasi Web dengan React",
     issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Juni 2026",
-    image: "/sertifikat/Belajar-Membuat-Aplikasi-Web-dengan-React.pdf",
+    images: [
+      "/sertifikat/Certificate of Completion Belajar Membuat Aplikasi Web dengan React/Belajar-Membuat-Aplikasi-Web-dengan-React-1.png",
+      "/sertifikat/Certificate of Completion Belajar Membuat Aplikasi Web dengan React/Belajar-Membuat-Aplikasi-Web-dengan-React-2.png"
+    ],
     link: "https://www.dicoding.com/certificates/1OP8RM32LZQK",
   },
   {
     title: "Certificate of Completion: Belajar Membuat Front-End Web untuk Pemula",
     issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Mei 2026",
-    image: "/sertifikat/Belajar-Membuat-Front-End-Web-untuk-Pemula.pdf",
+    images: [
+      "/sertifikat/Certificate of Completion Belajar Membuat Front-End Web untuk Pemula/Belajar-Membuat-Front-End-Web-untuk-Pemula-1.png",
+      "/sertifikat/Certificate of Completion Belajar Membuat Front-End Web untuk Pemula/Belajar-Membuat-Front-End-Web-untuk-Pemula-2.png"
+    ],
     link: "https://www.dicoding.com/certificates/0LZ0YM693X65",
   },
   {
     title: "Certificate of Completion: Belajar Dasar Pemrograman JavaScript",
     issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Mei 2026",
-    image: "/sertifikat/Belajar-Dasar-Pemrograman-JavaScript.pdf",
+    images: [
+      "/sertifikat/Certificate of Completion Belajar Dasar Pemrograman JavaScript/Belajar-Dasar-Pemrograman-JavaScript-1.png",
+      "/sertifikat/Certificate of Completion Belajar Dasar Pemrograman JavaScript/Belajar-Dasar-Pemrograman-JavaScript-2.png",
+      "/sertifikat/Certificate of Completion Belajar Dasar Pemrograman JavaScript/Belajar-Dasar-Pemrograman-JavaScript-3.png"
+    ],
     link: "https://www.dicoding.com/certificates/07Z67M0V2PQR",
   },
   {
     title: "Certificate of Completion: Belajar Dasar Pemrograman Web",
     issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Mei 2026",
-    image: "/sertifikat/Belajar-Dasar-Pemrograman-Web.pdf",
+    images: [
+      "/sertifikat/Certificate of Completion Belajar Dasar Pemrograman Web/Belajar-Dasar-Pemrograman-Web-1.png",
+      "/sertifikat/Certificate of Completion Belajar Dasar Pemrograman Web/Belajar-Dasar-Pemrograman-Web-2.png",
+      "/sertifikat/Certificate of Completion Belajar Dasar Pemrograman Web/Belajar-Dasar-Pemrograman-Web-3.png"
+    ],
     link: "https://www.dicoding.com/certificates/QLZ99G117Z5D",
   },
   {
     title: "Certificate of Completion: Memulai Pemrograman dengan Python",
     issuer: "Dicoding Indonesia x Pijak Flash Class",
     date: "Juni 2026",
-    image: "/sertifikat/sertifikat_python.pdf",
+    images: [
+      "/sertifikat/Certificate of Completion Memulai Pemrograman dengan Python/sertifikat_python-1.png",
+      "/sertifikat/Certificate of Completion Memulai Pemrograman dengan Python/sertifikat_python-2.png",
+      "/sertifikat/Certificate of Completion Memulai Pemrograman dengan Python/sertifikat_python-3.png"
+    ],
     link: "https://www.dicoding.com/certificates/GRX5W1LWKZ0M",
   },
   {
     title: "Certificate of Participation: Zero Day Defense (SOC War Room)",
     issuer: "Jadi Hacker",
     date: "Maret 2026",
-    image: "/sertifikat/(Bulk 2) sertifikat soc war room-25-1.png",
+    images: ["/sertifikat/(Bulk 2) sertifikat soc war room-25-1.png"],
     link: "#",
   },
   {
     title: "Certificate of Completion: Introduction to Financial Literacy",
     issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Mei 2026",
-    image: "/sertifikat/Introduction-to-Financial-Literacy.pdf",
+    images: [
+      "/sertifikat/Certificate of Completion Introduction to Financial Literacy/Introduction-to-Financial-Literacy-1.png",
+      "/sertifikat/Certificate of Completion Introduction to Financial Literacy/Introduction-to-Financial-Literacy-2.png",
+      "/sertifikat/Certificate of Completion Introduction to Financial Literacy/Introduction-to-Financial-Literacy-3.png"
+    ],
     link: "https://www.dicoding.com/certificates/07Z67MLDJPQR",
   },
   {
     title: "Certificate of Completion: Python Programming",
     issuer: "SpecialSkill Indonesia",
     date: "Mei 2026",
-    image: "/sertifikat/sertifikat-specialskill.png",
+    images: ["/sertifikat/sertifikat-specialskill.png"],
     link: "https://specialskill.id/certificate?cert_hash=4e7d3c57cf6b12bc",
   }
 ];
 
 export default function Certificates() {
-  const [selectedCert, setSelectedCert] = useState<string | null>(null);
+  const [selectedCert, setSelectedCert] = useState<string[] | null>(null);
 
   // Mengunci scroll layar utama ketika gambar sertifikat dibuka
   React.useEffect(() => {
@@ -116,7 +138,7 @@ export default function Certificates() {
               transition={{ duration: 0.8, delay: i * 0.1 }}
               viewport={{ once: true }}
               className="bg-black/40 border border-white/10 rounded-2xl p-6 hover:border-amber-500/40 hover:shadow-[0_10px_30px_rgba(245,158,11,0.1)] transition-all group cursor-pointer backdrop-blur-sm relative overflow-hidden"
-              onClick={() => setSelectedCert(cert.image)}
+              onClick={() => setSelectedCert(cert.images)}
             >
               {/* Highlight background saat hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -124,18 +146,11 @@ export default function Certificates() {
               <div className="relative z-10 flex flex-col h-full">
                 {/* Thumbnail */}
                 <div className="relative w-full h-40 sm:h-48 rounded-xl overflow-hidden mb-5 bg-white/5 border border-white/10 group-hover:border-amber-500/30 transition-all">
-                  {cert.image.endsWith('.pdf') ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center bg-zinc-900/80 text-amber-500/50 group-hover:text-amber-400/80 transition-colors">
-                      <Award size={48} className="mb-2" />
-                      <span className="text-xs font-bold tracking-widest uppercase">Dokumen PDF</span>
-                    </div>
-                  ) : (
-                    <img 
-                      src={cert.image} 
-                      alt={cert.title} 
-                      className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100"
-                    />
-                  )}
+                  <img 
+                    src={cert.images[0]} 
+                    alt={cert.title} 
+                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100"
+                  />
                   {/* Overlay untuk memperjelas thumbnail */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent opacity-80" />
                 </div>
@@ -150,7 +165,7 @@ export default function Certificates() {
                 <div className="flex gap-3 mt-auto pt-4">
                   <button
                     className="text-xs md:text-sm font-bold text-white bg-white/5 border border-white/10 px-4 py-2.5 rounded-lg hover:bg-white/10 transition-all active:scale-95 flex-1"
-                    onClick={(e) => { e.stopPropagation(); setSelectedCert(cert.image); }}
+                    onClick={(e) => { e.stopPropagation(); setSelectedCert(cert.images); }}
                   >
                     Lihat
                   </button>
@@ -192,18 +207,7 @@ export default function Certificates() {
             onClick={e => e.stopPropagation()}
           >
             <div className="flex justify-between items-center w-full">
-              {selectedCert.endsWith(".pdf") ? (
-                <a 
-                  href={selectedCert} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-amber-500/20 text-amber-400 border border-amber-500/50 hover:bg-amber-500 hover:text-black px-4 py-2 rounded-lg font-bold transition-all text-sm flex items-center gap-2 shadow-lg"
-                >
-                  Buka PDF <ExternalLink size={16} />
-                </a>
-              ) : (
-                <div />
-              )}
+              <div />
               <button
                 className="text-white hover:text-white bg-white/5 hover:bg-red-500 border border-white/10 p-3 rounded-full transition-all shadow-lg"
                 onClick={() => setSelectedCert(null)}
@@ -213,19 +217,12 @@ export default function Certificates() {
               </button>
             </div>
             
-            <div className="w-full rounded-xl overflow-hidden border border-white/10 shadow-[0_0_100px_rgba(245,158,11,0.15)] bg-[#111]">
-              {selectedCert.endsWith(".pdf") ? (
-                <object data={selectedCert} type="application/pdf" className="w-full h-[80vh] min-h-[500px] bg-white">
-                  <div className="flex flex-col items-center justify-center h-full min-h-[500px] p-6 text-center text-white">
-                    <p className="mb-4 font-medium">Browser HP Anda mungkin tidak mendukung pratinjau PDF langsung.</p>
-                    <a href={selectedCert} target="_blank" rel="noopener noreferrer" className="bg-amber-500 text-black px-6 py-3 rounded-lg font-bold hover:bg-amber-400 transition-colors flex items-center gap-2 mx-auto w-max">
-                      Unduh / Buka PDF <ExternalLink size={18} />
-                    </a>
-                  </div>
-                </object>
-              ) : (
-                <img src={selectedCert} alt="Sertifikat Detail" className="w-full h-auto object-contain min-h-[300px] max-h-[80vh] flex items-center justify-center bg-[#111] text-white italic" />
-              )}
+            <div className="w-full max-h-[80vh] overflow-y-auto rounded-xl border border-white/10 shadow-[0_0_100px_rgba(245,158,11,0.15)] bg-[#111] flex flex-col scrollbar-thin scrollbar-thumb-amber-500/50 scrollbar-track-transparent">
+              {selectedCert.map((img, idx) => (
+                <div key={idx} className="w-full border-b border-white/10 last:border-b-0 flex-shrink-0 flex items-center justify-center bg-[#111] min-h-[300px]">
+                  <img src={img} alt={`Sertifikat Detail ${idx + 1}`} className="w-full h-auto object-contain text-white italic" />
+                </div>
+              ))}
             </div>
           </motion.div>
         </motion.div>

@@ -161,7 +161,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
                 href={project.download}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-teal- to-teal-600 text-white px-4 py-2 rounded-full hover:from-teal- hover:to-teal-500 transition-all duration-300 ease-out shadow-[0_0_20px_rgba(20,184,166,0.3)] hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] active:scale-95"
+                className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-teal-400 to-teal-600 text-white px-4 py-2 rounded-full hover:from-teal-400 hover:to-teal-500 transition-all duration-300 ease-out shadow-[0_0_20px_rgba(20,184,166,0.3)] hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] active:scale-95"
               >
                 <Download size={16} /> Unduh Aplikasi
               </a>
