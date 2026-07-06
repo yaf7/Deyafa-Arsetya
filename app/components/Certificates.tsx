@@ -1,9 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, ExternalLink, X } from "lucide-react";
+import { Award, ExternalLink, X, ShieldCheck } from "lucide-react";
 import React, { useState } from "react";
 
+/* ─── Featured BNSP Certificate ─── */
+const FEATURED_CERT = {
+  title: "Sertifikat Kompetensi: Pemrograman Software Komputer",
+  issuer: "Badan Nasional Sertifikasi Profesi (BNSP)",
+  date: "Oktober 2025",
+  description:
+    "Sertifikasi profesi resmi dari pemerintah Republik Indonesia yang memvalidasi kompetensi di bidang Teknologi Informasi — Pemrograman Software Komputer. Dikeluarkan melalui LSP Politeknik Negeri Malang.",
+  images: ["/sertifikat/BNSP/bnsp.jpeg"],
+  link: "#",
+};
+
+/* ─── Other Certificates ─── */
 const CERTIFICATES = [
   {
     title: "Full-Stack Developer Internship: NPWPD Registration Information System (BPPKAD Kota Kediri)",
@@ -129,6 +141,112 @@ export default function Certificates() {
           </p>
         </motion.div>
 
+        {/* ═══════════════════════════════════════════════
+            ★ FEATURED BNSP CERTIFICATE — HERO CARD ★
+        ═══════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="max-w-6xl mx-auto mb-10"
+        >
+          <div
+            className="relative rounded-2xl p-[2px] cursor-pointer group"
+            onClick={() => setSelectedCert(FEATURED_CERT.images)}
+            style={{
+              background: "linear-gradient(135deg, #f59e0b, #d97706, #fbbf24, #f59e0b)",
+              backgroundSize: "300% 300%",
+              animation: "bnsp-border-glow 4s ease-in-out infinite",
+            }}
+          >
+            {/* Outer ambient glow */}
+            <div className="absolute -inset-1 rounded-2xl opacity-40 group-hover:opacity-70 blur-xl transition-opacity duration-700"
+              style={{ background: "linear-gradient(135deg, #f59e0b, #d97706, #fbbf24)" }}
+            />
+
+            {/* Inner card */}
+            <div className="relative bg-[#0c0f1a] rounded-2xl overflow-hidden">
+              {/* Shimmer overlay */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-20"
+                style={{
+                  background: "linear-gradient(105deg, transparent 40%, rgba(251,191,36,0.08) 45%, rgba(251,191,36,0.15) 50%, rgba(251,191,36,0.08) 55%, transparent 60%)",
+                  backgroundSize: "200% 100%",
+                  animation: "bnsp-shimmer 2.5s ease-in-out infinite",
+                }}
+              />
+
+              <div className="flex flex-col md:flex-row">
+                {/* Certificate Image */}
+                <div className="md:w-[45%] relative overflow-hidden">
+                  <div className="aspect-[4/3] md:aspect-auto md:h-full relative">
+                    <img
+                      src={FEATURED_CERT.images[0]}
+                      alt={FEATURED_CERT.title}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out"
+                    />
+                    {/* Gradient fade to content */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#0c0f1a] hidden md:block" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0f1a] via-transparent to-transparent md:hidden" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="md:w-[55%] p-6 sm:p-8 md:p-10 flex flex-col justify-center relative z-10">
+                  {/* Badge */}
+                  <div className="flex items-center gap-2 mb-5">
+                    <span
+                      className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest text-amber-900"
+                      style={{ background: "linear-gradient(135deg, #fbbf24, #f59e0b)" }}
+                    >
+                      <ShieldCheck size={14} strokeWidth={3} />
+                      BNSP Certified
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20">
+                      <Award size={12} />
+                      Sertifikasi Profesi
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl md:text-3xl font-black text-white mb-3 leading-tight group-hover:text-amber-200 transition-colors duration-500">
+                    {FEATURED_CERT.title}
+                  </h3>
+
+                  <p className="text-white/70 text-sm sm:text-base leading-relaxed mb-6">
+                    {FEATURED_CERT.description}
+                  </p>
+
+                  <div className="flex items-center gap-3 text-sm text-amber-400 font-semibold mb-6">
+                    <span>{FEATURED_CERT.issuer}</span>
+                    <span className="w-1 h-1 rounded-full bg-amber-400" />
+                    <span>{FEATURED_CERT.date}</span>
+                  </div>
+
+                  {/* Validity info */}
+                  <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-amber-500/5 border border-amber-500/15 mb-6">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-xs text-white/60">Berlaku 3 tahun</span>
+                    <span className="text-xs text-white/40 mx-1">•</span>
+                    <span className="text-xs text-white/60">No. Reg. TIK.383.13810.2025</span>
+                  </div>
+
+                  <button
+                    className="self-start text-sm font-bold text-amber-900 px-6 py-3 rounded-xl transition-all active:scale-95 hover:shadow-lg hover:shadow-amber-500/20"
+                    style={{ background: "linear-gradient(135deg, #fbbf24, #f59e0b)" }}
+                    onClick={(e) => { e.stopPropagation(); setSelectedCert(FEATURED_CERT.images); }}
+                  >
+                    Lihat Sertifikat
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ═══════════════════════════════════════════════
+            Regular Certificate Grid
+        ═══════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {CERTIFICATES.map((cert, i) => (
             <motion.div
@@ -227,6 +345,18 @@ export default function Certificates() {
           </motion.div>
         </motion.div>
       )}
+
+      {/* Keyframe animations for BNSP featured card */}
+      <style jsx>{`
+        @keyframes bnsp-border-glow {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        @keyframes bnsp-shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+      `}</style>
     </section>
   );
 }
