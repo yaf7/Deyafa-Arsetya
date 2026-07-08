@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
 const STACK_ROW1 = [
   { name: "HTML5", icon: "html5/html5-original.svg", color: "#E34F26" },
@@ -67,6 +68,7 @@ function MarqueeRow({ items, reverse = false }: { items: typeof STACK_ROW1; reve
 }
 
 export default function TechStack() {
+  const { t } = useLanguage();
   return (
     <section id="tech" className="py-24 relative bg-transparent overflow-hidden">
       {/* Background accents */}
@@ -82,9 +84,9 @@ export default function TechStack() {
            className="text-center mb-4"
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
-            <span className="text-white">Teknologi</span> <span className="text-emerald-500">Utama</span>
+            <span className="text-white">{t("tech.title1")}</span> <span className="text-emerald-500">{t("tech.title2")}</span>
           </h2>
-          <p className="text-white">Perkakas dan teknologi yang membentuk arsitektur digital saya.</p>
+          <p className="text-white">{t("tech.desc")}</p>
         </motion.div>
       </div>
 

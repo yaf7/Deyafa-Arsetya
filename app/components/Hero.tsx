@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import { useLanguage } from "../context/LanguageContext";
 
 const SocialIcon = ({ type }: { type: string }) => {
   switch (type) {
@@ -103,9 +104,10 @@ const ORBITING_PLANETS = [
 ];
 
 export default function Hero() {
+  const { t } = useLanguage();
   const firstName = "DEYAFA";
   const lastName = "ARSETYA";
-  const { displayed, done, started } = useTypingEffect("Web & Mobile Developer | System Analyst | Data Analyst", 70, 2200);
+  const { displayed, done, started } = useTypingEffect(t("hero.subtitle"), 70, 2200);
 
   // Mouse parallax for floating elements
   const mouseX = useMotionValue(0);
@@ -234,7 +236,7 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
               </span>
-              <span className="text-xs font-medium text-emerald-200 tracking-wide uppercase">Terbuka untuk Kolaborasi</span>
+              <span className="text-xs font-medium text-emerald-200 tracking-wide uppercase">{t("hero.available")}</span>
             </motion.div>
 
             {/* Animated Name — Letter by Letter */}
@@ -311,7 +313,7 @@ export default function Hero() {
               >
                 <span className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent transition-all duration-700 ease-out group-hover:h-full group-hover:opacity-10 opacity-0" />
                 <span className="relative flex items-center gap-2">
-                  Lihat Proyek <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-500 ease-out" />
+                  {t("hero.viewProjects")} <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-500 ease-out" />
                 </span>
               </a>
 
@@ -430,7 +432,7 @@ export default function Hero() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
-                <span className="text-xs font-bold text-white tracking-wide">Tersedia untuk Bekerja</span>
+                <span className="text-xs font-bold text-white tracking-wide">{t("hero.availableToWork")}</span>
               </motion.div>
             </div>
           </motion.div>
@@ -445,7 +447,7 @@ export default function Hero() {
         transition={{ delay: 3.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-[10px] uppercase tracking-[0.3em] text-white font-medium">Gulir</span>
+        <span className="text-[10px] uppercase tracking-[0.3em] text-white font-medium">{t("hero.scroll")}</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

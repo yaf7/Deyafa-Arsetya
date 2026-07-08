@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion";
 import { BookOpen, ExternalLink, GraduationCap, Library, Network } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Publications() {
+  const { t } = useLanguage();
   return (
     <section id="publications" className="py-24 relative overflow-hidden bg-transparent">
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-zinc-400/25 to-transparent" />
@@ -18,13 +20,13 @@ export default function Publications() {
           className="text-center mb-16"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-400/10 border border-teal-400/20 text-teal-400 text-xs font-bold uppercase tracking-widest mb-6">
-            <BookOpen size={12} /> Riset & Publikasi
+            <BookOpen size={12} /> {t("publications.badge")}
           </span>
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
-            <span className="text-white">Riset</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-600">Akademik</span>
+            <span className="text-white">{t("publications.title1")}</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-600">{t("publications.title2")}</span>
           </h2>
           <p className="text-white max-w-2xl mx-auto text-lg mt-4">
-            Mendokumentasikan implementasi teknis dan arsitektur sistem melalui riset akademik serta publikasi ilmiah.
+            {t("publications.desc")}
           </p>
         </motion.div>
 
@@ -62,7 +64,7 @@ export default function Publications() {
               <div className="mt-auto">
                 <a href="https://doi.org/10.62951/router.v3i4.821" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-bold bg-white text-black px-6 py-3 rounded-full hover:bg-teal-400 transition-colors duration-500 ease-out shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] group/btn">
-                  Lihat Publikasi DOI <ExternalLink size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
+                  {t("publications.view")} <ExternalLink size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
                 </a>
               </div>
             </div>
@@ -75,7 +77,7 @@ export default function Publications() {
             viewport={{ once: true }}
             className="lg:col-span-4 flex flex-col gap-4"
           >
-            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-2 pl-2">Jejak Akademik</h4>
+            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-2 pl-2">{t("publications.academic_trail")}</h4>
             <a href="https://scholar.google.co.id/scholar?hl=id&as_sdt=0%2C5&q=deyafa+arsetya&btnG=" target="_blank" rel="noopener noreferrer"
               className="bento-card p-6 flex items-center justify-between group">
               <div className="flex items-center gap-4">

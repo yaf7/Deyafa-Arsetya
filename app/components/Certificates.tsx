@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Award, ExternalLink, X, ShieldCheck } from "lucide-react";
 import React, { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 /* ─── Featured BNSP Certificate ─── */
 const FEATURED_CERT = {
@@ -113,6 +114,7 @@ const CERTIFICATES = [
 
 export default function Certificates() {
   const [selectedCert, setSelectedCert] = useState<string[] | null>(null);
+  const { t } = useLanguage();
 
   // Mengunci scroll layar utama ketika gambar sertifikat dibuka
   React.useEffect(() => {
@@ -134,10 +136,10 @@ export default function Certificates() {
           className="text-center mb-16"
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
-            <span className="text-white">Sertifikat &</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">Pencapaian</span>
+            <span className="text-white">{t("certificates.title1")}</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">{t("certificates.title2")}</span>
           </h2>
           <p className="text-white max-w-2xl mx-auto">
-            Dokumentasi pelatihan, partisipasi, dan validasi keahlian yang telah saya pelajari.
+            {t("certificates.desc")}
           </p>
         </motion.div>
 
@@ -201,11 +203,11 @@ export default function Certificates() {
                       style={{ background: "linear-gradient(135deg, #fbbf24, #f59e0b)" }}
                     >
                       <ShieldCheck size={14} strokeWidth={3} />
-                      BNSP Certified
+                      {t("certificates.bnsp_certified")}
                     </span>
                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20">
                       <Award size={12} />
-                      Sertifikasi Profesi
+                      {t("certificates.professional_certification")}
                     </span>
                   </div>
 
@@ -226,7 +228,7 @@ export default function Certificates() {
                   {/* Validity info */}
                   <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-amber-500/5 border border-amber-500/15 mb-6">
                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-xs text-white/60">Berlaku 3 tahun</span>
+                    <span className="text-xs text-white/60">{t("certificates.valid_3_years")}</span>
                     <span className="text-xs text-white/40 mx-1">•</span>
                     <span className="text-xs text-white/60">No. Reg. TIK.383.13810.2025</span>
                   </div>
@@ -236,7 +238,7 @@ export default function Certificates() {
                     style={{ background: "linear-gradient(135deg, #fbbf24, #f59e0b)" }}
                     onClick={(e) => { e.stopPropagation(); setSelectedCert(FEATURED_CERT.images); }}
                   >
-                    Lihat Sertifikat
+                    {t("certificates.view_cert")}
                   </button>
                 </div>
               </div>
@@ -285,7 +287,7 @@ export default function Certificates() {
                     className="text-xs md:text-sm font-bold text-white bg-white/5 border border-white/10 px-4 py-2.5 rounded-lg hover:bg-white/10 transition-all active:scale-95 flex-1"
                     onClick={(e) => { e.stopPropagation(); setSelectedCert(cert.images); }}
                   >
-                    Lihat
+                    {t("certificates.view")}
                   </button>
                   {cert.link !== "#" && (
                     <a
@@ -295,7 +297,7 @@ export default function Certificates() {
                       className="text-xs md:text-sm font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-4 py-2.5 rounded-lg hover:bg-amber-400/20 transition-all flex items-center justify-center gap-2 active:scale-95 flex-1"
                       onClick={e => e.stopPropagation()}
                     >
-                      Kredensial <ExternalLink size={14} />
+                      {t("certificates.credential")} <ExternalLink size={14} />
                     </a>
                   )}
                 </div>

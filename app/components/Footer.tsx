@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="relative bg-transparent border-t border-white/5 py-16 md:py-28 overflow-hidden">
       {/* Subtle background glow */}
@@ -27,10 +29,10 @@ export default function Footer() {
           viewport={{ once: true }}
           className="font-display text-2xl md:text-5xl lg:text-6xl font-black mb-4 tracking-wider md:tracking-widest text-center leading-tight"
         >
-          <span className="text-white">MARI KITA BANGUN</span>
+          <span className="text-white">{t("footer.line1")}</span>
           <br />
-          <span className="text-white">SESUATU YANG </span>
-          <span className="gradient-text-animated">HEBAT</span>
+          <span className="text-white">{t("footer.line2")}</span>
+          <span className="gradient-text-animated">{t("footer.line3")}</span>
         </motion.h2>
 
         {/* Subtitle */}
@@ -41,7 +43,7 @@ export default function Footer() {
           viewport={{ once: true }}
           className="text-white text-sm md:text-base mb-12 tracking-wider"
         >
-          Punya proyek menarik? Mari berdiskusi.
+          {t("footer.subtitle")}
         </motion.p>
 
 

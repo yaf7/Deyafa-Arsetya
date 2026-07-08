@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Lock, X, Award, Download } from "lucide-react";
 import React, { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 const PROJECTS = [
   {
@@ -73,6 +74,7 @@ const GithubIcon = () => (
 
 // Optimized, static Project Card Component with high-end CSS transitions
 const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeof PROJECTS[0] | any, onOpenCertificate?: (url: string) => void, index?: number }) => {
+  const { t } = useLanguage();
   return (
     <motion.div
       className="relative w-full rounded-2xl min-h-[480px] h-auto md:h-[450px] group overflow-hidden border border-zinc-700/50 bg-[#08080a] shadow-2xl transition-all duration-500 ease-out hover:border-zinc-500/40 hover:shadow-[0_20px_50px_rgba(16,185,129,0.12)] hover:-translate-y-1.5"
@@ -107,7 +109,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
             <div className="relative group/badge">
               <div className="absolute inset-0 bg-amber-500/20 blur-xl rounded-full group-hover/badge:bg-amber-500/30 transition-colors duration-500 ease-out" />
               <span className="relative flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-300 bg-black/50 border border-amber-500/30 px-4 py-2 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-                <Lock size={14} className="text-amber-400" /> Segera Hadir
+                <Lock size={14} className="text-amber-400" /> {t("projects.coming_soon")}
               </span>
             </div>
           </div>
@@ -139,7 +141,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
                 onClick={() => onOpenCertificate?.(project.certificate as string)}
                 className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-yellow-400 to-amber-600 text-black px-4 py-2 rounded-full hover:from-yellow-300 hover:to-amber-500 transition-all duration-300 ease-out shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] active:scale-95"
               >
-                <Award size={16} /> Sertifikat
+                <Award size={16} /> {t("projects.certificate")}
               </button>
             )}
             {project.github ? (
@@ -149,11 +151,11 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full transition-all duration-300 ease-out backdrop-blur-sm hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] active:scale-95"
               >
-                <GithubIcon /> Code
+                <GithubIcon /> {t("projects.code")}
               </a>
             ) : (
               <span className="flex items-center gap-2 text-sm font-bold text-white bg-white/5 border border-white/5 px-4 py-2 rounded-full backdrop-blur-sm cursor-not-allowed">
-                <Lock size={16} /> Sumber Privat
+                <Lock size={16} /> {t("projects.private")}
               </span>
             )}
             {project.download && (
@@ -163,7 +165,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-teal-400 to-teal-600 text-white px-4 py-2 rounded-full hover:from-teal-400 hover:to-teal-500 transition-all duration-300 ease-out shadow-[0_0_20px_rgba(20,184,166,0.3)] hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] active:scale-95"
               >
-                <Download size={16} /> Unduh Aplikasi
+                <Download size={16} /> {t("projects.download")}
               </a>
             )}
           </div>
@@ -175,6 +177,7 @@ const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeo
 
 export default function Projects() {
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   // Lock body scroll when modal is open
   React.useEffect(() => {
@@ -200,10 +203,10 @@ export default function Projects() {
           className="text-center mb-20 md:mb-16"
         >
           <h2 className="font-display text-2xl sm:text-3xl md:text-5xl font-black mb-4 uppercase tracking-wider md:tracking-widest">
-            <span className="text-white">Proyek</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-600">Pilihan</span>
+            <span className="text-white">{t("projects.title1")}</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-600">{t("projects.title2")}</span>
           </h2>
           <p className="text-white max-w-2xl mx-auto">
-            Kumpulan karya dan proyek digital pilihan yang telah saya bangun
+            {t("projects.desc")}
           </p>
         </motion.div>
 

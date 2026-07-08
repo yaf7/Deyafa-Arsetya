@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,13 +36,15 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  const { t, language, toggleLanguage } = useLanguage();
+
   const navLinks = [
-    { name: "Beranda", href: "#home", id: "home" },
-    { name: "Tentang", href: "#about", id: "about" },
-    { name: "Teknologi", href: "#tech", id: "tech" },
-    { name: "Riset", href: "#publications", id: "publications" },
-    { name: "Proyek", href: "#projects", id: "projects" },
-    { name: "Sertifikat", href: "#certificates", id: "certificates" },
+    { name: t("nav.home"), href: "#home", id: "home" },
+    { name: t("nav.about"), href: "#about", id: "about" },
+    { name: t("nav.tech"), href: "#tech", id: "tech" },
+    { name: t("nav.publications"), href: "#publications", id: "publications" },
+    { name: t("nav.projects"), href: "#projects", id: "projects" },
+    { name: t("nav.certificates"), href: "#certificates", id: "certificates" },
   ];
 
   return (
@@ -112,10 +115,30 @@ export default function Navbar() {
               </a>
             );
           })}
+          
+          {/* Desktop Language Toggle */}
+          <button 
+            onClick={toggleLanguage}
+            className="flex items-center gap-1 text-xs font-bold bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1.5 rounded-full transition-colors duration-300 ml-2"
+          >
+            <span className={language === 'id' ? 'text-emerald-400' : 'text-white/50'}>ID</span>
+            <span className="text-white/30">/</span>
+            <span className={language === 'en' ? 'text-emerald-400' : 'text-white/50'}>EN</span>
+          </button>
         </div>
 
-        {/* Mobile Nav Button */}
-        <div className="md:hidden flex items-center">
+        {/* Mobile Nav Actions */}
+        <div className="md:hidden flex items-center gap-4">
+          {/* Mobile Language Toggle */}
+          <button 
+            onClick={toggleLanguage}
+            className="flex items-center gap-1 text-[10px] font-bold bg-white/10 border border-white/20 px-2.5 py-1 rounded-full"
+          >
+            <span className={language === 'id' ? 'text-emerald-400' : 'text-white/50'}>ID</span>
+            <span className="text-white/30">/</span>
+            <span className={language === 'en' ? 'text-emerald-400' : 'text-white/50'}>EN</span>
+          </button>
+
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-white hover:text-white focus:outline-none relative w-8 h-8 flex items-center justify-center"

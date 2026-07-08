@@ -191,7 +191,7 @@ export default function ScorpioConstellation() {
     const initScorpioParticles = () => {
       scorpioParticles = [];
       const isMobile = window.innerWidth < 768;
-      const densityMultiplier = isMobile ? 0.4 : 1.0;
+      const densityMultiplier = isMobile ? 0.3 : 0.7;
       
       const generateParticlesForSegment = (
         nodeA: number,
@@ -342,6 +342,9 @@ export default function ScorpioConstellation() {
       const w = window.innerWidth;
       const h = window.innerHeight;
       ctx.clearRect(0, 0, w, h);
+
+      // Use native canvas composite for glowing blend instead of CSS mix-blend-screen (huge performance boost)
+      ctx.globalCompositeOperation = "lighter";
 
       // Smooth parallax offset
       currentMouseOffset.x += (targetMouseOffset.x - currentMouseOffset.x) * 0.04;
@@ -1027,7 +1030,7 @@ export default function ScorpioConstellation() {
     <div className="fixed inset-0 pointer-events-none z-[0] w-full h-full select-none overflow-hidden">
       <canvas
          ref={canvasRef}
-         className="w-full h-full mix-blend-screen opacity-75"
+         className="w-full h-full opacity-80"
       />
     </div>
   );
