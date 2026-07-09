@@ -429,21 +429,21 @@ export default function ScorpioConstellation() {
           currentRotation += diff * 0.05;
         }
 
-        // Trigger a new walk when the idle timer expires (only if not currently backing away from threat)
-        if (!isThreatened && stateTime >= stateDuration) {
+        // Trigger a new walk when the idle timer expires
+        if (stateTime >= stateDuration) {
           behaviorState = "WALKING";
           stateTime = 0;
-          stateDuration = 1000 + Math.random() * 2000; // Scurry for 1 to 3s
+          stateDuration = 1500 + Math.random() * 3000; // Walk for 1.5 to 4.5s
           
-          // Wander target
+          // Wander target (walk relative to current position)
           const wanderAngle = Math.random() * Math.PI * 2;
-          const wanderDist = 60 + Math.random() * 110;
-          targetWanderX = Math.cos(wanderAngle) * wanderDist;
-          targetWanderY = Math.sin(wanderAngle) * wanderDist;
+          const wanderDist = 150 + Math.random() * 300;
+          targetWanderX = scorpionX + Math.cos(wanderAngle) * wanderDist;
+          targetWanderY = scorpionY + Math.sin(wanderAngle) * wanderDist;
           
-          // Clamp target
-          const maxWanderRangeX = isMobile ? 50 : 180;
-          const maxWanderRangeY = isMobile ? 35 : 110;
+          // Clamp target to stay within screen boundaries
+          const maxWanderRangeX = isMobile ? w * 0.4 : w * 0.45;
+          const maxWanderRangeY = isMobile ? h * 0.4 : h * 0.45;
           targetWanderX = Math.max(-maxWanderRangeX, Math.min(maxWanderRangeX, targetWanderX));
           targetWanderY = Math.max(-maxWanderRangeY, Math.min(maxWanderRangeY, targetWanderY));
         }

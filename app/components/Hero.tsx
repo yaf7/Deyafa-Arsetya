@@ -218,7 +218,14 @@ export default function Hero() {
               </motion.div>
               {/* Photo */}
               <div className="absolute inset-[20px] rounded-full overflow-hidden">
-                <img src="/Foto-Deyafa-Arsetya.jpg" alt="Deyafa Arsetya" className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700" />
+                <Image
+                  src="/Foto-Deyafa-Arsetya.jpg"
+                  alt="Deyafa Arsetya"
+                  fill
+                  className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
+                  priority
+                  sizes="(max-width: 768px) 160px, 0vw"
+                />
               </div>
             </div>
           </motion.div>
