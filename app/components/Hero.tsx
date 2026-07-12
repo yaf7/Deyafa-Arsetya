@@ -329,7 +329,7 @@ export default function Hero() {
                 {[
                   { type: "linkedin", href: "https://www.linkedin.com/in/deyafa-arsetya", label: "LinkedIn" },
                   { type: "github", href: "https://github.com/yaf7", label: "GitHub" },
-                  { type: "instagram", href: "https://www.instagram.com/yffaarz?igsh=bWM0NHFta3BsNnJ3", label: "Instagram" },
+                  { type: "instagram", href: "https://www.instagram.com/_deyafaarsetya", label: "Instagram" },
                   { type: "email", href: "mailto:yafaarsetya@gmail.com", label: "Email" },
                 ].map(({ type, href }) => (
                   <MagneticButton

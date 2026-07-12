@@ -53,6 +53,17 @@ const CERTIFICATES = [
     link: "https://www.dicoding.com/certificates/0LZ0YM693X65",
   },
   {
+    title: "Certificate of Completion: Belajar Fundamental Front-End Web Development",
+    issuer: "Dicoding Indonesia × DBS Foundation",
+    date: "Juli 2026",
+    images: [
+      "/sertifikat/Certificate of Completion Belajar Fundamental Front-End Web Development/Belajar-Fundamental-Front-End-Web-Development-1.png",
+      "/sertifikat/Certificate of Completion Belajar Fundamental Front-End Web Development/Belajar-Fundamental-Front-End-Web-Development-2.png",
+      "/sertifikat/Certificate of Completion Belajar Fundamental Front-End Web Development/Belajar-Fundamental-Front-End-Web-Development-3.png"
+    ],
+    link: "https://www.dicoding.com/certificates/2VX30DEO4XYQ",
+  },
+  {
     title: "Certificate of Completion: Belajar Dasar Pemrograman JavaScript",
     issuer: "Dicoding Indonesia × DBS Foundation",
     date: "Mei 2026",
