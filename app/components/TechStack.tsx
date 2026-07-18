@@ -17,6 +17,7 @@ const STACK_ROW1 = [
 const STACK_ROW2 = [
   { name: "Bootstrap", icon: "bootstrap/bootstrap-original.svg", color: "#7952B3" },
   { name: "Vite", icon: "vitejs/vitejs-original.svg", color: "#646CFF" },
+  { name: "Python", icon: "python/python-original.svg", color: "#3776AB" },
   { name: "MySQL", icon: "mysql/mysql-original.svg", color: "#4479A1" },
   { name: "Firebase", icon: "firebase/firebase-plain.svg", color: "#FFCA28" },
   { name: "Supabase", icon: "supabase/supabase-original.svg", color: "#3ECF8E" },
