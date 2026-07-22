@@ -87,6 +87,7 @@ const GithubIcon = () => (
 );
 
 // Optimized, static Project Card Component with high-end CSS transitions
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProjectCard = ({ project, onOpenCertificate, index = 0 }: { project: typeof PROJECTS[0] | any, onOpenCertificate?: (url: string) => void, index?: number }) => {
   const { t } = useLanguage();
   return (

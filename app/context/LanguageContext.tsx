@@ -20,6 +20,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
   useEffect(() => {
     const saved = localStorage.getItem("language") as Language;
     if (saved === "en" || saved === "id") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLanguage(saved);
     }
     setMounted(true);
@@ -34,6 +35,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
   const t = (key: string): string => {
     if (!mounted) return key.split('.').pop() || key; // Prevent hydration mismatch by returning raw key or fallback during SSR (better handled with actual text, but for our simple site this is fine)
     const keys = key.split(".");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let value: any = translations[language];
     for (const k of keys) {
       if (value === undefined) return key;
@@ -45,6 +47,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
   // Safe SSR fallback for 't' before mount
   const ssrT = (key: string): string => {
     const keys = key.split(".");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let value: any = translations["id"]; // Default to ID for SSR
     for (const k of keys) {
       if (value === undefined) return key;

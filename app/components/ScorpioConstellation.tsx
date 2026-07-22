@@ -420,7 +420,7 @@ export default function ScorpioConstellation() {
         walkingWeight += (0 - walkingWeight) * 0.12;
         
         // Face the mouse if it's active and close
-        let desiredHeading = currentRotation;
+        const desiredHeading = currentRotation;
         // (Rotation to face mouse DISABLED by user request)
 
         if (desiredHeading !== null && currentRotation !== null) {
