@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "Deyafa Arsetya - Portfolio",
   description: "Portfolio of Deyafa Arsetya — Web & Mobile Developer | System Analyst | Data Analyst based in Kediri, Indonesia. Specialized in Laravel, React, Next.js, and Kotlin.",
   icons: {
-    icon: "/logo.png",
+    icon: "/favicon-Deyafa-Arsetya.jpg",
   },
   verification: {
     google: "f-AWvyCzd-Uo2vywPxo4tGvj9Feua7pEWcF6ynfA3L8",

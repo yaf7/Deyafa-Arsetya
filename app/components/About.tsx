@@ -107,7 +107,7 @@ export default function About() {
               <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden relative shadow-2xl mb-6 bg-zinc-900 border border-white/10 z-10" style={{ transform: "translateZ(30px)" }}>
                 {/* Hover overlay color */}
                 <div className="absolute inset-0 bg-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay z-10" />
-                <img src="/foto-aboutme.png" alt="Deyafa Arsetya Profile" className="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-700 relative z-0 scale-105 group-hover:scale-100" />
+                <img src="/foto-aboutme-Deyafa-Arsetya.png" alt="Deyafa Arsetya Profile" className="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-700 relative z-0 scale-105 group-hover:scale-100" />
               </div>
               
               {/* Details Container */}

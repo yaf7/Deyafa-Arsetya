@@ -72,7 +72,7 @@ export default function Navbar() {
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full opacity-0 group-hover:opacity-60 blur-md transition duration-500" />
               
               <Image 
-                 src="/logo-yafa.png" 
+                 src="/logo-Deyafa-Arsetya-transparent.png" 
                  alt="Deyafa Arsetya Logo" 
                  width={56} 
                  height={56} 
