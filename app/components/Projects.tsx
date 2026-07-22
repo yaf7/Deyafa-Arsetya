@@ -30,15 +30,15 @@ const PROJECTS = [
     github: "https://github.com/yaf7/cybertrace-osint"
   },
   {
-    title: "Sistem Informasi Manajemen Donasi – LAZISNU",
-    description: "Sistem Informasi Manajemen donasi berbasis Laravel untuk LAZISNU, dilengkapi dengan implementasi simulasi Xendit Payment Gateway untuk otomatisasi verifikasi pembayaran.",
+    title: "Sistem Manajemen Donasi – LAZISNU",
+    description: "Sistem Manajemen donasi berbasis Laravel untuk LAZISNU, dilengkapi dengan implementasi simulasi Xendit Payment Gateway untuk otomatisasi verifikasi pembayaran.",
     tags: ["Laravel", "PHP", "MySQL", "Xendit"],
     image: "/gambar-project/lazisnu.png",
     github: "https://github.com/yaf7/SIM-LAZISNU"
   },
   {
-    title: "Sistem Informasi Reservasi Meeting Room – Amaze Hotel",
-    description: "Sistem manajemen reservasi ruang pertemuan berbasis Laravel untuk Amaze Hotel Kediri. Terintegrasi dengan Midtrans Payment Gateway (Sandbox) untuk otomatisasi transaksi dan dilengkapi fitur kustomisasi paket meeting serta menu buffet secara real-time.",
+    title: "Sistem Reservasi Meeting Room – Amaze Hotel",
+    description: "Sistem reservasi ruang pertemuan berbasis Laravel untuk Amaze Hotel Kediri. Terintegrasi dengan Midtrans Payment Gateway (Sandbox) untuk otomatisasi transaksi dan dilengkapi fitur kustomisasi paket meeting serta menu buffet secara real-time.",
     tags: ["Laravel", "PHP", "MySQL", "Midtrans"],
     image: "/gambar-project/amaze-hotel.png",
     github: "https://github.com/yaf7/deyafaarsetya-amaze-hotel-meeting-room"
@@ -49,6 +49,13 @@ const PROJECTS = [
     tags: ["Laravel", "PHP", "GIS", "FTTH", "Mapping", "LeafletJS", "MySQL"],
     image: "/gambar-project/griya-karsa.png",
     github: "https://github.com/yaf7/griya-karsa-ftth-mapping"
+  },
+  {
+    title: "NotReplaced.ai",
+    description: "Dibangun untuk ajang hackathon internasional Hoobit Hacks 2026. Aplikasi web modern bertenaga AI untuk menganalisis kerentanan profesi terhadap otomatisasi AI. Memberikan persentase ancaman, Peta Jalan Bertahan (Survival Roadmap), serta rekomendasi alat AI Co-pilot untuk membantu profesional tetap relevan.",
+    tags: ["Next.js", "React", "Tailwind CSS", "Google Gemini API"],
+    image: "/gambar-project/NotReplaced.ai.png",
+    github: "https://github.com/yaf7/not-replaced-ai"
   },
   {
     title: "NextGen Photobooth: Kreator Kolase & Strip Foto Instan",
@@ -67,7 +74,7 @@ const PROJECTS = [
   {
     title: "Unfollytics",
     description: "Aplikasi web Pendeteksi unfollowers Instagram secara aman menggunakan ekstraksi data JSON resmi.",
-    tags: ["Next.js", "React", "Tailwind CSS"],
+    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
     image: "/gambar-project/unfollytics.png",
     github: "https://github.com/yaf7/unfollytics"
   }
