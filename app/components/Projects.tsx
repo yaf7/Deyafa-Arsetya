@@ -23,6 +23,13 @@ const PROJECTS = [
     download: "https://github.com/yaf7/YFScanner/releases/tag/v1.0.0"
   },
   {
+    title: "CyberTrace - Platform Intelijen Keamanan Siber & Alat OSINT",
+    description: "Platform intelijen keamanan siber modern dan alat OSINT untuk menganalisis ancaman digital secara instan. Mengumpulkan data dari berbagai vendor keamanan global untuk memeriksa reputasi URL, IP, Domain, dan File.",
+    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "OSINT"],
+    image: "/gambar-project/cybertrace-osint.png",
+    github: "https://github.com/yaf7/cybertrace-osint"
+  },
+  {
     title: "Sistem Informasi Manajemen Donasi – LAZISNU",
     description: "Sistem Informasi Manajemen donasi berbasis Laravel untuk LAZISNU, dilengkapi dengan implementasi simulasi Xendit Payment Gateway untuk otomatisasi verifikasi pembayaran.",
     tags: ["Laravel", "PHP", "MySQL", "Xendit"],
