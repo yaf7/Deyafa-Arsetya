@@ -58,6 +58,13 @@ const PROJECTS = [
     github: "https://github.com/yaf7/not-replaced-ai"
   },
   {
+    title: "JagoJualan - Digitalization & Acceleration of MSMEs with Generative AI",
+    description: "Proyek Hackathon IDCamp Developer Challenge #2 yang diselenggarakan oleh Dicoding Indonesia. JagoJualan hadir sebagai solusi Generative AI untuk membantu digitalisasi dan akselerasi UMKM di Indonesia melalui otomatisasi pembuatan konten pemasaran dan operasional bisnis.",
+    tags: ["Next.js", "Tailwind CSS", "Google Gemini API", "Supabase"],
+    image: "/gambar-project/JagoJualan.png",
+    github: "https://github.com/yaf7/JagoJualan-app"
+  },
+  {
     title: "NextGen Photobooth: Kreator Kolase & Strip Foto Instan",
     description: "Platform photobooth digital yang menghadirkan pengalaman studio foto. Buat strip foto estetik dengan filter real-time dan ekspor kualitas tinggi dalam hitungan detik.",
     tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Canvas API"],
